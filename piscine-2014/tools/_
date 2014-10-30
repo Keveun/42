@@ -1,0 +1,66 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2014/08/30 01:34:30 by kperreau          #+#    #+#             */
+/*   Updated: 2014/09/06 21:36:04 by kperreau         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <unistd.h>
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+//int	ft_strncmp(char *s1, char *s2, unsigned int n);
+//int	ft_find_next_prime(int nb);
+//char	*ft_strstr(char *str, char *to_find);
+//void	ft_putstr(char *str);
+//void	ft_div_mod(int a, int b, int *div, int *mod);
+//int	ft_sqrt(int nb);
+//char	*ft_strncpy(char *dest, char *src, unsigned int n);
+//char	*ft_strcat(char *dest, char *src);
+//int		ft_str_is_alpha(char *str);
+//int	ft_recursive_factorial(int nb);
+//char	*ft_strdup(char *src);
+//void	ft_putstr(char *str);
+//int		ft_putchar(char c);
+//void ft_putstr(char *str);
+//int	ft_ultimate_range(int **range, int min, int max);
+char	*ft_concat_params(int argc, char **argv);
+//char	**ft_split_whitespaces(char *str);
+//void	ft_print_words_tables(char **tab);
+//int		match(char *s1, char *s2);
+
+
+int		main(int argc, char **argv)
+{
+//	char test[] = "ah ahah  ah yolo";
+//	char test2[] = "*.y olo";
+//	int is_match;
+	//char *test2;
+	//char *test;
+	//char test2[20] = "ddd";
+	//ft_strrev(test);
+	//ft_putstr(ft_is_prime(1));
+	//printf("%s\n", ft_strcmp(test, test2));
+	//printf("%s\n", ft_strcat(test, test2));
+	//printf("'%s\n", ft_strlowercase(test));
+	//test = ft_concat_params(argc, argv);
+	//test2 = ft_split_whitespaces(test);
+	//ft_print_words_tables(test2);
+	//if (argc > 2)
+	//{
+//		is_match = match(argv[1], argv[2]);
+	//ft_putstr(test2);
+	//free(tab);
+//		printf("%d", is_match);
+//	}
+	//printf("%s\n", test);
+	//printf("%d", ft_recursive_factorial(0));
+	if (argc > 1)
+		printf("%s", ft_concat_params(argc, argv));
+	return (0);
+}

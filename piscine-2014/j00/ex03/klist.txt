@@ -1,0 +1,9 @@
+Credentials cache: API:11038
+        Principal: kperreau@42.FR
+
+  Issued                Expires               Principal
+Aug 26 14:47:37 2014  Aug 27 00:47:21 2014  krbtgt/42.FR@42.FR
+Aug 26 14:47:41 2014  Aug 27 00:47:21 2014  nfs/zfs-student-1.42.fr@42.FR
+Aug 26 14:47:44 2014  Aug 27 00:47:21 2014  nfs/zfs-student-2.42.fr@42.FR
+Aug 26 15:00:47 2014  Aug 27 00:47:21 2014  host/vogsphere-frontend-normal-1.42.fr@42.FR
+Aug 26 18:08:41 2014  Aug 27 00:47:21 2014  ldap/ldap-proxy.42.fr@42.FR
