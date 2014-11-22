@@ -1,7 +1,7 @@
 <?php
 	define("PATH", "files/");
 	define("TEST", "test.");
-	require "color.php";
+	require "color.php"
 
 	function echo_test($name)
 	{
@@ -59,7 +59,7 @@
 	echo echo_test("1.3");
 	echo "X lignes de 16 caracteres avec \\n:\n", getfile(TEST . "6");
 	echo echo_test("2.1");
-	echo "1 signe de 16 caracteres avec \\n depuis l'entree standard::\n", getfile(TEST . "4", 1);
+	echo "1 ligne de 16 caracteres avec \\n depuis l'entree standard::\n", getfile(TEST . "4", 1);
 	echo echo_test("2.2");
 	echo "2 lignes de 16 caracteres avec \\n depuis l'entree standard:\n", getfile(TEST . "5", 1);
 	echo echo_test("2.3");
@@ -74,7 +74,7 @@
 	echo echo_test("1.3");
 	echo "X lignes de 4 caracteres avec \\n:\n", getfile(TEST . "9");
 	echo echo_test("2.1");
-	echo "1 signe de 4 caracteres avec \\n depuis l'entree standard:\n", getfile(TEST . "7", 1);
+	echo "1 ligne de 4 caracteres avec \\n depuis l'entree standard:\n", getfile(TEST . "7", 1);
 	echo echo_test("2.2");
 	echo "2 lignes de 4 caracteres avec \\n depuis l'entree standard:\n", getfile(TEST . "8", 1);
 	echo echo_test("2.3");
