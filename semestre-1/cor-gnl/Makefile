@@ -6,7 +6,7 @@
 #    By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/03 14:06:54 by kperreau          #+#    #+#              #
-#    Updated: 2014/11/22 19:10:42 by kperreau         ###   ########.fr        #
+#    Updated: 2014/11/22 19:11:52 by kperreau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,4 +33,4 @@ clean:
 fclean: clean
 	@rm -f $(NAME)
 
-e: fclean all
+re: fclean all
