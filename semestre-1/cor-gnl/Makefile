@@ -6,7 +6,7 @@
 #    By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/03 14:06:54 by kperreau          #+#    #+#              #
-#    Updated: 2014/11/22 19:09:49 by kperreau         ###   ########.fr        #
+#    Updated: 2014/11/22 19:10:42 by kperreau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,9 +33,4 @@ clean:
 fclean: clean
 	@rm -f $(NAME)
 
-git:
-	@git add $(SRCS) auteur get_next_line.c get_next_line.h
-	@git commit -m "update"
-	@git push
-
-re: fclean all
+e: fclean all
