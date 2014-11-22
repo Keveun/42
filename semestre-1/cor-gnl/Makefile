@@ -6,7 +6,7 @@
 #    By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/03 14:06:54 by kperreau          #+#    #+#              #
-#    Updated: 2014/11/17 15:08:37 by kperreau         ###   ########.fr        #
+#    Updated: 2014/11/22 19:09:49 by kperreau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ SRCS = get_next_line.c
 
 OFILES = $(SRCS:.c=.o)
 
-FLAGS = -Wall -Wextra -Werror -O3 -I /libft/includes/ -c
+FLAGS = -Wall -Wextra -Werror -I /libft/includes/ -c
 
 all: $(NAME)
 
