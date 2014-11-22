@@ -90,7 +90,7 @@
 	echo "1 ligne de 16 caracteres sans \\n:\n", getfile(TEST . "12");
 	echo echo_test("2.1");
 	echo "Fichier vide avec \\n:\n", getfile(TEST . "13");
-	echo echo_test("2.1");
+	echo echo_test("2.2");
 	echo "Fichier vide avec \\n depuis l'entree standard:\n", getfile(TEST . "13", 1);
 	echo "\n";
 ?>
