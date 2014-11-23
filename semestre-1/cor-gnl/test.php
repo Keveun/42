@@ -1,7 +1,7 @@
 <?php
 	define("PATH", "files/");
 	define("TEST", "test.");
-	require "color.php"
+	require "color.php";
 
 	function echo_test($name)
 	{
@@ -22,9 +22,9 @@
 		if (file_exists($path_file) && is_file($path_file))
 		{
 			$exec = ($input) ? "cat " . $path_file . " | ./test_gnl 0 0" : "./test_gnl " . $path_file;
-			$search = array("\r", "\n");
 			$s1 = implode(file($path_file, FILE_IGNORE_NEW_LINES));
-			$s2 = exec($exec);
+			exec($exec, $s2);
+			$s2 = implode($s2);
 			if (!strcmp($s1 , $s2))
 				echo $colors->getColoredString("OK\n", "green");
 			else
@@ -32,6 +32,21 @@
 				echo $colors->getColoredString("FAIL\n", "red"); 
 				echo "Output should be: <", $s1, ">\nBut is: <", $s2, ">\n";
 			}
+		}
+	}
+
+	function test_fd()
+	{
+		$colors = new Colors();
+		$exec = "./test_gnl 0 0 0";
+		$s1 = "-1";
+		$s2 = exec($exec);
+		if (!strcmp($s1 , $s2))
+			echo $colors->getColoredString("OK\n", "green");
+		else
+		{
+			echo $colors->getColoredString("FAIL\n", "red"); 
+			echo "Output should be: <", $s1, ">\nBut is: <", $s2, ">\n";
 		}
 	}
 	
@@ -44,7 +59,7 @@
 	echo echo_test("1.3");
 	echo "X lignes de 8 caracteres avec \\n depuis l'entree standard:\n", getfile(TEST . "3", 1);
 	echo echo_test("2.1");
-	echo "1 signe de 8 caracteres avec \\n:\n", getfile(TEST . "1");
+	echo "1 ligne de 8 caracteres avec \\n:\n", getfile(TEST . "1");
 	echo echo_test("2.2");
 	echo "2 lignes de 8 caracteres avec \\n:\n", getfile(TEST . "2");
 	echo echo_test("2.3");
@@ -90,7 +105,12 @@
 	echo "1 ligne de 16 caracteres sans \\n:\n", getfile(TEST . "12");
 	echo echo_test("2.1");
 	echo "Fichier vide avec \\n:\n", getfile(TEST . "13");
-	echo echo_test("2.2");
+	echo echo_test("2.1");
 	echo "Fichier vide avec \\n depuis l'entree standard:\n", getfile(TEST . "13", 1);
+	echo "\n";
+
+	echo echo_partie("5");
+	echo echo_test("1.1");
+	echo "Tester avec un faux file descriptor:\n", test_fd();
 	echo "\n";
 ?>
