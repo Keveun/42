@@ -1,0 +1,6 @@
+#include "libft.h"
+
+void	main(void)
+{
+	ft_putstr("test\n");
+}

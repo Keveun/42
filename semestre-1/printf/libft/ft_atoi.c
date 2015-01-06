@@ -24,10 +24,10 @@ static size_t	ft_check_whitespace(char c)
 	return (0);
 }
 
-int				ft_atoi(const char *str)
+long			ft_atoi(const char *str)
 {
 	size_t	is_negative;
-	int		value;
+	long	value;
 
 	is_negative = 0;
 	value = 0;

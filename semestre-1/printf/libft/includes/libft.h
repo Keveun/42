@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/03 14:44:18 by kperreau          #+#    #+#             */
-/*   Updated: 2014/12/12 16:48:55 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/01/04 22:29:28 by Kevin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ char			*ft_strstr(const char *s1, const char *s2);
 char			*ft_strnstr(const char *s1, const char *s2, size_t n);
 int				ft_strcmp(const char *s1, const char *s2);
 int				ft_strncmp(const char *s1, const char *s2, size_t n);
-int				ft_atoi(const char *str);
+long			ft_atoi(const char *str);
 int				ft_isalpha(int c);
 int				ft_isascii(int c);
 int				ft_isdigit(int c);
@@ -65,16 +65,15 @@ int				ft_tolower(int c);
 */
 char			*ft_strnew(size_t size);
 char			**ft_strsplit(const char *s, char c);
-char			*ft_itoa(int n);
+char			*ft_itoa(long n);
 void			ft_putchar(char c);
 void			ft_putstr(char const *s);
-void			ft_putnbr(int n);
+void			ft_putnbr(long n);
 void			ft_putendl(char const *s);
-void			ft_putnbr(int n);
 void			ft_putchar_fd(char c, int fd);
 void			ft_putstr_fd(char const *s, int fd);
 void			ft_putendl_fd(char const *s, int fd);
-void			ft_putnbr_fd(int n, int fd);
+void			ft_putnbr_fd(long n, int fd);
 char			*ft_strjoin(char const *s1, char const *s2);
 void			ft_strclr(char *s);
 void			*ft_memalloc(size_t size);
@@ -96,6 +95,9 @@ void			ft_swap_ptr(char **s1, char **s2);
 t_list			*ft_create_list(char *str);
 t_list			*ft_add_list(t_list *list, char *str);
 void			ft_del_list(t_list **list);
+int				ft_digitlen(long n);
+void			ft_strrev(char *str);
+void			ft_swap(int *a, int *b);
 
 /*
 **GET NEXT LINE

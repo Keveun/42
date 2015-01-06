@@ -6,7 +6,7 @@
 #    By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/12/05 14:10:51 by kperreau          #+#    #+#              #
-#    Updated: 2015/01/02 21:42:59 by kperreau         ###   ########.fr        #
+#    Updated: 2015/01/04 22:32:42 by Kevin            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,8 @@ LIBDIR = libft
 
 MAIN = main.c
 
-CFILES = ft_parse.c ft_printf.c
+CFILES = ft_parse.c ft_printf.c ft_options.c ft_types1.c ft_types2.c \
+			ft_dec_convert.c ft_putnbrul.c
 
 SRC = $(patsubst %, $(SRCDIR)/%, $(CFILES))
 
@@ -39,12 +40,11 @@ HEADERS = $(patsubst %, $(INCLUDESDIR)/%, $(HFILES))
 #ERRORFLAGS = -Wall -Werror -Wextra -W -O3
 ERRORFLAGS =
 
-
 INCLUDEFLAGS = -I $(INCLUDESDIR) -I $(LIBDIR)/includes/
 
-LIBFLAGS = -L $(LIBDIR) -lft
+LIBFLAGS = -L $(LIBDIR)/ -lft
 
-FLAGS = $(ERRORFLAGS) $(LIBFLAGS) $(INCLUDEFLAGS)
+FLAGS = $(ERRORFLAGS) $(INCLUDEFLAGS)
 
 CC = gcc
 
@@ -63,13 +63,12 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 			@make -C $(LIBDIR)/
-			@$(CC) $(FLAGS) $(MAIN) $(OBJ) -o $(NAME)
+			@$(CC) $(FLAGS) $(MAIN) $(OBJ) $(LIBFLAGS)  -o $(NAME)
 
 re: fclean all
 
 clean:
 			@rm -f $(OBJ)
-			@rm -f $(TMP)
 			@make -C $(LIBDIR)/ clean
 
 fclean: clean
