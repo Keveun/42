@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/02 21:21:32 by kperreau          #+#    #+#             */
-/*   Updated: 2015/01/05 00:11:13 by Kevin            ###   ########.fr       */
+/*   Updated: 2015/01/06 22:00:15 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,7 @@ int				ft_dectohex(long n, int maxlen, int up)
 	ft_strrev(hex);
 	len = ft_strlen(hex);
 	if (maxlen != -1 && len > maxlen)
-		write(1, hex , maxlen);
-	else
-		ft_putstr(hex);
-	return ((len > maxlen) ? maxlen : len);
+		len = maxlen;
+	write(1, hex , len);
+	return (len);
 }

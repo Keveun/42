@@ -6,7 +6,7 @@
 /*   By: Kevin <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/04 22:06:04 by Kevin             #+#    #+#             */
-/*   Updated: 2015/01/05 00:13:37 by Kevin            ###   ########.fr       */
+/*   Updated: 2015/01/06 20:28:37 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int		ft_len(char *str, int len)
 
 	i = 0;
 	n = 0;
-	while (str[i])
+	while (i < len)
 	{
 		if (str[i - 1] != '.' && ft_isdigit(str[i]) && ft_atoi(str + i) > 0)
 		{
@@ -65,7 +65,7 @@ int		ft_precise(char *str, int len)
 
 	i = 0;
 	n = 0;
-	while (str[i])
+	while (i < len)
 	{
 		if (str[i - 1] == '.' && ft_isdigit(str[i]))
 		{

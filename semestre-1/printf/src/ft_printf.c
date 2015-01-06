@@ -6,14 +6,13 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/02 21:22:03 by kperreau          #+#    #+#             */
-/*   Updated: 2015/01/04 23:52:22 by Kevin            ###   ########.fr       */
+/*   Updated: 2015/01/06 21:23:53 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
 
-static int		ft_parse_var(char *str, va_list *ap, \
-					int (*f[14])(t_options *, va_list *ap))
+static int		ft_parse_var(char *str, t_vars *vars)
 {
 	int		i;
 
@@ -22,11 +21,11 @@ static int		ft_parse_var(char *str, va_list *ap, \
 		++i;
 	if (ft_strchr(FT_TYPES, str[i]))
 		++i;
-	ft_parse(str, i - 1, ap, f);
+	ft_parse(str, i - 1, vars);
 	return (i);
 }
 
-static int		ft_init_f(int (*f[14])(t_options *, va_list *ap))
+static int		ft_init_f(int (**f)(t_options *, va_list *, int *ret))
 {
 	f[0] = ft_s;
 	f[2] = ft_p;
@@ -46,28 +45,30 @@ int				ft_printf(const char *format, ...)
 {
 	char		*str;
 	char		*begin;
-	va_list		ap;
-	int			(*f[14])(t_options *, va_list *ap);
+	t_vars		vars;
 
 	if (format == NULL)
 		return (-1);
-	va_start(ap, format);
+	va_start(vars.ap, format);
 	str = (char*)format;
-	ft_init_f(f);
+	ft_init_f(vars.f);
 	begin = str;
+	vars.ret = 0;
 	while (*str)
 	{
 		if (*str == '%')
 		{
 			++str;
+			vars.ret += str - begin - 1;
 			write(1, begin, str - begin - 1);
 			if(*str != '%')
-				str += ft_parse_var(str, &ap, f);
+				str += ft_parse_var(str, &vars);
 			begin = str;
 		}
 		++str;
 	}
+	vars.ret += ft_strlen(begin);
 	ft_putstr(begin);
-	va_end(ap);
-	return (0);
+	va_end(vars.ap);
+	return (vars.ret);
 }
