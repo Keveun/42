@@ -6,7 +6,7 @@
 /*   By: Kevin <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/04 22:22:00 by Kevin             #+#    #+#             */
-/*   Updated: 2015/01/04 22:35:13 by Kevin            ###   ########.fr       */
+/*   Updated: 2015/01/08 22:52:15 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,11 @@
 
 int		ft_digitlen(long n)
 {
+	unsigned long	b;
+
 	if (n < 0)
-		n = -n;
-	return ((n > 9) ? ft_digitlen(n / 10) + 1 : 1);
+		b = -n;
+	else
+		b = n;
+	return ((b > 9) ? ft_digitlen((long)b / 10) + 1 : 1);
 }

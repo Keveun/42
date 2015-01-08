@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/06 20:29:19 by kperreau          #+#    #+#             */
-/*   Updated: 2015/01/08 20:49:17 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/01/08 23:45:22 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,11 @@ int			ft_d(t_options *opt, va_list *ap, int *ret)
 	len = (opt->precise > temp) ? opt->precise : temp;
 	if (opt->len > temp && !(opt->flags & 1))
 		ft_putspace(opt, ret, len);
+	if (n < 0)
+		write(1, "-", 1);
 	if (opt->precise > temp)
 		ft_putzero(opt, ret, temp);
-	ft_putnbr(n);
+	ft_putnbr((n < 0) ? -n : n);
 	if (opt->len > len && opt->flags & 1)
 		ft_putspace(opt, ret, len);
 	len = (opt->len > len) ? opt->len : len;
@@ -62,10 +64,12 @@ int			ft_d(t_options *opt, va_list *ap, int *ret)
 int			ft_d2(t_options *opt, va_list *ap, int *ret)
 {
 	long	n;
+	int		len;
 
 	n = va_arg(*ap, long);
 	ft_putnbr(n);
-	*ret += ft_digitlen(n);
+	len = ft_digitlen(n);
+	*ret += len;
 	return (0);
 }
 
