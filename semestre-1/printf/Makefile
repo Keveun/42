@@ -6,7 +6,7 @@
 #    By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/12/05 14:10:51 by kperreau          #+#    #+#              #
-#    Updated: 2015/01/04 22:32:42 by Kevin            ###   ########.fr        #
+#    Updated: 2015/01/08 18:11:32 by kperreau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ LIBDIR = libft
 MAIN = main.c
 
 CFILES = ft_parse.c ft_printf.c ft_options.c ft_types1.c ft_types2.c \
-			ft_dec_convert.c ft_putnbrul.c
+			ft_dec_convert.c ft_putnbrul.c ft_len.c
 
 SRC = $(patsubst %, $(SRCDIR)/%, $(CFILES))
 

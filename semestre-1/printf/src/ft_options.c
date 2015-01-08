@@ -6,7 +6,7 @@
 /*   By: Kevin <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/04 22:06:04 by Kevin             #+#    #+#             */
-/*   Updated: 2015/01/06 20:28:37 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/01/08 18:44:15 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,23 @@ int		ft_flag(char *s1, char *s2, int len)
 	return (flags);
 }
 
+int		ft_zero(char *s1, int len)
+{
+	while (*s1)
+	{
+		if (ft_isdigit(*s1) && (*s1 != '0' || *(s1 - 1) == '.'))
+		{
+			while (ft_isdigit(*s1))
+				++s1;
+		}
+		else if (ft_isdigit(*s1))
+			return (1);
+		else
+			++s1;
+	}
+	return (0);
+}
+
 int		ft_len(char *str, int len)
 {
 	int		i;
@@ -47,7 +64,13 @@ int		ft_len(char *str, int len)
 	n = 0;
 	while (i < len)
 	{
-		if (str[i - 1] != '.' && ft_isdigit(str[i]) && ft_atoi(str + i) > 0)
+		if (str[i] == '.')
+		{
+			++i;
+			while (ft_isdigit(str[i]))
+				++i;
+		}
+		if (ft_isdigit(str[i]) && ft_atoi(str + i) > 0)
 		{
 			n = ft_atoi(str + i);
 			i += ft_digitlen(n);
@@ -64,12 +87,12 @@ int		ft_precise(char *str, int len)
 	int		n;
 
 	i = 0;
-	n = 0;
+	n = -1;
 	while (i < len)
 	{
-		if (str[i - 1] == '.' && ft_isdigit(str[i]))
+		if (str[i] == '.')
 		{
-			n = ft_atoi(str + i);
+			n = ft_atoi(str + i + 1);
 			i += ft_digitlen(n);
 		}
 		else

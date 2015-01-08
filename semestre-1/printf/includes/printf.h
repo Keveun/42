@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/02 21:10:58 by kperreau          #+#    #+#             */
-/*   Updated: 2015/01/06 22:00:08 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/01/08 20:13:24 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct	s_options
 	int	precise;
 	int	modif;
 	int	type;
+	int	zero;
 }				t_options;
 
 typedef struct	s_vars
@@ -44,6 +45,8 @@ void			ft_parse(char *str, int len, t_vars *vars);
 int				ft_dectohex(long n, int maxlen, int up);
 unsigned long	ft_dectooctal(unsigned long n);
 void			ft_putnbrul(unsigned long n);
+void			ft_putspace(t_options *opt, int *ret, int len);
+void			ft_putzero(t_options *opt, int *ret, int len);
 
 /*
 **Fonctions Parse Types

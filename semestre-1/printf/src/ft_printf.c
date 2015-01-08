@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/02 21:22:03 by kperreau          #+#    #+#             */
-/*   Updated: 2015/01/06 21:23:53 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/01/07 22:17:20 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int		ft_parse_var(char *str, t_vars *vars)
 	return (i);
 }
 
-static int		ft_init_f(int (**f)(t_options *, va_list *, int *ret))
+static int		ft_init_f(int (**f)(t_options *, va_list *, int *))
 {
 	f[0] = ft_s;
 	f[2] = ft_p;
