@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/02 21:10:58 by kperreau          #+#    #+#             */
-/*   Updated: 2015/01/08 20:13:24 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/01/08 23:59:55 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ unsigned long	ft_dectooctal(unsigned long n);
 void			ft_putnbrul(unsigned long n);
 void			ft_putspace(t_options *opt, int *ret, int len);
 void			ft_putzero(t_options *opt, int *ret, int len);
+void			ft_putnbr2(unsigned long n);
 
 /*
 **Fonctions Parse Types

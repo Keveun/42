@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/06 20:29:19 by kperreau          #+#    #+#             */
-/*   Updated: 2015/01/08 23:45:22 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/01/09 00:02:15 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int			ft_d(t_options *opt, va_list *ap, int *ret)
 		write(1, "-", 1);
 	if (opt->precise > temp)
 		ft_putzero(opt, ret, temp);
-	ft_putnbr((n < 0) ? -n : n);
+	ft_putnbr2((n < 0) ? -n : n);
 	if (opt->len > len && opt->flags & 1)
 		ft_putspace(opt, ret, len);
 	len = (opt->len > len) ? opt->len : len;
@@ -67,9 +67,11 @@ int			ft_d2(t_options *opt, va_list *ap, int *ret)
 	int		len;
 
 	n = va_arg(*ap, long);
-	ft_putnbr(n);
+	if (n < 0)
+		write(1, "-", 1);
+	ft_putnbr2((n < 0) ? -n : n);
 	len = ft_digitlen(n);
-	*ret += len;
+	*ret += ((n < 0) ? 1 : 0) + len;
 	return (0);
 }
 

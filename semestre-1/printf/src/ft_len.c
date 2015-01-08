@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/08 17:53:47 by kperreau          #+#    #+#             */
-/*   Updated: 2015/01/08 22:22:52 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/01/09 00:00:14 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,17 @@ void		ft_putzero(t_options *opt, int *ret, int len)
 	str[i] = '\0';
 	write(1, str, size);
 	free(str);
+}
+
+void	ft_putnbr2(unsigned long n)
+{
+	if (n > 9)
+	{
+		ft_putnbr(n / 10);
+		ft_putnbr(n % 10);
+	}
+	else
+	{
+		ft_putchar(48 + n);
+	}
 }
