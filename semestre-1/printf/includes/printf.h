@@ -47,7 +47,7 @@ unsigned long	ft_dectooctal(unsigned long n);
 void			ft_putnbrul(unsigned long n);
 void			ft_putspace(t_options *opt, int *ret, int len);
 void			ft_putzero(t_options *opt, int *ret, int len);
-void			ft_putnbr2(unsigned long n);
+void			ft_putsigned(int flags, int n);
 
 /*
 **Fonctions Parse Types

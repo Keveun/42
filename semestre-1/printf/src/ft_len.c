@@ -20,7 +20,7 @@ void		ft_putspace(t_options *opt, int *ret, int len)
 	char	c;
 
 	size = (opt->len > len) ? opt->len - len : 0;
-	if (opt->type == 3 && opt->precise == -1 && opt->zero)
+	if (opt->type == 3 && opt->precise == -1 && opt->zero && !(opt->flags & 1))
 	{
 		opt->precise += opt->len;
 		return ;
@@ -56,15 +56,12 @@ void		ft_putzero(t_options *opt, int *ret, int len)
 	free(str);
 }
 
-void	ft_putnbr2(unsigned long n)
+void		ft_putsigned(int flags, int n)
 {
-	if (n > 9)
-	{
-		ft_putnbr(n / 10);
-		ft_putnbr(n % 10);
-	}
+	if (n < 0)
+		write(1, "-", 1);
+	else if (flags & 3)
+		write(1, "+", 1);
 	else
-	{
-		ft_putchar(48 + n);
-	}
+		write(1, " ", 1);
 }
