@@ -20,9 +20,17 @@ void		ft_putspace(t_options *opt, int *ret, int len)
 	char	c;
 
 	size = (opt->len > len) ? opt->len - len : 0;
+	if (opt->type == 3 && opt->precise == -1 && opt->zero)
+	{
+		opt->precise += opt->len;
+		return ;
+	}
 	if ((str = (char*)malloc(sizeof(char*) * size)) == NULL)
 		return ;
-	c = (opt->zero && !(opt->flags & 1)) ? '0' : ' ';
+	if (opt->type == 3 && opt->precise != -1)
+		c = ' ';
+	else
+		c = (opt->zero && !(opt->flags & 1)) ? '0' : ' ';
 	i = 0;
 	while (i < size)
 		str[i++] = c;
@@ -37,7 +45,7 @@ void		ft_putzero(t_options *opt, int *ret, int len)
 	int		size;
 	int		i;
 
-	size = opt->precise - len;
+	size = ((len < 0) ? 1 : 0) + opt->precise - len;
 	if ((str = (char*)malloc(sizeof(char*) * size)) == NULL)
 		return ;
 	i = 0;

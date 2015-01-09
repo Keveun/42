@@ -40,24 +40,26 @@ int			ft_d(t_options *opt, va_list *ap, int *ret)
 	long	n;
 	int		len;
 	int		temp;
+	int		negative;
 
 	if (opt->type == 8 || opt->type == 9)
 		n = va_arg(*ap, unsigned int);
 	else
 		n = va_arg(*ap, int);
+	negative = (n < 0) ? 1 : 0;
 	temp = ft_digitlen(n);
-	len = (opt->precise > temp) ? opt->precise : temp;
-	if (opt->len > temp && !(opt->flags & 1))
+	len = ((opt->precise > temp) ? opt->precise : temp) + negative;
+	if (opt->len > len && !(opt->flags & 1))
 		ft_putspace(opt, ret, len);
-	if (n < 0)
+	if (negative)
 		write(1, "-", 1);
 	if (opt->precise > temp)
 		ft_putzero(opt, ret, temp);
-	ft_putnbr2((n < 0) ? -n : n);
+	ft_putnbr2((negative) ? -n : n);
 	if (opt->len > len && opt->flags & 1)
 		ft_putspace(opt, ret, len);
 	len = (opt->len > len) ? opt->len : len;
-	*ret += ((n < 0) ? 1 : 0) + len;
+	*ret += len;
 	return (0);
 }
 

@@ -70,7 +70,7 @@ int		ft_len(char *str, int len)
 			while (ft_isdigit(str[i]))
 				++i;
 		}
-		if (ft_isdigit(str[i]) && ft_atoi(str + i) > 0)
+		if (ft_isdigit(str[i]) && str[i] != '0' && ft_atoi(str + i) > 0)
 		{
 			n = ft_atoi(str + i);
 			i += ft_digitlen(n);
