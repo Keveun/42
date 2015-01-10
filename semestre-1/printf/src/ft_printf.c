@@ -34,7 +34,7 @@ static int		ft_init_f(int (**f)(t_options *, va_list *, int *))
 	f[5] = ft_d;
 	f[6] = ft_o;
 	f[7] = ft_o2;
-	f[8] = ft_d;
+	f[8] = ft_u;
 	f[9] = ft_u2;
 	f[10] = ft_x;
 	f[11] = ft_x2;

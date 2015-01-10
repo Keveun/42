@@ -95,7 +95,7 @@ void			ft_swap_ptr(char **s1, char **s2);
 t_list			*ft_create_list(char *str);
 t_list			*ft_add_list(t_list *list, char *str);
 void			ft_del_list(t_list **list);
-int				ft_digitlen(long n);
+int				ft_nbrlen(long n);
 void			ft_strrev(char *str);
 void			ft_swap(int *a, int *b);
 

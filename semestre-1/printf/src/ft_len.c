@@ -12,7 +12,7 @@
 
 #include "printf.h"
 
-void		ft_putspace(t_options *opt, int *ret, int len)
+void		ft_putspace(t_options *opt, int len, long long n)
 {
 	char	*str;
 	int		size;
@@ -20,14 +20,15 @@ void		ft_putspace(t_options *opt, int *ret, int len)
 	char	c;
 
 	size = (opt->len > len) ? opt->len - len : 0;
-	if (opt->type == 3 && opt->precise == -1 && opt->zero && !(opt->flags & 1))
+	if (opt->type == 3 && n < 0 && opt->precise == -1 && opt->zero \
+		&& !(opt->flags & 1))
 	{
 		opt->precise += opt->len;
 		return ;
 	}
 	if ((str = (char*)malloc(sizeof(char*) * size)) == NULL)
 		return ;
-	if (opt->type == 3 && opt->precise != -1)
+	if (opt->type >= 2 && opt->type <= 11 && opt->precise != -1)
 		c = ' ';
 	else
 		c = (opt->zero && !(opt->flags & 1)) ? '0' : ' ';
@@ -39,7 +40,7 @@ void		ft_putspace(t_options *opt, int *ret, int len)
 	free(str);
 }
 
-void		ft_putzero(t_options *opt, int *ret, int len)
+void		ft_putzero(t_options *opt, int len)
 {
 	char	*str;
 	int		size;
@@ -60,8 +61,13 @@ void		ft_putsigned(int flags, int n)
 {
 	if (n < 0)
 		write(1, "-", 1);
-	else if (flags & 3)
+	else if (flags & 2)
 		write(1, "+", 1);
 	else
 		write(1, " ", 1);
+}
+
+int			ft_nbrlen2(unsigned long n)
+{
+	return ((n > 9) ? ft_nbrlen2(n / 10) + 1 : 1);
 }

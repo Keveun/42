@@ -30,12 +30,10 @@ unsigned long	ft_dectooctal(unsigned long n)
 	return (octal);
 }
 
-int				ft_dectohex(long n, int maxlen, int up)
+int			ft_dectohex(char *hex, unsigned long n, int up)
 {
 	int		i;
-	int		rem;
-	char	hex[20];
-	int		len;
+	long	rem;
 
 	i = 0;
 	while (n)
@@ -50,9 +48,5 @@ int				ft_dectohex(long n, int maxlen, int up)
 	}
 	hex[i] = '\0';
 	ft_strrev(hex);
-	len = ft_strlen(hex);
-	if (maxlen != -1 && len > maxlen)
-		len = maxlen;
-	write(1, hex , len);
-	return (len);
+	return (0);
 }

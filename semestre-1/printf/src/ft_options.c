@@ -73,7 +73,7 @@ int		ft_len(char *str, int len)
 		if (ft_isdigit(str[i]) && str[i] != '0' && ft_atoi(str + i) > 0)
 		{
 			n = ft_atoi(str + i);
-			i += ft_digitlen(n);
+			i += ft_nbrlen(n);
 		}
 		else
 			++i;
@@ -93,7 +93,7 @@ int		ft_precise(char *str, int len)
 		if (str[i] == '.')
 		{
 			n = ft_atoi(str + i + 1);
-			i += ft_digitlen(n);
+			i += ft_nbrlen(n);
 		}
 		else
 			++i;

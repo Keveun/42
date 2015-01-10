@@ -24,8 +24,9 @@ LIBDIR = libft
 
 MAIN = main.c
 
-CFILES = ft_parse.c ft_printf.c ft_options.c ft_types1.c ft_types2.c \
-			ft_dec_convert.c ft_putnbrul.c ft_len.c
+CFILES = ft_parse.c ft_printf.c ft_options.c ft_type_s.c ft_types_x.c \
+			ft_dec_convert.c ft_putnbrul.c ft_len.c ft_type_d.c \
+			ft_type_u.c ft_type_o.c ft_type_p.c ft_type_c.c
 
 SRC = $(patsubst %, $(SRCDIR)/%, $(CFILES))
 

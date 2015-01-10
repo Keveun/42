@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_digitlen.c                                      :+:      :+:    :+:   */
+/*   ft_nbrlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Kevin <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-int		ft_digitlen(long n)
+int		ft_nbrlen(long n)
 {
 	unsigned long	b;
 
@@ -20,5 +20,5 @@ int		ft_digitlen(long n)
 		b = -n;
 	else
 		b = n;
-	return ((b > 9) ? ft_digitlen((long)b / 10) + 1 : 1);
+	return ((b > 9) ? ft_nbrlen((long)b / 10) + 1 : 1);
 }

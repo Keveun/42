@@ -42,12 +42,13 @@ typedef struct	s_vars
 */
 int				ft_printf(const char *format, ...);
 void			ft_parse(char *str, int len, t_vars *vars);
-int				ft_dectohex(long n, int maxlen, int up);
+int				ft_dectohex(char *hex, unsigned long n, int up);
 unsigned long	ft_dectooctal(unsigned long n);
 void			ft_putnbrul(unsigned long n);
-void			ft_putspace(t_options *opt, int *ret, int len);
-void			ft_putzero(t_options *opt, int *ret, int len);
+void			ft_putspace(t_options *opt, int len, long long n);
+void			ft_putzero(t_options *opt, int len);
 void			ft_putsigned(int flags, int n);
+int				ft_nbrlen2(unsigned long n);
 
 /*
 **Fonctions Parse Types
@@ -70,6 +71,7 @@ int				ft_x(t_options *opt, va_list *ap, int *ret);
 int				ft_x2(t_options *opt, va_list *ap, int *ret);
 int				ft_o(t_options *opt, va_list *ap, int *ret);
 int				ft_o2(t_options *opt, va_list *ap, int *ret);
+int				ft_u(t_options *opt, va_list *ap, int *ret);
 int				ft_u2(t_options *opt, va_list *ap, int *ret);
 
 #endif
