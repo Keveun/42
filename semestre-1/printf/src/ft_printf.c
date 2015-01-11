@@ -28,6 +28,7 @@ static int		ft_parse_var(char *str, t_vars *vars)
 static int		ft_init_f(int (**f)(t_options *, va_list *, int *))
 {
 	f[0] = ft_s;
+	f[1] = ft_s2;
 	f[2] = ft_p;
 	f[3] = ft_d;
 	f[4] = ft_d2;

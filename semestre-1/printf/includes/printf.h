@@ -63,6 +63,7 @@ int				ft_flag(char *s1, char *s2, int len);
 **Fonctions Types
 */
 int				ft_s(t_options *opt, va_list *ap, int *ret);
+int				ft_s2(t_options *opt, va_list *ap, int *ret);
 int				ft_d(t_options *opt, va_list *ap, int *ret);
 int				ft_d2(t_options *opt, va_list *ap, int *ret);
 int				ft_c(t_options *opt, va_list *ap, int *ret);

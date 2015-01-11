@@ -32,7 +32,10 @@ int			ft_s(t_options *opt, va_list *ap, int *ret)
 	char	*s;
 	int		len;
 
-	s = va_arg(*ap, char *);
+	if (opt->modif == 1)
+		s = (char*)va_arg(*ap, wchar_t *);
+	else
+		s = va_arg(*ap, char *);
 	if (s == NULL)
 	{
 		ft_putstr("(null)");
@@ -40,4 +43,12 @@ int			ft_s(t_options *opt, va_list *ap, int *ret)
 	}
 	*ret += ft_write_s(opt, s);
 	return (0);
+}
+
+
+int			ft_s2(t_options *opt, va_list *ap, int *ret)
+{
+	opt->modif = 1;
+	opt->type = 0;
+	return (ft_c(opt, ap, ret));
 }
