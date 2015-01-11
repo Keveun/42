@@ -25,9 +25,9 @@ int		main(int argc, char **argv)
 	test = TEST;
 	if (argc > 1)
 	{
-		val1 = printf(argv[1], 42, -9999L, test);
+		val1 = printf(argv[1], 260, -9999L, test);
 		printf("\nval1: %d\n", val1);
-		val2 = ft_printf(argv[1], 42, -9999L, test);
+		val2 = ft_printf(argv[1], 260, -9999L, test);
 		printf("\nval2: %d\n", val2);
 	}
 	return (0);

@@ -39,6 +39,7 @@ static int		ft_init_f(int (**f)(t_options *, va_list *, int *))
 	f[10] = ft_x;
 	f[11] = ft_x2;
 	f[12] = ft_c;
+	f[13] = ft_c2;
 }
 
 int				ft_printf(const char *format, ...)

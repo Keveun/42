@@ -12,14 +12,14 @@
 
 #include "printf.h"
 
-static int	ft_write_c(t_options *opt, char c)
+static int	ft_write_c(t_options *opt, wint_t c)
 {
 	int		len;
 
 	len = 1;
 	if (opt->len > len && !(opt->flags & 1))
 		ft_putspace(opt, len, 0);
-	write(1, &c, 1);
+	write(1, &c, (opt->modif == 1) ? 1 : 1);
 	if (opt->len > len && opt->flags & 1)
 		ft_putspace(opt, len, 0);
 	len = (opt->len != -1 && len < opt->len) ? opt->len : len;
@@ -28,9 +28,19 @@ static int	ft_write_c(t_options *opt, char c)
 
 int			ft_c(t_options *opt, va_list *ap, int *ret)
 {
-	char	c;
+	long	c;
 
-	c = va_arg(*ap, int);
+	if (opt->modif == 1)
+		c = va_arg(*ap, long);
+	else
+		c = va_arg(*ap, int);
 	*ret += ft_write_c(opt, c);
 	return (0);
+}
+
+int			ft_c2(t_options *opt, va_list *ap, int *ret)
+{
+	opt->modif = 1;
+	opt->type = 12;
+	return (ft_c(opt, ap, ret));
 }

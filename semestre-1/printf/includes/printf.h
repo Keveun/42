@@ -66,6 +66,7 @@ int				ft_s(t_options *opt, va_list *ap, int *ret);
 int				ft_d(t_options *opt, va_list *ap, int *ret);
 int				ft_d2(t_options *opt, va_list *ap, int *ret);
 int				ft_c(t_options *opt, va_list *ap, int *ret);
+int				ft_c2(t_options *opt, va_list *ap, int *ret);
 int				ft_p(t_options *opt, va_list *ap, int *ret);
 int				ft_x(t_options *opt, va_list *ap, int *ret);
 int				ft_x2(t_options *opt, va_list *ap, int *ret);
