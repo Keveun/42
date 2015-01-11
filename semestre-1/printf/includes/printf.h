@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/02 21:10:58 by kperreau          #+#    #+#             */
-/*   Updated: 2015/01/08 23:59:55 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/01/11 22:41:32 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 # include "libft.h"
 # include <stdarg.h>
 # include <stdio.h>
+# include <wchar.h>
+# define FT_PARSE "hljz-+ #.*"
 # define FT_TYPES "sSpdDioOuUxXcC"
 # define FT_MODIF "hljz"
 # define FT_FLAGS "-+ #"
@@ -47,8 +49,9 @@ unsigned long	ft_dectooctal(unsigned long n);
 void			ft_putnbrul(unsigned long n);
 void			ft_putspace(t_options *opt, int len, long long n);
 void			ft_putzero(t_options *opt, int len);
-void			ft_putsigned(int flags, int n);
+void			ft_putsigned(int flags, long long n);
 int				ft_nbrlen2(unsigned long n);
+int				ft_zero(char *s1);
 
 /*
 **Fonctions Parse Types

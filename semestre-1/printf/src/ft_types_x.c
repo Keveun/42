@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/02 21:22:03 by kperreau          #+#    #+#             */
-/*   Updated: 2015/01/06 21:59:28 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/01/11 22:45:46 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static int		ft_write_x(t_options *opt, char *hex)
 	if (opt->len > len && opt->flags & 1)
 		ft_putspace(opt, len, 0);
 	len = (opt->len > len) ? opt->len : len;
-	return (len + 2);
+	return ((opt->flags & 8) ? len + 2 : len);
 }
 
 int			ft_x(t_options *opt, va_list *ap, int *ret)
@@ -59,10 +59,10 @@ int			ft_x(t_options *opt, va_list *ap, int *ret)
 	unsigned long long	n;
 	char				hex[20];
 
-	if (opt->modif == -1)
-		n = va_arg(*ap, unsigned int);
-	else if (opt->modif == 1)
+	if (opt->modif == 1)
 		n = va_arg(*ap, unsigned long);
+	else
+		n = va_arg(*ap, unsigned int);
 	ft_dectohex(hex, n, (opt->type == 11) ? 1 : 0);
 	*ret += ft_write_x(opt, hex);
 	return (0);

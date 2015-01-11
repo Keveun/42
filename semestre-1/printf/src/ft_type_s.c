@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/06 20:29:19 by kperreau          #+#    #+#             */
-/*   Updated: 2015/01/09 00:02:15 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/01/11 21:10:41 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ static int	ft_write_s(t_options *opt, char *s)
 int			ft_s(t_options *opt, va_list *ap, int *ret)
 {
 	char	*s;
-	int		len;
 
 	if (opt->modif == 1)
 		s = (char*)va_arg(*ap, wchar_t *);
@@ -39,6 +38,7 @@ int			ft_s(t_options *opt, va_list *ap, int *ret)
 	if (s == NULL)
 	{
 		ft_putstr("(null)");
+		*ret += 6;
 		return (0);
 	}
 	*ret += ft_write_s(opt, s);

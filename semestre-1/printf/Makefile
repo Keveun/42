@@ -6,11 +6,11 @@
 #    By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/12/05 14:10:51 by kperreau          #+#    #+#              #
-#    Updated: 2015/01/08 18:11:32 by kperreau         ###   ########.fr        #
+#    Updated: 2015/01/11 20:05:33 by kperreau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = ft_printf
+NAME = libftprintf.a
 
 # Dir vars
 
@@ -64,7 +64,9 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 			@make -C $(LIBDIR)/
-			@$(CC) $(FLAGS) $(MAIN) $(OBJ) $(LIBFLAGS)  -o $(NAME)
+			@ar rc $(NAME) $(OBJ)
+			@ranlib $(NAME)
+#			@$(CC) $(FLAGS) $(MAIN) $(LIBFLAGS) libftprintf.a -o $(NAME)
 
 re: fclean all
 
@@ -78,6 +80,9 @@ fclean: clean
 
 relib:
 		@make -C $(LIBDIR)/ re
+
+test: $(OBJ)
+	@$(CC) $(FLAGS) $(MAIN) $(LIBFLAGS) libftprintf.a -o ft_printf
 
 %.o: %.c
 			@$(CC) -o $@ -c $< $(FLAGS)

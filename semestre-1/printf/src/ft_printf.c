@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/02 21:22:03 by kperreau          #+#    #+#             */
-/*   Updated: 2015/01/07 22:17:20 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/01/11 23:08:03 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,17 @@ static int		ft_parse_var(char *str, t_vars *vars)
 	int		i;
 
 	i = 0;
-	while (str[i] && (!ft_isalpha(str[i]) || ft_strchr(FT_MODIF, str[i])))
+	while (str[i] && (ft_isdigit(str[i]) || ft_strchr(FT_PARSE, str[i])))
 		++i;
-	if (ft_strchr(FT_TYPES, str[i]))
+	if (str[i] && ft_strchr(FT_TYPES, str[i]))
+	{
+		ft_parse(str, i, vars);
 		++i;
-	ft_parse(str, i - 1, vars);
+	}
 	return (i);
 }
 
-static int		ft_init_f(int (**f)(t_options *, va_list *, int *))
+static void		ft_init_f(int (**f)(t_options *, va_list *, int *))
 {
 	f[0] = ft_s;
 	f[1] = ft_s2;
@@ -48,6 +50,7 @@ int				ft_printf(const char *format, ...)
 	char		*str;
 	char		*begin;
 	t_vars		vars;
+	int			ret;
 
 	if (format == NULL)
 		return (-1);
@@ -60,14 +63,16 @@ int				ft_printf(const char *format, ...)
 	{
 		if (*str == '%')
 		{
-			++str;
-			vars.ret += str - begin - 1;
-			write(1, begin, str - begin - 1);
-			if(*str != '%')
-				str += ft_parse_var(str, &vars);
+			vars.ret += str - begin;
+			if (vars.ret > 0)
+				write(1, begin, str - begin);
+			str += ft_parse_var(str + 1, &vars) + 1;
 			begin = str;
+			if (!ft_strchr(FT_TYPES, *(str - 1)) && *str)
+				++str;
 		}
-		++str;
+		else
+			++str;
 	}
 	vars.ret += ft_strlen(begin);
 	ft_putstr(begin);

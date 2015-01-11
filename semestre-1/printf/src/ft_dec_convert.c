@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/02 21:21:32 by kperreau          #+#    #+#             */
-/*   Updated: 2015/01/06 22:00:15 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/01/11 22:50:54 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ int			ft_dectohex(char *hex, unsigned long n, int up)
 	long	rem;
 
 	i = 0;
+	if (!n)
+		hex[i++] = '0';
 	while (n)
 	{
 		rem = n % 16;
@@ -47,6 +49,7 @@ int			ft_dectohex(char *hex, unsigned long n, int up)
 		n /= 16;
 	}
 	hex[i] = '\0';
-	ft_strrev(hex);
+	if (i > 1)
+		ft_strrev(hex);
 	return (0);
 }

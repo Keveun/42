@@ -6,7 +6,7 @@
 /*   By: Kevin <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/04 22:06:04 by Kevin             #+#    #+#             */
-/*   Updated: 2015/01/08 18:44:15 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/01/11 19:17:51 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int		ft_flag(char *s1, char *s2, int len)
 	return (flags);
 }
 
-int		ft_zero(char *s1, int len)
+int		ft_zero(char *s1)
 {
 	while (*s1)
 	{

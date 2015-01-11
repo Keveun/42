@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/08 17:53:47 by kperreau          #+#    #+#             */
-/*   Updated: 2015/01/09 00:00:14 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/01/11 22:41:19 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void		ft_putzero(t_options *opt, int len)
 	free(str);
 }
 
-void		ft_putsigned(int flags, int n)
+void		ft_putsigned(int flags, long long n)
 {
 	if (n < 0)
 		write(1, "-", 1);
