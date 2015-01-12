@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/02 21:22:03 by kperreau          #+#    #+#             */
-/*   Updated: 2015/01/12 20:49:04 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/01/12 20:56:03 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static int		ft_write_x(t_options *opt, char *hex, unsigned long long n)
 	if (opt->len > len && opt->flags & 1)
 		ft_putspace(opt, len, 0);
 	len = (opt->len > len) ? opt->len : len;
-	return ((opt->flags & 8) ? len + 2 : len);
+	return ((opt->flags & 8 && n) ? len + 2 : len);
 }
 
 int			ft_x(t_options *opt, va_list *ap, int *ret)
