@@ -19,10 +19,11 @@ static int		ft_parse_var(char *str, t_vars *vars)
 	i = 0;
 	while (str[i] && (ft_isdigit(str[i]) || ft_strchr(FT_PARSE, str[i])))
 		++i;
-	if (str[i] && ft_strchr(FT_TYPES, str[i]))
+	if (str[i])
 	{
 		ft_parse(str, i, vars);
-		++i;
+		// if (ft_strchr(FT_TYPES, str[i]))
+			++i;
 	}
 	return (i);
 }

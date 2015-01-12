@@ -17,17 +17,17 @@ static int		ft_write_u(t_options *opt, unsigned long long n)
 	int		len;
 	int		temp;
 
-	temp = ft_nbrlen2(n);
+	temp = (n || opt->precise) ? ft_nbrlen2(n) : 0;
 	len = ((opt->precise > temp) ? opt->precise : temp);
 	if (opt->len > len && !(opt->flags & 1))
 		ft_putspace(opt, len, 0);
 	if (opt->precise > temp)
 		ft_putzero(opt, temp);
-	ft_putnbrul(n);
+	if (opt->precise || n)
+		ft_putnbrul(n);
 	if (opt->len > len && opt->flags & 1)
 		ft_putspace(opt, len, 0);
-	len = (opt->len > len) ? opt->len : len;
-	return (len);
+	return ((opt->len > len) ? opt->len : len);
 }
 
 int			ft_u(t_options *opt, va_list *ap, int *ret)

@@ -6,7 +6,7 @@
 #    By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/12/05 14:10:51 by kperreau          #+#    #+#              #
-#    Updated: 2015/01/11 20:05:33 by kperreau         ###   ########.fr        #
+#    Updated: 2015/01/12 11:27:01 by Kevin            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,7 +66,7 @@ $(NAME): $(OBJ)
 			@make -C $(LIBDIR)/
 			@ar rc $(NAME) $(OBJ)
 			@ranlib $(NAME)
-#			@$(CC) $(FLAGS) $(MAIN) $(LIBFLAGS) libftprintf.a -o $(NAME)
+#			@$(CC) $(FLAGS) $(MAIN) libprintf.a $(LIBFLAGS) -o $(NAME)
 
 re: fclean all
 
@@ -82,7 +82,7 @@ relib:
 		@make -C $(LIBDIR)/ re
 
 test: $(OBJ)
-	@$(CC) $(FLAGS) $(MAIN) $(LIBFLAGS) libftprintf.a -o ft_printf
+	@$(CC) $(FLAGS) $(MAIN) libftprintf.a $(LIBFLAGS) -o ft_printf
 
 %.o: %.c
 			@$(CC) -o $@ -c $< $(FLAGS)

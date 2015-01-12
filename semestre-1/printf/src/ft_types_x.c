@@ -30,7 +30,7 @@
 	return (len);
 }*/
 
-static int		ft_write_x(t_options *opt, char *hex)
+static int		ft_write_x(t_options *opt, char *hex, unsigned long long n)
 {
 	int		len;
 	int		temp;
@@ -39,15 +39,16 @@ static int		ft_write_x(t_options *opt, char *hex)
 		opt->len -= 2;
 	if (opt->precise == -1 && opt->zero && opt->flags & 8)
 		opt->precise = opt->len;
-	temp = ft_strlen(hex);
+	temp = (n || opt->precise) ? ft_strlen(hex) : 0;
 	len = ((opt->precise > temp) ? opt->precise : temp);
 	if (opt->len > len && !(opt->flags & 1))
 		ft_putspace(opt, len, 0);
-	if (opt->flags & 8)
+	if (opt->flags & 8 && n)
 		write(1, "0x", 2);
 	if (opt->precise > temp)
 		ft_putzero(opt, temp);
-	write(1, hex, temp);
+	if (opt->precise || n)
+		write(1, hex, temp);
 	if (opt->len > len && opt->flags & 1)
 		ft_putspace(opt, len, 0);
 	len = (opt->len > len) ? opt->len : len;
@@ -64,7 +65,7 @@ int			ft_x(t_options *opt, va_list *ap, int *ret)
 	else
 		n = va_arg(*ap, unsigned int);
 	ft_dectohex(hex, n, (opt->type == 11) ? 1 : 0);
-	*ret += ft_write_x(opt, hex);
+	*ret += ft_write_x(opt, hex, n);
 	return (0);
 }
 
