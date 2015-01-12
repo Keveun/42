@@ -6,7 +6,7 @@
 /*   By: Kevin <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/04 22:06:04 by Kevin             #+#    #+#             */
-/*   Updated: 2015/01/11 19:17:51 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/01/12 23:38:48 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,9 +118,9 @@ int		ft_modif(char *s1, int len)
 			{
 				modif = s2 - FT_MODIF;
 				if (*s2 == 'l' && *(s1 - 1) == 'l')
-					modif = 5;
+					modif = 4;
 				else if (*s2 == 'h' && *(s1 - 1) == 'h')
-					modif = 6;
+					modif = 5;
 				return(modif);
 			}
 			++s2;

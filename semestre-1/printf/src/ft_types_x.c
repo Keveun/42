@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/02 21:22:03 by kperreau          #+#    #+#             */
-/*   Updated: 2015/01/12 20:56:03 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/01/13 00:05:00 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,10 @@ int			ft_x(t_options *opt, va_list *ap, int *ret)
 	unsigned long long	n;
 	char				hex[20];
 
-	if (opt->modif == 1)
+	if (1 << opt->modif & 14)
 		n = va_arg(*ap, unsigned long);
+	else if (opt->modif == 5)
+		n = (unsigned char)va_arg(*ap, unsigned int);
 	else
 		n = va_arg(*ap, unsigned int);
 	ft_dectohex(hex, n, (opt->type == 11) ? 1 : 0);

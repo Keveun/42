@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/06 20:29:19 by kperreau          #+#    #+#             */
-/*   Updated: 2015/01/12 20:44:51 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/01/12 23:46:20 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,12 @@ int			ft_o(t_options *opt, va_list *ap, int *ret)
 	unsigned long	n;
 	char			oct[30];
 
-	if (opt->modif == 1)
+	if (1 << opt->modif & 14)
 		n = va_arg(*ap, unsigned long);
+	else if (!opt->modif)
+		n = (unsigned short)va_arg(*ap, unsigned int);
+	else if (opt->modif == 5)
+		n = (unsigned char)va_arg(*ap, unsigned int);
 	else
 		n = va_arg(*ap, unsigned int);
 	n = ft_dectooctal(oct, n);
