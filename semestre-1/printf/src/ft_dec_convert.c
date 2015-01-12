@@ -6,27 +6,35 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/02 21:21:32 by kperreau          #+#    #+#             */
-/*   Updated: 2015/01/11 22:50:54 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/01/12 20:44:21 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
 
-unsigned long	ft_dectooctal(unsigned long n)
+unsigned long	ft_dectooctal(char *oct, unsigned long n)
 {
-	unsigned long	rem;
+	int				rem;
 	unsigned long	i;
+	int				j;
 	unsigned long	octal;
 	
 	i = 1;
+	j = 0;
 	octal = 0;
+	if (!n)
+		oct[j++] = '0';
 	while (n)
 	{
 		rem = n % 8;
 		n /= 8;
 		octal += rem * i;
 		i *= 10;
+		oct[j++] = rem + '0';
 	}
+	oct[j] = '\0';
+	if (j > 1)
+		ft_strrev(oct);
 	return (octal);
 }
 

@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/02 21:10:58 by kperreau          #+#    #+#             */
-/*   Updated: 2015/01/11 22:41:32 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/01/12 17:47:36 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ typedef struct	s_vars
 int				ft_printf(const char *format, ...);
 void			ft_parse(char *str, int len, t_vars *vars);
 int				ft_dectohex(char *hex, unsigned long n, int up);
-unsigned long	ft_dectooctal(unsigned long n);
+unsigned long	ft_dectooctal(char *oct, unsigned long n);
 void			ft_putnbrul(unsigned long n);
 void			ft_putspace(t_options *opt, int len, long long n);
 void			ft_putzero(t_options *opt, int len);

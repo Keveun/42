@@ -6,29 +6,11 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/02 21:22:03 by kperreau          #+#    #+#             */
-/*   Updated: 2015/01/11 22:45:46 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/01/12 20:49:04 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
-
-/*static int		ft_write_x(t_options *opt, char *hex)
-{
-	int		len;
-	int		temp;
-
-	temp = ft_strlen(hex);
-	len = ((opt->precise > temp) ? opt->precise : temp);
-	if (opt->len > len && !(opt->flags & 1))
-		ft_putspace(opt, len, 0);
-	if (opt->precise > temp)
-		ft_putzero(opt, temp);
-	write(1, hex, temp);
-	if (opt->len > len && opt->flags & 1)
-		ft_putspace(opt, len, 0);
-	len = (opt->len > len) ? opt->len : len;
-	return (len);
-}*/
 
 static int		ft_write_x(t_options *opt, char *hex, unsigned long long n)
 {
@@ -43,8 +25,10 @@ static int		ft_write_x(t_options *opt, char *hex, unsigned long long n)
 	len = ((opt->precise > temp) ? opt->precise : temp);
 	if (opt->len > len && !(opt->flags & 1))
 		ft_putspace(opt, len, 0);
-	if (opt->flags & 8 && n)
+	if (opt->flags & 8 && n && opt->type == 10)
 		write(1, "0x", 2);
+	else if (opt->flags & 8 && n)
+		write(1, "0X", 2);
 	if (opt->precise > temp)
 		ft_putzero(opt, temp);
 	if (opt->precise || n)

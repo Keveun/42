@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/02 21:22:03 by kperreau          #+#    #+#             */
-/*   Updated: 2015/01/11 23:08:03 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/01/12 16:52:20 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,8 @@ int				ft_printf(const char *format, ...)
 				write(1, begin, str - begin);
 			str += ft_parse_var(str + 1, &vars) + 1;
 			begin = str;
-			if (!ft_strchr(FT_TYPES, *(str - 1)) && *str)
-				++str;
+	//		if (!ft_strchr(FT_TYPES, *(str - 1)) && *str)
+	//			++str;
 		}
 		else
 			++str;
