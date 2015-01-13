@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/02 21:21:32 by kperreau          #+#    #+#             */
-/*   Updated: 2015/01/11 19:18:36 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/01/13 20:21:43 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ void			ft_parse(char *str, int len, t_vars *vars)
 
 	opt.flags = ft_flag(FT_FLAGS, str, len);
 	opt.len = ft_len(str, len, &vars->ap);
+	opt.flags |= (opt.len >= 0) ? 0 : 1;
+	opt.len = (opt.len >= 0) ? opt.len : -opt.len;
 	opt.precise = ft_precise(str, len, &vars->ap);
 	opt.modif = ft_modif(str, len);
 	opt.zero = ft_zero(str);

@@ -6,7 +6,7 @@
 /*   By: Kevin <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/04 22:06:04 by Kevin             #+#    #+#             */
-/*   Updated: 2015/01/13 19:55:19 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/01/13 20:12:38 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int		ft_len(char *str, int len, va_list *ap)
 		else
 			++i;
 	}
-	return ((n >= 0) ? n : -1);
+	return (n);
 }
 
 int		ft_precise(char *str, int len, va_list *ap)
