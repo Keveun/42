@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/06 20:29:19 by kperreau          #+#    #+#             */
-/*   Updated: 2015/01/13 20:07:16 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/01/13 23:29:50 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	ft_write_c(t_options *opt, wint_t c)
 	len = 1;
 	if (opt->len > len && !(opt->flags & 1))
 		ft_putspace(opt, len, 0);
-	write(1, &c, 1);
+	write(1, &c, ft_utfclen(c));
 	if (opt->len > len && opt->flags & 1)
 		ft_putspace(opt, len, 0);
 	len = (opt->len != -1 && len < opt->len) ? opt->len : len;

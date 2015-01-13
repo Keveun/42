@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/02 21:10:58 by kperreau          #+#    #+#             */
-/*   Updated: 2015/01/12 17:47:36 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/01/13 23:16:02 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void			ft_putsigned(int flags, long long n);
 int				ft_nbrlen2(unsigned long n);
 int				ft_zero(char *s1);
 int				ft_searchpoint(char *str, int len);
+int				ft_utfclen(int c);
 
 /*
 **Fonctions Parse Types

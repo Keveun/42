@@ -6,7 +6,7 @@
 #    By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/12/05 14:10:51 by kperreau          #+#    #+#              #
-#    Updated: 2015/01/12 11:27:01 by Kevin            ###   ########.fr        #
+#    Updated: 2015/01/13 23:18:13 by kperreau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ MAIN = main.c
 
 CFILES = ft_parse.c ft_printf.c ft_options.c ft_type_s.c ft_types_x.c \
 			ft_dec_convert.c ft_putnbrul.c ft_len.c ft_type_d.c \
-			ft_type_u.c ft_type_o.c ft_type_p.c ft_type_c.c
+			ft_type_u.c ft_type_o.c ft_type_p.c ft_type_c.c ft_utf8.c
 
 SRC = $(patsubst %, $(SRCDIR)/%, $(CFILES))
 
