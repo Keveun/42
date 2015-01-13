@@ -71,3 +71,15 @@ int			ft_nbrlen2(unsigned long n)
 {
 	return ((n > 9) ? ft_nbrlen2(n / 10) + 1 : 1);
 }
+
+int			ft_searchpoint(char *str, int len)
+{
+	int		i;
+
+	i = 0;
+	while (str[len] != '.' && len >= 0)
+		--len;
+	if (str[len] != '.')
+		len = -1;
+	return (len);
+}

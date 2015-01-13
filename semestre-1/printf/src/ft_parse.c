@@ -33,8 +33,8 @@ void			ft_parse(char *str, int len, t_vars *vars)
 	int			(**pf)(t_options *, va_list *, int *);
 
 	opt.flags = ft_flag(FT_FLAGS, str, len);
-	opt.len = ft_len(str, len);
-	opt.precise = ft_precise(str, len);
+	opt.len = ft_len(str, len, &vars->ap);
+	opt.precise = ft_precise(str, len, &vars->ap);
 	opt.modif = ft_modif(str, len);
 	opt.zero = ft_zero(str);
 	if ((c = ft_strchr(FT_TYPES, str[len])))

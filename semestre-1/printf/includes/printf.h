@@ -52,13 +52,14 @@ void			ft_putzero(t_options *opt, int len);
 void			ft_putsigned(int flags, long long n);
 int				ft_nbrlen2(unsigned long n);
 int				ft_zero(char *s1);
+int				ft_searchpoint(char *str, int len);
 
 /*
 **Fonctions Parse Types
 */
 int				ft_sub(char *str);
-int				ft_len(char *str, int len);
-int				ft_precise(char *str, int len);
+int				ft_len(char *str, int len, va_list *ap);
+int				ft_precise(char *str, int len, va_list *ap);
 int				ft_modif(char *str, int len);
 int				ft_flag(char *s1, char *s2, int len);
 

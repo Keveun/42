@@ -55,7 +55,7 @@ int		ft_zero(char *s1)
 	return (0);
 }
 
-int		ft_len(char *str, int len)
+int		ft_len(char *str, int len, va_list *ap)
 {
 	int		i;
 	int		n;
@@ -67,12 +67,13 @@ int		ft_len(char *str, int len)
 		if (str[i] == '.')
 		{
 			++i;
-			while (ft_isdigit(str[i]))
+			while (ft_isdigit(str[i]) || str[i] == '*')
 				++i;
 		}
-		if (ft_isdigit(str[i]) && str[i] != '0' && ft_atoi(str + i) > 0)
+		if (ft_isdigit(str[i]) && str[i] && ft_atoi(str + i) > 0 \
+			|| str[i] == '*')
 		{
-			n = ft_atoi(str + i);
+			n = (str[i] == '*') ? va_arg(*ap, int) : ft_atoi(str + i);
 			i += ft_nbrlen(n);
 		}
 		else
@@ -81,23 +82,14 @@ int		ft_len(char *str, int len)
 	return (n);
 }
 
-int		ft_precise(char *str, int len)
+int		ft_precise(char *str, int len, va_list *ap)
 {
 	int		i;
 	int		n;
 
-	i = 0;
-	n = -1;
-	while (i < len)
-	{
-		if (str[i] == '.')
-		{
-			n = ft_atoi(str + i + 1);
-			i += ft_nbrlen(n);
-		}
-		else
-			++i;
-	}
+	if ((i = ft_searchpoint(str, len - 1)) == -1)
+		return (-1);
+	n = (str[i + 1] == '*') ? va_arg(*ap, int) : ft_atoi(str + i + 1);
 	return (n);
 }
 
