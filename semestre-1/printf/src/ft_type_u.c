@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/06 20:29:19 by kperreau          #+#    #+#             */
-/*   Updated: 2015/01/13 00:03:19 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/01/13 20:01:20 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int			ft_u(t_options *opt, va_list *ap, int *ret)
 {
 	unsigned long long	n;
 
-	if (1 << opt->modif & 14)
+	if (1 << opt->modif & 30)
 		n = va_arg(*ap, unsigned long);
 	else if (opt->modif == 5)
 		n = (unsigned char)va_arg(*ap, unsigned int);

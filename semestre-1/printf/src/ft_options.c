@@ -6,7 +6,7 @@
 /*   By: Kevin <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/04 22:06:04 by Kevin             #+#    #+#             */
-/*   Updated: 2015/01/12 23:38:48 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/01/13 19:55:19 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int		ft_len(char *str, int len, va_list *ap)
 		else
 			++i;
 	}
-	return (n);
+	return ((n >= 0) ? n : -1);
 }
 
 int		ft_precise(char *str, int len, va_list *ap)
@@ -90,7 +90,7 @@ int		ft_precise(char *str, int len, va_list *ap)
 	if ((i = ft_searchpoint(str, len - 1)) == -1)
 		return (-1);
 	n = (str[i + 1] == '*') ? va_arg(*ap, int) : ft_atoi(str + i + 1);
-	return (n);
+	return ((n >= 0) ? n : -1);
 }
 
 int		ft_modif(char *s1, int len)

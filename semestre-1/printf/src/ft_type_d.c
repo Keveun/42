@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/06 20:29:19 by kperreau          #+#    #+#             */
-/*   Updated: 2015/01/12 23:40:38 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/01/13 20:00:46 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int			ft_d(t_options *opt, va_list *ap, int *ret)
 
 	if (opt->type == 5)
 		opt->type = 3;
-	if (1 << opt->modif & 14)
+	if (1 << opt->modif & 30)
 		n = va_arg(*ap, long);
 	else if (opt->modif == 5)
 		n = (char)va_arg(*ap, int);
