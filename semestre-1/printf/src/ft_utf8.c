@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/13 23:10:16 by kperreau          #+#    #+#             */
-/*   Updated: 2015/01/14 23:11:09 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/01/15 00:14:14 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ int		ft_to_utf8(int c, int bytes, unsigned char *mask)
 {
 	int		i;
 	int		ft_or[3];
-	int		ft_and[3];
 
 	if (bytes < 2)
 	{
@@ -55,17 +54,16 @@ int		ft_to_utf8(int c, int bytes, unsigned char *mask)
 	ft_or[0] = 0xC0;
 	ft_or[1] = 0xE0;
 	ft_or[2] = 0xF0;
-	ft_and[0] = 0xDF;
-	ft_and[1] = 0xEF;
-	ft_and[2] = 0xF7;
 	i = 0;
 	while (i < bytes)
 	{
 		mask[i] = 0;
 		if (!i)
-			mask[i] = (c >> (8 * (bytes - 1) - 2 * (bytes - 1))) | ft_or[bytes - 2];
+			mask[i] = (c >> (8 * (bytes - 1) - 2 * (bytes - 1))) \
+				| ft_or[bytes - 2];
 		else
-			mask[i] = ((c >> (8 * (bytes - (i + 1)) - 2 * (bytes - (i + 1)))) & 0x3F) | 0x80;
+			mask[i] = ((c >> (8 * (bytes - (i + 1)) \
+				 - 2 * (bytes - (i + 1)))) & 0x3F) | 0x80;
 		++i;
 	}
 	return (0);
