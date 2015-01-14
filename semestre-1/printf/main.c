@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/02 21:21:13 by kperreau          #+#    #+#             */
-/*   Updated: 2015/01/13 23:24:26 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/01/14 23:56:20 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ int		main(int argc, char **argv)
 	val2 = 0;
 	if (argc > 1)
 	{
-		val1 = printf(argv[1], 5762, 945, 'a');
+		val1 = printf(argv[1], 5762, 945, L'米', 'a', "abc", L"米米", L"我是一只猫。");
 		printf("\nval1: %d\n", val1);
-		val2 = ft_printf(argv[1], 5762, 945, 'a');
+		val2 = ft_printf(argv[1], 5762, 945, L'米', 'a', "abc", L"米米", L"我是一只猫。");
 		printf("\nval2: %d\n", val2);
 		// val1 = printf("{%10R}");
 		// val2 = ft_printf(argv[1], 260, -9999L, test);

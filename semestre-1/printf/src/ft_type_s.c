@@ -6,13 +6,47 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/06 20:29:19 by kperreau          #+#    #+#             */
-/*   Updated: 2015/01/12 23:01:22 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/01/15 00:06:59 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
 
-static int	ft_write_s(t_options *opt, char *s)
+static int	ft_write_s(t_options *opt, wchar_t *s)
+{
+	int				len;
+	int				i;
+	int				j;
+	int				bytes;
+	unsigned char	mask[4];
+
+	if ((len = ft_utflen(s)) < 0)
+		return (-1);
+	len = (opt->precise != -1 && len > opt->precise) ? opt->precise : len;
+	if (opt->len > len && !(opt->flags & 1))
+		ft_putspace(opt, len, 0);
+	j = 0;
+	while (j < len)
+	{
+		bytes = ft_utfclen(*s);
+		if (len < j + bytes)
+		{
+			len = j;
+			break ;
+		}
+		ft_to_utf8(*s++, bytes, mask);
+		i = 0;
+		while (i < bytes)
+			write(1, &mask[i++], 1);
+		j += bytes;
+	}
+	if (opt->len > len && opt->flags & 1)
+		ft_putspace(opt, len, 0);
+	len = (opt->len != -1 && len < opt->len) ? opt->len : len;
+	return (len);
+}
+
+static int	ft_write_s_bis(t_options *opt, char *s)
 {
 	int		len;
 
@@ -29,22 +63,27 @@ static int	ft_write_s(t_options *opt, char *s)
 
 int			ft_s(t_options *opt, va_list *ap, int *ret)
 {
-	char	*s;
-	int		strdup;
+	wchar_t		*s;
+	char		*s2;
 
-	strdup = 0;
+	s = NULL;
+	s2 = NULL;
 	if (opt->modif == 1)
-		s = (char*)va_arg(*ap, wchar_t *);
-	else
-		s = va_arg(*ap, char *);
-	if (s == NULL)
 	{
-		s = ft_strdup("(null)");
-		strdup = 1;
+		if ((s = va_arg(*ap, wchar_t *)))
+			*ret += ft_write_s(opt, s);
 	}
-	*ret += ft_write_s(opt, s);
-	if (strdup)
-		free(s);
+	else
+	{
+		if ((s2 = va_arg(*ap, char *)))
+			*ret += ft_write_s_bis(opt, s2);
+	}
+	if (!s && !s2)
+	{
+		s2 = ft_strdup("(null)");
+		*ret += ft_write_s_bis(opt, s2);
+		free(s2);
+	}
 	return (0);
 }
 
@@ -53,5 +92,5 @@ int			ft_s2(t_options *opt, va_list *ap, int *ret)
 {
 	opt->modif = 1;
 	opt->type = 0;
-	return (ft_c(opt, ap, ret));
+	return (ft_s(opt, ap, ret));
 }

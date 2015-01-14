@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/06 20:29:19 by kperreau          #+#    #+#             */
-/*   Updated: 2015/01/13 23:29:50 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/01/14 20:48:47 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,17 @@ static int	ft_write_c(t_options *opt, wint_t c)
 	int		i;
 	unsigned char	mask[4];
 
-	len = 1;
-	if (opt->len > len && !(opt->flags & 1))
-	ft_putspace(opt, len, 0);
 	bytes = ft_utfclen(c);
+	len = bytes;
+	if (opt->len > len && !(opt->flags & 1))
+		ft_putspace(opt, len, 0);
 	ft_to_utf8(c, bytes, mask);
 	i = 0;
 	while (i < bytes)
 		write(1, &(mask[i++]), 1);
 		ft_putspace(opt, len, 0);
 	len = (opt->len != -1 && len < opt->len) ? opt->len : len;
-	return (len + bytes - 1);
+	return (len);
 }
 
 int			ft_c(t_options *opt, va_list *ap, int *ret)
@@ -46,10 +46,7 @@ int			ft_c(t_options *opt, va_list *ap, int *ret)
 
 int			ft_c2(t_options *opt, va_list *ap, int *ret)
 {
-	if (opt->modif == 5)
-		opt->modif = -1;
-	else
-		opt->modif = 1;
+	opt->modif = 1;
 	opt->type = 12;
 	return (ft_c(opt, ap, ret));
 }

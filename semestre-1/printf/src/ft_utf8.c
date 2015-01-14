@@ -6,14 +6,11 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/13 23:10:16 by kperreau          #+#    #+#             */
-/*   Updated: 2015/01/13 23:16:08 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/01/14 23:11:09 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
-#define FT_OR {0xC0, 0xE0, 0xF0}
-#define FT_AND {0xDF, 0xEF, 0xF7}
-
 
 int		ft_utfclen(int c)
 {
@@ -26,6 +23,22 @@ int		ft_utfclen(int c)
 	else if (ft_binlen(c) <= 21)
 		return (4);
 	return (-1);
+}
+
+int		ft_utflen(wchar_t *s)
+{
+	int		len;
+	int		temp;
+
+	len = 0;
+	while (*s)
+	{
+		temp = ft_utfclen(*s++);
+		if (temp < 0)
+			return (-1);
+		len += temp;
+	}
+	return (len);
 }
 
 int		ft_to_utf8(int c, int bytes, unsigned char *mask)
