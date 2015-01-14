@@ -98,6 +98,7 @@ void			ft_del_list(t_list **list);
 int				ft_nbrlen(long n);
 void			ft_strrev(char *str);
 void			ft_swap(int *a, int *b);
+int				ft_binlen(int n);
 
 /*
 **GET NEXT LINE

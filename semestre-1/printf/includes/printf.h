@@ -54,6 +54,7 @@ int				ft_nbrlen2(unsigned long n);
 int				ft_zero(char *s1);
 int				ft_searchpoint(char *str, int len);
 int				ft_utfclen(int c);
+int				ft_to_utf8(int c, int bytes, unsigned char *mask);
 
 /*
 **Fonctions Parse Types

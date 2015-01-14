@@ -27,9 +27,9 @@ int		main(int argc, char **argv)
 	val2 = 0;
 	if (argc > 1)
 	{
-		val1 = printf(argv[1], 8364);
+		val1 = printf(argv[1], 5762, 945, 'a');
 		printf("\nval1: %d\n", val1);
-		val2 = ft_printf(argv[1], 8364);
+		val2 = ft_printf(argv[1], 5762, 945, 'a');
 		printf("\nval2: %d\n", val2);
 		// val1 = printf("{%10R}");
 		// val2 = ft_printf(argv[1], 260, -9999L, test);

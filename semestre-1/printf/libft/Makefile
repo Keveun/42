@@ -30,7 +30,7 @@ CFILES = ft_atoi.c ft_memmove.c ft_putstr.c ft_strdup.c ft_strmapi.c \
 			ft_memdel.c ft_putnbr_fd.c ft_strdel.c ft_strmap.c ft_strrchr.c \
 			get_next_line.c ft_funcs.c ft_strsplit.c ft_bzero.c ft_memset.c \
 			ft_create_list.c ft_add_list.c ft_del_list.c ft_nbrlen.c \
-			ft_swap.c ft_strrev.c
+			ft_swap.c ft_strrev.c ft_binlen.c
 
 OBJ = $(CFILES:.c=.o)
 

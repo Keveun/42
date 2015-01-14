@@ -11,16 +11,49 @@
 /* ************************************************************************** */
 
 #include "printf.h"
+#define FT_OR {0xC0, 0xE0, 0xF0}
+#define FT_AND {0xDF, 0xEF, 0xF7}
+
 
 int		ft_utfclen(int c)
 {
-	if (c <= 0x7F)
+	if (ft_binlen(c) <= 7)
 		return (1);
-	else if (c <= 0x7FF)
+	else if (ft_binlen(c) <= 11)
 		return (2);
-	else if (c <= 0xFFFF)
+	else if (ft_binlen(c) <= 16)
 		return (3);
-	else if (c <= 0x10FFFF)
+	else if (ft_binlen(c) <= 21)
 		return (4);
 	return (-1);
+}
+
+int		ft_to_utf8(int c, int bytes, unsigned char *mask)
+{
+	int		i;
+	int		ft_or[3];
+	int		ft_and[3];
+
+	if (bytes < 2)
+	{
+		mask[0] = (unsigned char)c;
+		return (0);
+	}
+	ft_or[0] = 0xC0;
+	ft_or[1] = 0xE0;
+	ft_or[2] = 0xF0;
+	ft_and[0] = 0xDF;
+	ft_and[1] = 0xEF;
+	ft_and[2] = 0xF7;
+	i = 0;
+	while (i < bytes)
+	{
+		mask[i] = 0;
+		if (!i)
+			mask[i] = (c >> (8 * (bytes - 1) - 2 * (bytes - 1))) | ft_or[bytes - 2];
+		else
+			mask[i] = ((c >> (8 * (bytes - (i + 1)) - 2 * (bytes - (i + 1)))) & 0x3F) | 0x80;
+		++i;
+	}
+	return (0);
 }

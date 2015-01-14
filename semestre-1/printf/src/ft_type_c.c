@@ -15,15 +15,21 @@
 static int	ft_write_c(t_options *opt, wint_t c)
 {
 	int		len;
+	int		bytes;
+	int		i;
+	unsigned char	mask[4];
 
 	len = 1;
 	if (opt->len > len && !(opt->flags & 1))
-		ft_putspace(opt, len, 0);
-	write(1, &c, ft_utfclen(c));
-	if (opt->len > len && opt->flags & 1)
+	ft_putspace(opt, len, 0);
+	bytes = ft_utfclen(c);
+	ft_to_utf8(c, bytes, mask);
+	i = 0;
+	while (i < bytes)
+		write(1, &(mask[i++]), 1);
 		ft_putspace(opt, len, 0);
 	len = (opt->len != -1 && len < opt->len) ? opt->len : len;
-	return (len);
+	return (len + bytes - 1);
 }
 
 int			ft_c(t_options *opt, va_list *ap, int *ret)
