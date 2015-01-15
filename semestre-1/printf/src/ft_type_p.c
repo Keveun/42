@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/02 21:22:03 by kperreau          #+#    #+#             */
-/*   Updated: 2015/01/06 21:59:28 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/01/15 19:04:32 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static int		ft_write_p(t_options *opt, char *hex, unsigned long n)
 	return (len + 2);
 }
 
-int			ft_p(t_options *opt, va_list *ap, int *ret)
+int				ft_p(t_options *opt, va_list *ap, int *ret)
 {
 	unsigned long	n;
 	char			hex[20];

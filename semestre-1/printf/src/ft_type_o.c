@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/06 20:29:19 by kperreau          #+#    #+#             */
-/*   Updated: 2015/01/13 20:01:51 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/01/15 19:05:21 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static int		ft_write_o(t_options *opt, char *oct, unsigned long n)
 	return ((opt->len > len) ? opt->len : len);
 }
 
-int			ft_o(t_options *opt, va_list *ap, int *ret)
+int				ft_o(t_options *opt, va_list *ap, int *ret)
 {
 	unsigned long	n;
 	char			oct[30];
@@ -51,7 +51,7 @@ int			ft_o(t_options *opt, va_list *ap, int *ret)
 	return (0);
 }
 
-int			ft_o2(t_options *opt, va_list *ap, int *ret)
+int				ft_o2(t_options *opt, va_list *ap, int *ret)
 {
 	opt->modif = 1;
 	opt->type = 6;

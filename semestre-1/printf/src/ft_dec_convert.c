@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/02 21:21:32 by kperreau          #+#    #+#             */
-/*   Updated: 2015/01/12 20:44:21 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/01/15 19:02:09 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ unsigned long	ft_dectooctal(char *oct, unsigned long n)
 	return (octal);
 }
 
-int			ft_dectohex(char *hex, unsigned long n, int up)
+int				ft_dectohex(char *hex, unsigned long n, int up)
 {
 	int		i;
 	long	rem;

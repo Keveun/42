@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/12 15:45:09 by kperreau          #+#    #+#             */
-/*   Updated: 2014/12/12 19:47:02 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/01/15 19:08:40 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int		ft_binlen(int n)
 	int		len;
 
 	len = 0;
-	while(n > 0)
+	while (n > 0)
 	{
 		n >>= 1;
 		++len;

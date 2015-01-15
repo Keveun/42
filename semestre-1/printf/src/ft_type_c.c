@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/06 20:29:19 by kperreau          #+#    #+#             */
-/*   Updated: 2015/01/14 20:48:47 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/01/15 19:06:41 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 static int	ft_write_c(t_options *opt, wint_t c)
 {
-	int		len;
-	int		bytes;
-	int		i;
+	int				len;
+	int				bytes;
+	int				i;
 	unsigned char	mask[4];
 
 	bytes = ft_utfclen(c);
@@ -27,6 +27,7 @@ static int	ft_write_c(t_options *opt, wint_t c)
 	i = 0;
 	while (i < bytes)
 		write(1, &(mask[i++]), 1);
+	if (opt->len > len && opt->flags & 1)
 		ft_putspace(opt, len, 0);
 	len = (opt->len != -1 && len < opt->len) ? opt->len : len;
 	return (len);
