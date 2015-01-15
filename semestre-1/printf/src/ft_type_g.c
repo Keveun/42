@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/15 20:33:33 by kperreau          #+#    #+#             */
-/*   Updated: 2015/01/15 23:44:29 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/01/16 00:32:19 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,30 @@ static int	ft_leetlen(char *s)
 	return (len);
 }
 
-static int	ft_write_g(t_options *opt, char *s)
+static int	ft_leetnlen(char *s, int i)
 {
 	int		len;
+	int		mem;
+
+	len = 0;
+	mem = 0;
+	while (*s && len <= i)
+	{
+		mem = len;
+		len += ft_cleetlen(*s++);
+	}
+	return ((len != i) ? mem : i);
+}
+
+static int	ft_write_g(t_options *opt, char *s, char *s2)
+{
+	int		len;
+	int		leetlen;
 
 	len = ft_strlen(s);
+	if (opt->precise != -1)
+		opt->precise = ft_leetnlen(s, opt->precise);
+	printf("test: %d\n", opt->precise);
 	len = (opt->precise != -1 && len > opt->precise) ? opt->precise : len;
 	if (opt->len > len && !(opt->flags & 1))
 		ft_putspace(opt, len, 0);
@@ -101,18 +120,20 @@ static char	*ft_leet(char *s)
 int			ft_g(t_options *opt, va_list *ap, int *ret)
 {
 	char		*s;
+	char		*leet;
 	int			value;
 
 	s = NULL;
 	if ((s = va_arg(*ap, char *)))
 	{
-		s = ft_leet(s);
-		value = ft_write_g(opt, s);
+		leet = ft_leet(s);
+		value = ft_write_g(opt, leet, s);
+		free(leet);
 	}
 	else
 	{
-		s = ft_strdup("(null)");
-		value = ft_write_g(opt, s);
+		leet = ft_strdup("(^/(_)11)");
+		value = ft_write_g(opt, leet, s);
 		free(s);
 	}
 	*ret += value;
