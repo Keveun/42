@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/02 21:10:58 by kperreau          #+#    #+#             */
-/*   Updated: 2015/01/14 22:20:44 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/01/15 00:15:17 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int				ft_searchpoint(char *str, int len);
 int				ft_utfclen(int c);
 int				ft_to_utf8(int c, int bytes, unsigned char *mask);
 int				ft_utflen(wchar_t *s);
+int				ft_utfnlen(wchar_t *s, int n);
 
 /*
 **Fonctions Parse Types

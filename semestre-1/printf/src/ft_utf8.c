@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/13 23:10:16 by kperreau          #+#    #+#             */
-/*   Updated: 2015/01/15 00:14:14 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/01/15 00:24:26 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,22 @@ int		ft_utfclen(int c)
 	else if (ft_binlen(c) <= 21)
 		return (4);
 	return (-1);
+}
+
+int		ft_utfnlen(wchar_t *s, int n)
+{
+	int		len;
+	int		temp;
+	int		mem;
+
+	len = 0;
+	while (*s && len <= n)
+	{
+		mem = len;
+		temp = ft_utfclen(*s++);
+		len += temp;
+	}
+	return ((len != n) ? mem : n);
 }
 
 int		ft_utflen(wchar_t *s)

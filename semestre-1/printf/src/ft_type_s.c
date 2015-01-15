@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/06 20:29:19 by kperreau          #+#    #+#             */
-/*   Updated: 2015/01/15 00:06:59 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/01/15 00:25:59 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,13 @@ static int	ft_write_s(t_options *opt, wchar_t *s)
 
 	if ((len = ft_utflen(s)) < 0)
 		return (-1);
-	len = (opt->precise != -1 && len > opt->precise) ? opt->precise : len;
+	len = (opt->precise != -1 && len > opt->precise) ? ft_utfnlen(s, opt->precise) : len;
 	if (opt->len > len && !(opt->flags & 1))
 		ft_putspace(opt, len, 0);
 	j = 0;
 	while (j < len)
 	{
 		bytes = ft_utfclen(*s);
-		if (len < j + bytes)
-		{
-			len = j;
-			break ;
-		}
 		ft_to_utf8(*s++, bytes, mask);
 		i = 0;
 		while (i < bytes)
