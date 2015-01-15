@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/02 21:21:32 by kperreau          #+#    #+#             */
-/*   Updated: 2015/01/15 19:02:09 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/01/15 19:40:40 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,22 @@ unsigned long	ft_dectooctal(char *oct, unsigned long n)
 	if (j > 1)
 		ft_strrev(oct);
 	return (octal);
+}
+
+int				ft_dectobin(char *bin, long n)
+{
+	int		i;
+
+	i = 0;
+	while (n > 0)
+	{
+		bin[i++] = (n & 1) + '0';
+		n >>= 1;
+	}
+	bin[i] = '\0';
+	if (i > 1)
+		ft_strrev(bin);
+	return (0);
 }
 
 int				ft_dectohex(char *hex, unsigned long n, int up)

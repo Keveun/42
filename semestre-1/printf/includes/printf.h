@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/02 21:10:58 by kperreau          #+#    #+#             */
-/*   Updated: 2015/01/15 00:15:17 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/01/15 19:36:15 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,11 @@
 # include <stdio.h>
 # include <wchar.h>
 # define FT_PARSE "hljz-+ #.*"
-# define FT_TYPES "sSpdDioOuUxXcC"
+# define FT_TYPES "sSpdDioOuUxXcCb"
 # define FT_MODIF "hljz"
 # define FT_FLAGS "-+ #"
 # define FT_HEX "abcdef"
+# define FT_NBTYPE 15
 
 typedef struct	s_options
 {
@@ -35,7 +36,7 @@ typedef struct	s_options
 typedef struct	s_vars
 {
 	va_list		ap;
-	int			(*f[14])(t_options *, va_list *, int *);
+	int			(*f[FT_NBTYPE])(t_options *, va_list *, int *);
 	int			ret;
 }				t_vars;
 
@@ -57,6 +58,7 @@ int				ft_utfclen(wint_t c);
 int				ft_to_utf8(wint_t c, int bytes, unsigned char *mask);
 int				ft_utflen(wchar_t *s);
 int				ft_utfnlen(wchar_t *s, int n);
+int				ft_dectobin(char *bin, long n);
 
 /*
 **Fonctions Parse Types
@@ -83,5 +85,10 @@ int				ft_o(t_options *opt, va_list *ap, int *ret);
 int				ft_o2(t_options *opt, va_list *ap, int *ret);
 int				ft_u(t_options *opt, va_list *ap, int *ret);
 int				ft_u2(t_options *opt, va_list *ap, int *ret);
+
+/*
+**Fonctions Types Bonus
+*/
+int				ft_b(t_options *opt, va_list *ap, int *ret);
 
 #endif
