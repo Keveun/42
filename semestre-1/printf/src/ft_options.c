@@ -70,7 +70,7 @@ int		ft_len(char *str, int len, va_list *ap)
 			while (ft_isdigit(str[i]) || str[i] == '*')
 				++i;
 		}
-		if (ft_isdigit(str[i]) && str[i] && ft_atoi(str + i) > 0 \
+		if ((str[i] && ft_isdigit(str[i]) && ft_atoi(str + i) > 0) \
 			|| str[i] == '*')
 		{
 			n = (str[i] == '*') ? va_arg(*ap, int) : ft_atoi(str + i);
@@ -113,7 +113,7 @@ int		ft_modif(char *s1, int len)
 					modif = 4;
 				else if (*s2 == 'h' && *(s1 - 1) == 'h')
 					modif = 5;
-				return(modif);
+				return (modif);
 			}
 			++s2;
 		}

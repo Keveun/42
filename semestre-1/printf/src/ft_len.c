@@ -74,9 +74,6 @@ int			ft_nbrlen2(unsigned long n)
 
 int			ft_searchpoint(char *str, int len)
 {
-	int		i;
-
-	i = 0;
 	while (str[len] != '.' && len >= 0)
 		--len;
 	if (str[len] != '.')

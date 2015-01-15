@@ -53,8 +53,8 @@ void			ft_putsigned(int flags, long long n);
 int				ft_nbrlen2(unsigned long n);
 int				ft_zero(char *s1);
 int				ft_searchpoint(char *str, int len);
-int				ft_utfclen(int c);
-int				ft_to_utf8(int c, int bytes, unsigned char *mask);
+int				ft_utfclen(wint_t c);
+int				ft_to_utf8(wint_t c, int bytes, unsigned char *mask);
 int				ft_utflen(wchar_t *s);
 int				ft_utfnlen(wchar_t *s, int n);
 

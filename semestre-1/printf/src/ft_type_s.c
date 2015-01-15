@@ -22,7 +22,8 @@ static int	ft_write_s(t_options *opt, wchar_t *s)
 
 	if ((len = ft_utflen(s)) < 0)
 		return (-1);
-	len = (opt->precise != -1 && len > opt->precise) ? ft_utfnlen(s, opt->precise) : len;
+	len = (opt->precise != -1 && len > opt->precise) ? \
+		ft_utfnlen(s, opt->precise) : len;
 	if (opt->len > len && !(opt->flags & 1))
 		ft_putspace(opt, len, 0);
 	j = 0;
@@ -37,8 +38,7 @@ static int	ft_write_s(t_options *opt, wchar_t *s)
 	}
 	if (opt->len > len && opt->flags & 1)
 		ft_putspace(opt, len, 0);
-	len = (opt->len != -1 && len < opt->len) ? opt->len : len;
-	return (len);
+	return ((opt->len != -1 && len < opt->len) ? opt->len : len);
 }
 
 static int	ft_write_s_bis(t_options *opt, char *s)
@@ -60,28 +60,29 @@ int			ft_s(t_options *opt, va_list *ap, int *ret)
 {
 	wchar_t		*s;
 	char		*s2;
+	int			value;
 
 	s = NULL;
 	s2 = NULL;
 	if (opt->modif == 1)
 	{
 		if ((s = va_arg(*ap, wchar_t *)))
-			*ret += ft_write_s(opt, s);
+			value = ft_write_s(opt, s);
 	}
 	else
 	{
 		if ((s2 = va_arg(*ap, char *)))
-			*ret += ft_write_s_bis(opt, s2);
+			value = ft_write_s_bis(opt, s2);
 	}
 	if (!s && !s2)
 	{
 		s2 = ft_strdup("(null)");
-		*ret += ft_write_s_bis(opt, s2);
+		value = ft_write_s_bis(opt, s2);
 		free(s2);
 	}
-	return (0);
+	*ret += value;
+	return (value);
 }
-
 
 int			ft_s2(t_options *opt, va_list *ap, int *ret)
 {

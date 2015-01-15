@@ -35,13 +35,15 @@ static int	ft_write_c(t_options *opt, wint_t c)
 int			ft_c(t_options *opt, va_list *ap, int *ret)
 {
 	wint_t	c;
+	int		value;
 
 	if (opt->modif == 1)
 		c = va_arg(*ap, wint_t);
 	else
 		c = (char)va_arg(*ap, int);
-	*ret += ft_write_c(opt, c);
-	return (0);
+	if ((value = ft_write_c(opt, c)) > 0)
+		*ret += value;
+	return (value);
 }
 
 int			ft_c2(t_options *opt, va_list *ap, int *ret)

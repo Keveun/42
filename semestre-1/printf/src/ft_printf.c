@@ -45,35 +45,42 @@ static void		ft_init_f(int (**f)(t_options *, va_list *, int *))
 	f[13] = ft_c2;
 }
 
+static int		ft_sub_printf(char *str, t_vars *vars)
+{
+	char	*begin;
+
+	begin = str;
+	vars->ret = 0;
+	while (*str)
+	{
+		if (*str == '%')
+		{
+			vars->ret += str - begin;
+			if (vars->ret > 0)
+				write(1, begin, str - begin);
+			str += ft_parse_var(str + 1, vars) + 1;
+			if (vars->ret == -1)
+				return (-1);
+			begin = str;
+		}
+		else
+			++str;
+	}
+	vars->ret += ft_strlen(begin);
+	ft_putstr(begin);
+	va_end(vars->ap);
+	return (0);
+}
+
 int				ft_printf(const char *format, ...)
 {
-	char		*str;
-	char		*begin;
 	t_vars		vars;
 	int			ret;
 
 	if (format == NULL)
 		return (-1);
 	va_start(vars.ap, format);
-	str = (char*)format;
 	ft_init_f(vars.f);
-	begin = str;
-	vars.ret = 0;
-	while (*str)
-	{
-		if (*str == '%')
-		{
-			vars.ret += str - begin;
-			if (vars.ret > 0)
-				write(1, begin, str - begin);
-			str += ft_parse_var(str + 1, &vars) + 1;
-			begin = str;
-		}
-		else
-			++str;
-	}
-	vars.ret += ft_strlen(begin);
-	ft_putstr(begin);
-	va_end(vars.ap);
-	return (vars.ret);
+	ret = (ft_sub_printf((char*)format, &vars) != -1) ? vars.ret : -1;
+	return (ret);
 }

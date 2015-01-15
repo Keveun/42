@@ -43,14 +43,9 @@ void			ft_parse(char *str, int len, t_vars *vars)
 	{
 		pf = vars->f;
 		opt.type = c - FT_TYPES;
-		(*pf[opt.type])(&opt, &vars->ap, &vars->ret);
+		if (((*pf[opt.type])(&opt, &vars->ap, &vars->ret)) == -1)
+			vars->ret = -1;
 	}
 	else
 		vars->ret += ft_notype(str + len, &opt);
-	/*printf("[%.*s]\n", len, str);
-	printf("flags: %d\n", opt.flags);
-	printf("len: %d\n", opt.len);
-	printf("precise: %d\n", opt.precise);
-	printf("Modif: %d\n", opt.modif);
-	printf("type: %d\n", opt.type);*/
 }

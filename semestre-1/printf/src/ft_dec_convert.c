@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_dectohex.c                                      :+:      :+:    :+:   */
+/*   ft_dec_convert.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -18,7 +18,7 @@ unsigned long	ft_dectooctal(char *oct, unsigned long n)
 	unsigned long	i;
 	int				j;
 	unsigned long	octal;
-	
+
 	i = 1;
 	j = 0;
 	octal = 0;
