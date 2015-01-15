@@ -14,13 +14,16 @@
 
 int		ft_utfclen(wint_t c)
 {
-	if (ft_binlen(c) <= 7)
+	int		len;
+
+	len = ft_binlen(c);
+	if (len <= 7)
 		return (1);
-	else if (ft_binlen(c) <= 11)
+	else if (len <= 11)
 		return (2);
-	else if (ft_binlen(c) <= 16)
+	else if (len <= 16)
 		return (3);
-	else if (ft_binlen(c) <= 21)
+	else if (len <= 21)
 		return (4);
 	return (-1);
 }
