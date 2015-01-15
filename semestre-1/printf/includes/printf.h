@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/02 21:10:58 by kperreau          #+#    #+#             */
-/*   Updated: 2015/01/15 20:33:20 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/01/15 20:41:23 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <stdio.h>
 # include <wchar.h>
 # define FT_PARSE "hljz-+ #.*"
-# define FT_TYPES "sSpdDioOuUxXcCbrG"
+# define FT_TYPES "sSpdDioOuUxXcCbrg"
 # define FT_MODIF "hljz"
 # define FT_FLAGS "-+ #"
 # define FT_HEX "abcdef"
@@ -91,5 +91,6 @@ int				ft_u2(t_options *opt, va_list *ap, int *ret);
 */
 int				ft_b(t_options *opt, va_list *ap, int *ret);
 int				ft_r(t_options *opt, va_list *ap, int *ret);
+int				ft_g(t_options *opt, va_list *ap, int *ret);
 
 #endif

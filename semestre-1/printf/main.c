@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/02 21:21:13 by kperreau          #+#    #+#             */
-/*   Updated: 2015/01/15 19:38:12 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/01/15 23:42:42 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,18 @@
 
 int		main(int argc, char **argv)
 {
-	int		val1;
+	//int		val1;
 	int		val2;
 
 	setlocale(LC_ALL, "en_US.UTF-8");
-	val1 = 0;
+	//val1 = 0;
 	val2 = 0;
 	if (argc > 1)
 	{
-		val1 = printf(argv[1], 5762, 945, L'米', 'a', "abc", L"米米", L"我是一只猫。");
-		printf("\nval1: %d\n", val1);
-		val2 = ft_printf(argv[1], 5762, 945, L'米', 'a', "abc", L"米米", L"我是一只猫。");
+		//val1 = printf(argv[1], 5762, 945, L'米', 'a', "abc", L"米米", L"我是一只猫。");
+		//printf("\nval1: %d\n", val1);
+		//val2 = ft_printf(argv[1], 5762, 945, L'米', 'a', "abc", L"米米", L"我是一只猫。");
+		val2 = ft_printf(argv[1], "un super test", "MDR", "Le leet c'est vraiment trop drole !");
 		printf("\nval2: %d\n", val2);
 	}
 	return (0);

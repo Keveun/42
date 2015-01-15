@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/02 21:22:03 by kperreau          #+#    #+#             */
-/*   Updated: 2015/01/15 20:33:12 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/01/15 20:40:40 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static void		ft_init_f(int (**f)(t_options *, va_list *, int *))
 	f[13] = ft_c2;
 	f[14] = ft_b;
 	f[15] = ft_r;
-	f[16] = ft_g.c
+	f[16] = ft_g;
 }
 
 static int		ft_sub_printf(char *str, t_vars *vars)
