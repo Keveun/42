@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/06 20:29:19 by kperreau          #+#    #+#             */
-/*   Updated: 2015/01/15 00:25:59 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/01/15 20:03:59 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,4 +89,27 @@ int			ft_s2(t_options *opt, va_list *ap, int *ret)
 	opt->modif = 1;
 	opt->type = 0;
 	return (ft_s(opt, ap, ret));
+}
+
+int			ft_r(t_options *opt, va_list *ap, int *ret)
+{
+	char		*s;
+	int			value;
+
+	s = NULL;
+	if ((s = va_arg(*ap, char *)))
+	{
+		s = ft_strdup(s);
+		ft_strrev(s);
+		value = ft_write_s_bis(opt, s);
+		free(s);
+	}
+	else
+	{
+		s = ft_strdup(")llun(");
+		value = ft_write_s_bis(opt, s);
+		free(s);
+	}
+	*ret += value;
+	return (value);
 }

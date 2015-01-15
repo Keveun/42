@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/02 21:10:58 by kperreau          #+#    #+#             */
-/*   Updated: 2015/01/15 19:36:15 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/01/15 20:33:20 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@
 # include <stdio.h>
 # include <wchar.h>
 # define FT_PARSE "hljz-+ #.*"
-# define FT_TYPES "sSpdDioOuUxXcCb"
+# define FT_TYPES "sSpdDioOuUxXcCbrG"
 # define FT_MODIF "hljz"
 # define FT_FLAGS "-+ #"
 # define FT_HEX "abcdef"
-# define FT_NBTYPE 15
+# define FT_NBTYPE 17
 
 typedef struct	s_options
 {
@@ -90,5 +90,6 @@ int				ft_u2(t_options *opt, va_list *ap, int *ret);
 **Fonctions Types Bonus
 */
 int				ft_b(t_options *opt, va_list *ap, int *ret);
+int				ft_r(t_options *opt, va_list *ap, int *ret);
 
 #endif
