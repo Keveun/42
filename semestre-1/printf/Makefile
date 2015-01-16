@@ -27,7 +27,7 @@ MAIN = main.c
 CFILES = ft_parse.c ft_printf.c ft_options.c ft_type_s.c ft_type_x.c \
 			ft_dec_convert.c ft_putnbrul.c ft_len.c ft_type_d.c \
 			ft_type_u.c ft_type_o.c ft_type_p.c ft_type_c.c ft_utf8.c \
-			ft_type_b.c ft_type_g.c
+			ft_type_b.c ft_type_g.c ft_leet.c
 
 SRC = $(patsubst %, $(SRCDIR)/%, $(CFILES))
 
@@ -39,8 +39,8 @@ HEADERS = $(patsubst %, $(INCLUDESDIR)/%, $(HFILES))
 
 # COMPILATION
 
-#ERRORFLAGS = -Wall -Werror -Wextra -W -O3
-ERRORFLAGS =
+ERRORFLAGS = -Wall -Werror -Wextra -W -O3
+#ERRORFLAGS =
 
 INCLUDEFLAGS = -I $(INCLUDESDIR) -I $(LIBDIR)/includes/
 

@@ -14,7 +14,6 @@
 # define PRINTF_H
 # include "libft.h"
 # include <stdarg.h>
-# include <stdio.h>
 # include <wchar.h>
 # define FT_PARSE "hljz-+ #.*"
 # define FT_TYPES "sSpdDioOuUxXcCbrg"
@@ -45,8 +44,6 @@ typedef struct	s_vars
 */
 int				ft_printf(const char *format, ...);
 void			ft_parse(char *str, int len, t_vars *vars);
-int				ft_dectohex(char *hex, unsigned long n, int up);
-unsigned long	ft_dectooctal(char *oct, unsigned long n);
 void			ft_putnbrul(unsigned long n);
 void			ft_putspace(t_options *opt, int len, long long n);
 void			ft_putzero(t_options *opt, int len);
@@ -54,11 +51,27 @@ void			ft_putsigned(int flags, long long n);
 int				ft_nbrlen2(unsigned long n);
 int				ft_zero(char *s1);
 int				ft_searchpoint(char *str, int len);
+
+/*
+**Fonctions Conversion Decimal
+*/
+int				ft_dectohex(char *hex, unsigned long n, int up);
+unsigned long	ft_dectooctal(char *oct, unsigned long n);
+int				ft_dectobin(char *bin, long n);
+
+/*
+**Fonctions Conversion UTF-8
+*/
 int				ft_utfclen(wint_t c);
 int				ft_to_utf8(wint_t c, int bytes, unsigned char *mask);
 int				ft_utflen(wchar_t *s);
 int				ft_utfnlen(wchar_t *s, int n);
-int				ft_dectobin(char *bin, long n);
+
+/*
+**Fonctions Leet Speak
+*/
+char			*ft_leet(char *s);
+int				ft_leetnlen(char *s, int i);
 
 /*
 **Fonctions Parse Types

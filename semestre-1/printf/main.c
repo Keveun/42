@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "printf.h"
+#include "stdio.h"
 #include "limits.h"
 #include <locale.h>
 #define TEST "test"
