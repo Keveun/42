@@ -45,8 +45,6 @@ LIBFILES = ft_atoi.c ft_memmove.c ft_putstr.c ft_strdup.c ft_strmapi.c \
 
 SRC = $(patsubst %, $(SRCDIR)/%, $(CFILES)) $(patsubst %, $(LIBDIR)/%, $(LIBFILES))
 
-# SRCLIB = $(patsubst %, $(LIBDIR)/%, $(LIBFILES))
-
 OBJ = $(SRC:.c=.o)
 
 HFILES = printf.h
@@ -56,11 +54,8 @@ HEADERS = $(patsubst %, $(INCLUDESDIR)/%, $(HFILES))
 # COMPILATION
 
 ERRORFLAGS = -Wall -Werror -Wextra -W -O3
-#ERRORFLAGS =
 
 INCLUDEFLAGS = -I $(INCLUDESDIR) -I $(LIBDIR)/includes/
-
-# LIBFLAGS = -L $(LIBDIR)/ -lft
 
 FLAGS = $(ERRORFLAGS) $(INCLUDEFLAGS)
 
