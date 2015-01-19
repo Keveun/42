@@ -6,7 +6,7 @@
 #    By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/12/04 15:19:03 by kperreau          #+#    #+#              #
-#    Updated: 2015/01/04 22:29:57 by Kevin            ###   ########.fr        #
+#    Updated: 2015/01/19 17:08:07 by kperreau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ CFILES = ft_atoi.c ft_memmove.c ft_putstr.c ft_strdup.c ft_strmapi.c \
 			ft_strnew.c ft_tolower.c ft_isprint.c ft_memcpy.c ft_putnbr.c \
 			ft_strcpy.c ft_strlen.c ft_strnstr.c ft_toupper.c ft_itoa.c \
 			ft_memdel.c ft_putnbr_fd.c ft_strdel.c ft_strmap.c ft_strrchr.c \
-			get_next_line.c ft_funcs.c ft_strsplit.c ft_bzero.c ft_memset.c \
+			get_next_line.c ft_init_gnl.c ft_strsplit.c ft_bzero.c ft_memset.c \
 			ft_create_list.c ft_add_list.c ft_del_list.c ft_nbrlen.c \
 			ft_swap.c ft_strrev.c ft_binlen.c
 

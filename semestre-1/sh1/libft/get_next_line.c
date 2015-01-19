@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/10 15:54:21 by kperreau          #+#    #+#             */
-/*   Updated: 2014/12/04 15:49:46 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/01/19 17:07:12 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ int					get_next_line(int const fd, char **line)
 	static size_t	end = 0;
 
 	if (!info)
-		ft_init(&info);
+		ft_init_gnl(&info);
 	if (!end)
 	{
 		if (stack && ft_trait(stack, info, line))
@@ -124,5 +124,5 @@ int					get_next_line(int const fd, char **line)
 			return (-1);
 	}
 	*line = ft_join_elem(info);
-	return ((end++) ? 0 : 1);
+	return ((end++) ? ft_reset_gnl(&info) : 1);
 }

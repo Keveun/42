@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/03 14:44:18 by kperreau          #+#    #+#             */
-/*   Updated: 2015/01/08 22:17:31 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/01/19 17:08:49 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,5 +120,6 @@ typedef struct	s_info
 }				t_info;
 
 int				get_next_line(int const fd, char **line);
-void			ft_init(t_info **info);
+void			ft_init_gnl(t_info **info);
+int				ft_reset_gnl(t_info **info);
 #endif
