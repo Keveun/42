@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/28 14:41:44 by kperreau          #+#    #+#             */
-/*   Updated: 2015/01/19 17:06:34 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/01/27 19:05:29 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,10 @@ void	ft_init_gnl(t_info **info)
 	pinfo->len = 0;
 }
 
-int		ft_reset_gnl(t_info **info)
+int		ft_reset_gnl(t_info **info, size_t *end)
 {
 	free(*info);
 	*info = NULL;
+	*end = 0;
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/10 15:54:21 by kperreau          #+#    #+#             */
-/*   Updated: 2015/01/19 17:07:12 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/01/27 19:00:41 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,5 +124,5 @@ int					get_next_line(int const fd, char **line)
 			return (-1);
 	}
 	*line = ft_join_elem(info);
-	return ((end++) ? ft_reset_gnl(&info) : 1);
+	return ((end++) ? ft_reset_gnl(&info, &end) : 1);
 }
