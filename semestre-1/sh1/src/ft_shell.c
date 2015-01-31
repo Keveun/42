@@ -79,7 +79,8 @@ int				ft_shell(char **env)
 	while (1)
 	{
 		write(1, "$> ", 3);
-		get_next_line(0, &line);
+		if (get_next_line(0, &line) != 1)
+			return (0);
 		ft_parse_stdin(line, &lenv);
 		free(line);
 	}

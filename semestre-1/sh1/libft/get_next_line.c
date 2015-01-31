@@ -124,5 +124,5 @@ int					get_next_line(int const fd, char **line)
 			return (-1);
 	}
 	*line = ft_join_elem(info);
-	return ((end++) ? ft_reset_gnl(&info, &end) : 1);
+	return ((end++) ? ft_reset_gnl(&info, &end) : 0);
 }

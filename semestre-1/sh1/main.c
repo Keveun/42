@@ -17,10 +17,17 @@ static int		ft_init_sh1(pid_t *father)
 	return (1);
 }
 
+static void		ft_sighandler(int signum)
+{
+	if (signum & (SIGINT | SIGQUIT))
+		exit(1);
+}
+
 int				main(int argc, char **argv, char **env)
 {
 	if (!env)
 		return (0);
+	signal(SIGINT, ft_sighandler);
 	(void)argc;
 	(void)argv;
 	// ft_init_sh1(&father);
