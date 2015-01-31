@@ -1,29 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_errors.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Kevin <kperreau@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/01/19 16:39:09 by kperreau          #+#    #+#             */
-/*   Updated: 2015/01/27 23:14:55 by kperreau         ###   ########.fr       */
+/*   Created: 2015/01/28 05:10:36 by Kevin             #+#    #+#             */
+/*   Updated: 2015/01/28 05:10:45 by Kevin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-static int		ft_init_sh1(pid_t *father)
+void		ft_printerror(char *s, int type)
 {
-	return (1);
-}
-
-int				main(int argc, char **argv, char **env)
-{
-	if (!env)
-		return (0);
-	(void)argc;
-	(void)argv;
-	// ft_init_sh1(&father);
-	ft_shell(env);
-	return (0);
+	write(2, "-", 1);
+	write(2, NAME, ft_strlen(NAME));
+	write(2, ": ", 2);
+	write(2, s, ft_strlen(s));
+	if (type == 1)
+		write(2, " : command not found\n", 21);
+	else if (type == 2)
+		write(2, " : Permission denied\n", 21);
 }

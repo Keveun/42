@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   ft_show_list.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Kevin <kperreau@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/04 20:00:05 by kperreau          #+#    #+#             */
-/*   Updated: 2014/11/09 20:08:08 by kperreau         ###   ########.fr       */
+/*   Created: 2015/01/31 03:08:17 by Kevin             #+#    #+#             */
+/*   Updated: 2015/01/31 03:08:19 by Kevin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_strcmp(const char *s1, const char *s2)
+void		ft_show_list(t_list *list, int newline)
 {
-	while (*s1 != '\0' || *s2 != '\0')
+	while (list)
 	{
-		if (*s1 != *s2)
-			return (*(unsigned char*)s1 - *(unsigned char*)s2);
-		++s1;
-		++s2;
+		if (list->content)
+			ft_putstr(list->content);
+		if (newline)
+			write(1, "\n", 1);
+		list = list->next;
 	}
-	return (0);
 }

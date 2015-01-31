@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   ft_count_elem.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Kevin <kperreau@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/04 20:00:05 by kperreau          #+#    #+#             */
-/*   Updated: 2014/11/09 20:08:08 by kperreau         ###   ########.fr       */
+/*   Created: 2015/01/31 00:09:25 by Kevin             #+#    #+#             */
+/*   Updated: 2015/01/31 00:09:28 by Kevin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_strcmp(const char *s1, const char *s2)
+int		ft_count_elem(t_list *list)
 {
-	while (*s1 != '\0' || *s2 != '\0')
+	int		n;
+
+	if (!list)
+		return (0);
+	n = 0;
+	while (list)
 	{
-		if (*s1 != *s2)
-			return (*(unsigned char*)s1 - *(unsigned char*)s2);
-		++s1;
-		++s2;
+		++n;
+		list = list->next;
 	}
-	return (0);
+	return (n);
 }

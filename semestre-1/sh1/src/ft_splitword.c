@@ -1,42 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strsplit.c                                      :+:      :+:    :+:   */
+/*   ft_splitword.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Kevin <kperreau@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/06 14:57:35 by kperreau          #+#    #+#             */
-/*   Updated: 2014/11/09 14:59:10 by kperreau         ###   ########.fr       */
+/*   Created: 2015/01/28 03:01:06 by Kevin             #+#    #+#             */
+/*   Updated: 2015/01/28 03:01:09 by Kevin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "shell.h"
 
-static size_t		ft_nbrstr(char *str, char c)
+static size_t		ft_nbrstr(char *str)
 {
 	size_t	n;
 
 	n = 0;
 	while (*str)
 	{
-		if (*str != c && (!n || (n && *(str - 1) == c)))
+		if (!ft_whitespace(*str) && (!n || (n && ft_whitespace(*(str - 1)))))
 			++n;
 		++str;
 	}
 	return (n);
 }
 
-static size_t		ft_strlenc(const char *str, char c)
+static size_t		ft_strlenc(const char *str)
 {
 	char	*temp;
 
 	temp = (char *)str;
-	while (*str != c && *str)
+	while (!ft_whitespace(*str) && *str)
 		++str;
 	return (str - temp);
 }
 
-char				**ft_strsplit(char const *s, char c)
+char				**ft_splitword(const char *s)
 {
 	char	**str;
 	char	**temp;
@@ -45,15 +45,15 @@ char				**ft_strsplit(char const *s, char c)
 
 	if (s == NULL)
 		return (NULL);
-	n = ft_nbrstr((char*)s, c);
+	n = ft_nbrstr((char*)s);
 	if ((str = (char**)malloc(sizeof(char*) * n + 1)) == NULL)
 		return (NULL);
 	temp = str;
 	while (n-- > 0)
 	{
-		while (*s == c)
+		while (ft_whitespace(*s))
 			++s;
-		lenc = ft_strlenc(s, c);
+		lenc = ft_strlenc(s);
 		*str = ft_strsub(s, 0, lenc);
 		s += lenc;
 		++str;

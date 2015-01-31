@@ -1,25 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   ft_pop_elem.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Kevin <kperreau@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/04 20:00:05 by kperreau          #+#    #+#             */
-/*   Updated: 2014/11/09 20:08:08 by kperreau         ###   ########.fr       */
+/*   Created: 2015/01/31 00:13:19 by Kevin             #+#    #+#             */
+/*   Updated: 2015/01/31 00:13:20 by Kevin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_strcmp(const char *s1, const char *s2)
+void		ft_pop_elem(t_list *elem, t_list *prev)
 {
-	while (*s1 != '\0' || *s2 != '\0')
+	if (prev)
 	{
-		if (*s1 != *s2)
-			return (*(unsigned char*)s1 - *(unsigned char*)s2);
-		++s1;
-		++s2;
+		if (prev->next != elem)
+		{
+			while (prev)
+			{
+				if (prev->next == elem)
+					break ;
+				prev = prev->next;
+			}
+			prev->next = elem->next;
+		}
 	}
-	return (0);
+	free(elem);
 }

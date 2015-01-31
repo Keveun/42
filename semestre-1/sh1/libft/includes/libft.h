@@ -95,10 +95,17 @@ void			ft_swap_ptr(char **s1, char **s2);
 t_list			*ft_create_list(char *str);
 t_list			*ft_add_list(t_list *list, char *str);
 void			ft_del_list(t_list **list);
+void			ft_pop_elem(t_list *elem, t_list *prev);
+int				ft_count_elem(t_list *list);
+void			ft_show_list(t_list *list, int newline);
 int				ft_nbrlen(long n);
 void			ft_strrev(char *str);
 void			ft_swap(int *a, int *b);
 int				ft_binlen(int n);
+t_list			*ft_tab_to_list(char **tab);
+char			**ft_list_to_tab(t_list *list);
+int				ft_iswhitespace(char c);
+
 
 /*
 **GET NEXT LINE

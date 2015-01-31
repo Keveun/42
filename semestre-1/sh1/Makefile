@@ -24,22 +24,22 @@ LIBDIR = libft
 
 MAIN = main.c
 
-CFILES = ft_sh1.c
+CFILES = ft_shell.c ft_splitword.c ft_findpath.c ft_errors.c ft_env.c
 
 SRC = $(patsubst %, $(SRCDIR)/%, $(CFILES))
 
 OBJ = $(SRC:.c=.o)
 
-HFILES = sh1.h
+HFILES = shell.h
 
 HEADERS = $(patsubst %, $(INCLUDESDIR)/%, $(HFILES))
 
 # COMPILATION
 
-ERRORFLAGS = -Wall -Werror -Wextra -W -O3
-#ERRORFLAGS =
+# ERRORFLAGS = -Wall -Werror -Wextra -W -O3
+ERRORFLAGS =
 
-INCLUDEFLAGS = -I $(INCLUDESDIR) -I $(LIBDIR)/includes/
+INCLUDEFLAGS = -I $(INCLUDESDIR)/ -I $(LIBDIR)/includes/
 
 LIBFLAGS = -L $(LIBDIR)/ -lft
 
@@ -62,9 +62,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 			@make -C $(LIBDIR)/
-			@ar rc $(NAME) $(OBJ)
-			@ranlib $(NAME)
-			@$(CC) $(FLAGS) $(MAIN) $(LIBFLAGS) -o $(NAME)
+			@$(CC) $(FLAGS) $(MAIN) $(OBJ) $(LIBFLAGS) -o $(NAME)
 
 re: fclean all
 

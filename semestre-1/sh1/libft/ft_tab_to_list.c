@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   ft_tab_to_list.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Kevin <kperreau@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/04 20:00:05 by kperreau          #+#    #+#             */
-/*   Updated: 2014/11/09 20:08:08 by kperreau         ###   ########.fr       */
+/*   Created: 2015/01/31 00:38:11 by Kevin             #+#    #+#             */
+/*   Updated: 2015/01/31 00:38:12 by Kevin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_strcmp(const char *s1, const char *s2)
+t_list		*ft_tab_to_list(char **tab)
 {
-	while (*s1 != '\0' || *s2 != '\0')
+	t_list	*list;
+
+	if (!tab)
+		return (NULL);
+	list = NULL;
+	while (*tab)
 	{
-		if (*s1 != *s2)
-			return (*(unsigned char*)s1 - *(unsigned char*)s2);
-		++s1;
-		++s2;
+		list = ft_add_list(list, *tab);
+		++tab;
 	}
-	return (0);
+	return (list);
 }
