@@ -24,7 +24,8 @@ LIBDIR = libft
 
 MAIN = main.c
 
-CFILES = ft_shell.c ft_splitword.c ft_findpath.c ft_errors.c ft_env.c
+CFILES = ft_shell.c ft_splitword.c ft_findpath.c ft_errors.c ft_env.c \
+		ft_basic_cmd.c ft_basic_cmd2.c
 
 SRC = $(patsubst %, $(SRCDIR)/%, $(CFILES))
 

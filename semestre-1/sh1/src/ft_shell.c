@@ -12,61 +12,51 @@
 
 #include "shell.h"
 
-static void		ft_exec(char **cmd, t_list *lenv)
+static void		ft_init_tofind(char **tofind)
 {
-	pid_t	father;
-	char	*path;
-	char	**paths;
-	char	**my_env;
-
-	path = ft_findpath(lenv);
-	paths = ft_strsplit(path, ':');
-	if ((path = ft_getpath(paths, cmd)))
-	{
-		father = fork();
-		if (father > 0)
-			wait(NULL);
-		my_env = ft_list_to_tab(lenv);
-		if (father == 0)
-			execve(path, cmd, my_env);
-		free(my_env);
-		my_env = NULL;
-	}
+	tofind[0] = CMD_1;
+	tofind[1] = CMD_2;
+	tofind[2] = CMD_3;
+	tofind[3] = CMD_4;
+	tofind[4] = CMD_5;
+	tofind[5] = '\0';
 }
 
-static int	ft_parse_stdin(char *line, t_list **lenv)
+static void		ft_init_f(pfunc *f)
+{
+	*f[0] = ft_cmd_bin;
+	*f[1] = ft_cmd_exit;
+	*f[2] = ft_cmd_env;
+	*f[3] = ft_cmd_setenv;
+	*f[4] = ft_cmd_unsetenv;
+	*f[5] = ft_cmd_cd;
+}
+
+static int		ft_find_func(char *cmd)
+{
+	int		i;
+	char	*tofind[NBRCMD];
+
+	ft_init_tofind(tofind);
+	i = 0;
+	while (tofind[i])
+	{
+		if (!ft_strcmp(tofind[i++], cmd))
+			return (i);
+	}
+	return (0);
+}
+
+static int		ft_parse_stdin(char *line, t_list **lenv)
 {
 	char	**cmd;
-	t_list	*elem;
+	pfunc	*f;
 
+	ft_init_f(f);
 	cmd = ft_splitword(line);
 	if (!cmd || !*cmd)
 		return (0);
-	if (!ft_strcmp("exit", *cmd))
-		exit(0);
-	else if (!ft_strcmp("env", *cmd))
-		ft_show_list(*lenv, 1);
-	else if (!ft_strcmp("unsetenv", *cmd))
-	{
-		if ((elem = ft_find_envpop(*lenv, cmd[1])))
-		{
-			if (elem == *lenv)
-				*lenv = (*lenv)->next;
-			ft_pop_elem(elem, *lenv);
-		}
-	}
-	else if (!ft_strcmp("setenv", *cmd))
-	{
-		if (ft_strchr(cmd[1], '='))
-		{
-			if ((elem = ft_find_env(*lenv, cmd[1])))
-				elem->content = ft_strdup(cmd[1]);
-			else
-				ft_add_list(*lenv, cmd[1]);
-		}
-	}
-	else
-		ft_exec(cmd, *lenv);
+	(*f[ft_find_func(*cmd)])(cmd, lenv);
 	return (0);
 }
 
