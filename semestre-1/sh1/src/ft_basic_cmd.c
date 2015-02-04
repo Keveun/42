@@ -28,7 +28,10 @@ void	ft_cmd_bin(char **cmd, t_list **lenv)
 			wait(NULL);
 		my_env = ft_list_to_tab(*lenv);
 		if (father == 0)
+		{
+			signal(SIGINT, SIG_DFL);
 			execve(path, cmd, my_env);
+		}
 		free(my_env);
 		my_env = NULL;
 	}
@@ -41,7 +44,8 @@ void	ft_cmd_exit(char **cmd, t_list **lenv)
 
 void	ft_cmd_env(char **cmd, t_list **lenv)
 {
-	ft_show_list(*lenv, 1);
+	if (*lenv)
+		ft_show_list(*lenv, 1);
 }
 
 void	ft_cmd_setenv(char **cmd, t_list **lenv)
@@ -50,17 +54,17 @@ void	ft_cmd_setenv(char **cmd, t_list **lenv)
 
 	if (ft_strchr(cmd[1], '='))
 	{
-		if ((elem = ft_find_env(*lenv, cmd[1])))
+		if (*lenv && (elem = ft_find_env(*lenv, cmd[1])))
 			elem->content = ft_strdup(cmd[1]);
 		else
-			ft_add_list(*lenv, cmd[1]);
+			*lenv = ft_add_list(*lenv, cmd[1]);
 	}
 }
 void	ft_cmd_unsetenv(char **cmd, t_list **lenv)
 {
 	t_list	*elem;
 
-	if ((elem = ft_find_envpop(*lenv, cmd[1])))
+	if (*lenv && (elem = ft_find_envpop(*lenv, cmd[1])))
 	{
 		if (elem == *lenv)
 			*lenv = (*lenv)->next;

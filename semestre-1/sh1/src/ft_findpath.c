@@ -78,7 +78,7 @@ char			*ft_getpath(char **paths, char **cmd)
 			return ((ret == 1) ? pathname : NULL);
 		free(pathname);
 	}
-	else
+	else if (paths)
 	{
 		while (*paths)
 		{

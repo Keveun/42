@@ -14,4 +14,5 @@
 
 void	ft_cmd_cd(char **cmd, t_list **lenv)
 {
+	printf("hello.\n");
 }
