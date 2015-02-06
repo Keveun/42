@@ -49,11 +49,10 @@ static int		ft_cd_dir(t_list **lenv, char **cmd)
 	return (0);
 }
 
-void			ft_cmd_cd(char **cmd, t_list **lenv)
+static char		*ft_getpwd(t_list **lenv)
 {
 	char	*pwd[2];
 	char	buf[2048];
-	int		success;
 
 	if ((*pwd = ft_find_var(*lenv, "PWD=")))
 		*pwd = ft_strdup(*pwd + 4);
@@ -64,6 +63,15 @@ void			ft_cmd_cd(char **cmd, t_list **lenv)
 		ft_cmd_setenv(pwd, lenv);
 		free(pwd[1]);
 	}
+	return (*pwd);
+}
+
+void			ft_cmd_cd(char **cmd, t_list **lenv)
+{
+	char	*pwd[2];
+	int		success;
+
+	*pwd = ft_getpwd(lenv);
 	if (!cmd[1] || !ft_strcmp(cmd[1], "~"))
 		success = ft_cd_env(lenv, "HOME=", *cmd);
 	else
@@ -71,7 +79,16 @@ void			ft_cmd_cd(char **cmd, t_list **lenv)
 		if (!ft_strcmp(cmd[1], "-"))
 			success = ft_cd_env(lenv, "OLDPWD=", *cmd);
 		else
+		{
+			if (!ft_strncmp(cmd[1], "~/", 2))
+			{
+				pwd[1] = ft_find_var(*lenv, "HOME=") + 5;
+				pwd[1] = ft_strjoin(pwd[1], cmd[1] + 1);
+				free(cmd[1]);
+				cmd[1] = pwd[1];
+			}
 			success = ft_cd_dir(lenv, cmd);
+		}
 	}
 	pwd[1] = ft_strjoin("OLDPWD=", *pwd);
 	free(*pwd);
