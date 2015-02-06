@@ -21,7 +21,7 @@ t_list		*ft_tab_to_list(char **tab)
 	list = NULL;
 	while (*tab)
 	{
-		list = ft_add_list(list, *tab);
+		list = ft_add_list(list, ft_strdup(*tab));
 		++tab;
 	}
 	return (list);

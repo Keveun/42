@@ -43,6 +43,7 @@ void			ft_printerror(char *s, int type);
 char			*ft_getpath(char **paths, char **cmd);
 t_list			*ft_find_env(t_list *lenv, char *s);
 t_list			*ft_find_envpop(t_list *lenv, char *s);
+char			*ft_find_var(t_list *lenv, char *tofind);
 
 /*
 **Fonctions commandes

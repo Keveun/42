@@ -19,7 +19,8 @@ static size_t		ft_nbrstr(char *str)
 	n = 0;
 	while (*str)
 	{
-		if (!ft_whitespace(*str) && (!n || (n && ft_whitespace(*(str - 1)))))
+		if (!ft_iswhitespace(*str) && \
+			(!n || (n && ft_iswhitespace(*(str - 1)))))
 			++n;
 		++str;
 	}
@@ -31,7 +32,7 @@ static size_t		ft_strlenc(const char *str)
 	char	*temp;
 
 	temp = (char *)str;
-	while (!ft_whitespace(*str) && *str)
+	while (!ft_iswhitespace(*str) && *str)
 		++str;
 	return (str - temp);
 }
@@ -51,7 +52,7 @@ char				**ft_splitword(const char *s)
 	temp = str;
 	while (n-- > 0)
 	{
-		while (ft_whitespace(*s))
+		while (ft_iswhitespace(*s))
 			++s;
 		lenc = ft_strlenc(s);
 		*str = ft_strsub(s, 0, lenc);

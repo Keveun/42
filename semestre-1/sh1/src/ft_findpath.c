@@ -11,6 +11,8 @@
 /* ************************************************************************** */
 
 #include "shell.h"
+#define ishere(c, s) ((c == '/') | !ft_strncmp("./", s, 2) | \
+						!ft_strncmp("../", s, 2))
 #define STRTOFIND "PATH="
 
 char			*ft_findpath(t_list *lenv)
@@ -27,7 +29,7 @@ char			*ft_findpath(t_list *lenv)
 			if (*tofind++ != *s++)
 				break ;
 		}
-		if (!*tofind)
+		if (!*tofind && *(s - 1) == '=')
 			return (s);
 		lenv = lenv->next;
 	}
@@ -71,24 +73,48 @@ char			*ft_getpath(char **paths, char **cmd)
 	char	*pathname;
 	int		ret;
 
-	if (**cmd == '/' || !ft_strncmp("./", *cmd, 2))
+	ret = 1;
+	if (ishere(**cmd, *cmd))
 	{
 		pathname = ft_strdup(*cmd);
 		if ((ret = ft_checkpath(pathname)))
 			return ((ret == 1) ? pathname : NULL);
+		ret = 3;
 		free(pathname);
 	}
 	else if (paths)
 	{
 		while (*paths)
 		{
-			pathname = ft_pathname(*paths, *cmd);
+			pathname = ft_pathname(*paths++, *cmd);
 			if ((ret = ft_checkpath(pathname)))
 				return ((ret == 1) ? pathname : NULL);
 			free(pathname);
-			++paths;
 		}
+		ret = 1;
 	}
-	ft_printerror(*cmd, 1);
+	ft_printerror(*cmd, ret);
+	return (NULL);
+}
+
+char			*ft_find_var(t_list *lenv, char *tofind)
+{
+	char	*s;
+	char	*begin;
+
+	begin = tofind;
+	while (lenv)
+	{
+		s = lenv->content;
+		tofind = begin;
+		while (*tofind && *s)
+		{
+			if (*tofind++ != *s++)
+				break ;
+		}
+		if (!*tofind && *(s - 1) == '=')
+			return (lenv->content);
+		lenv = lenv->next;
+	}
 	return (NULL);
 }

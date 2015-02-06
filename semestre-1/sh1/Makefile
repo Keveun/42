@@ -37,8 +37,8 @@ HEADERS = $(patsubst %, $(INCLUDESDIR)/%, $(HFILES))
 
 # COMPILATION
 
-# ERRORFLAGS = -Wall -Werror -Wextra -W -O3
-ERRORFLAGS =
+ERRORFLAGS = -Wall -Werror -Wextra -W -O3
+# ERRORFLAGS =
 
 INCLUDEFLAGS = -I $(INCLUDESDIR)/ -I $(LIBDIR)/includes/
 

@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-int			ft_whitespace(char c)
+int			ft_iswhitespace(char c)
 {
 	if ((c >= 9 && c <= 11) || c == 32 || c == 13)
 		return (1);

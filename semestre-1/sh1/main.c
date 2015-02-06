@@ -12,23 +12,11 @@
 
 #include "shell.h"
 
-static int		ft_init_sh1(pid_t *father)
-{
-	return (1);
-}
-
-static void		ft_sighandler(int signum)
-{
-	// if (signum & (SIGINT | SIGQUIT))
-		// exit(1);
-}
-
 int				main(int argc, char **argv, char **env)
 {
 	signal(SIGINT, SIG_IGN);
 	(void)argc;
 	(void)argv;
-	// ft_init_sh1(&father);
 	ft_shell(env);
 	return (0);
 }
