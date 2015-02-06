@@ -12,11 +12,39 @@
 
 #include "shell.h"
 
+static void		ft_read_file(t_list **lenv, char *s)
+{
+	char	*line;
+	int		fd;
+
+	if ((fd = open(s, O_RDONLY)) != -1)
+	{
+		line = NULL;
+		while (get_next_line(fd, &line) > 0)
+		{
+			ft_parse_stdin(line, lenv);
+			free(line);
+			line = NULL;
+		}
+		if (line)
+		{
+			ft_parse_stdin(line, lenv);
+			free(line);
+		}
+		close(fd);
+	}
+	else
+		ft_printerror(s, NULL, 3);
+}
+
 int				main(int argc, char **argv, char **env)
 {
+	t_list	*lenv;
+
 	signal(SIGINT, SIG_IGN);
-	(void)argc;
-	(void)argv;
-	ft_shell(env);
+	lenv = ft_tab_to_list(env);
+	if (argc > 1)
+		ft_read_file(&lenv, argv[1]);
+	ft_shell(&lenv);
 	return (0);
 }

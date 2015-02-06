@@ -29,7 +29,7 @@ static int		ft_cd_env(t_list **lenv, char *var, char *cmd)
 		return (1);
 	}
 	else
-		ft_printerror(cmd, 3);
+		ft_printerror(cmd, dir, 4);
 	return (0);
 }
 
@@ -45,7 +45,7 @@ static int		ft_cd_dir(t_list **lenv, char **cmd)
 		return (1);
 	}
 	else
-		ft_printerror(*cmd, 3);
+		ft_printerror(*cmd, cmd[1], 4);
 	return (0);
 }
 
@@ -58,7 +58,12 @@ void			ft_cmd_cd(char **cmd, t_list **lenv)
 	if ((*pwd = ft_find_var(*lenv, "PWD=")))
 		*pwd = ft_strdup(*pwd + 4);
 	else
+	{
 		*pwd = ft_strdup(getcwd(buf, 2048));
+		pwd[1] = ft_strjoin("PWD=", *pwd);
+		ft_cmd_setenv(pwd, lenv);
+		free(pwd[1]);
+	}
 	if (!cmd[1] || !ft_strcmp(cmd[1], "~"))
 		success = ft_cd_env(lenv, "HOME=", *cmd);
 	else

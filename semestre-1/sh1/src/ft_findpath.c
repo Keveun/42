@@ -62,7 +62,7 @@ static int		ft_checkpath(char *pathname)
 		if (access(pathname, X_OK) != -1)
 			return (1);
 		else
-			ft_printerror(pathname, 2);
+			ft_printerror(pathname, NULL, 2);
 		return (-1);
 	}
 	return (0);
@@ -93,7 +93,7 @@ char			*ft_getpath(char **paths, char **cmd)
 		}
 		ret = 1;
 	}
-	ft_printerror(*cmd, ret);
+	ft_printerror(*cmd, NULL, ret);
 	return (NULL);
 }
 

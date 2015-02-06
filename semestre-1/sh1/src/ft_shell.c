@@ -47,7 +47,7 @@ static int		ft_find_func(char *cmd)
 	return (0);
 }
 
-static int		ft_parse_stdin(char *line, t_list **lenv)
+int				ft_parse_stdin(char *line, t_list **lenv)
 {
 	char	**cmd;
 	pfunc	f;
@@ -60,13 +60,11 @@ static int		ft_parse_stdin(char *line, t_list **lenv)
 	return (0);
 }
 
-int				ft_shell(char **env)
+int				ft_shell(t_list **lenv)
 {
 	char	*line;
-	t_list	*lenv;
 	int		ret;
 
-	lenv = ft_tab_to_list(env);
 	while (1)
 	{
 		write(1, "$> ", 3);
@@ -74,7 +72,7 @@ int				ft_shell(char **env)
 			;
 		if (!ret)
 			return (0);
-		ft_parse_stdin(line, &lenv);
+		ft_parse_stdin(line, lenv);
 		free(line);
 	}
 	return (0);

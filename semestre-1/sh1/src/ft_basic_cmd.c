@@ -64,7 +64,7 @@ void	ft_cmd_setenv(char **cmd, t_list **lenv)
 			elem->content = ft_strdup(cmd[1]);
 		}
 		else
-			*lenv = ft_add_list(*lenv, cmd[1]);
+			*lenv = ft_add_list(*lenv, ft_strdup(cmd[1]));
 	}
 }
 

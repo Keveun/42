@@ -24,10 +24,9 @@ void	ft_init_gnl(t_info **info)
 	pinfo->len = 0;
 }
 
-int		ft_reset_gnl(t_info **info, size_t *end)
+int		ft_reset_gnl(t_info **info)
 {
 	free(*info);
 	*info = NULL;
-	*end = 0;
 	return (0);
 }

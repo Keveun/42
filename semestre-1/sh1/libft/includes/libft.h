@@ -128,5 +128,5 @@ typedef struct	s_info
 
 int				get_next_line(int const fd, char **line);
 void			ft_init_gnl(t_info **info);
-int				ft_reset_gnl(t_info **info, size_t *end);
+int				ft_reset_gnl(t_info **info);
 #endif

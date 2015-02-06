@@ -102,27 +102,23 @@ int					get_next_line(int const fd, char **line)
 {
 	static t_lst	*stack = NULL;
 	static t_info	*info = NULL;
-	static size_t	end = 0;
 
 	if (!info)
 		ft_init_gnl(&info);
-	if (!end)
+	if (stack && ft_trait(stack, info, line))
+		return (1);
+	if (fd < 0 || !(stack = ft_add_elem(info)))
+		return (-1);
+	while ((stack->ret = read(fd, stack->buff, BUFF_SIZE)) > 0)
 	{
-		if (stack && ft_trait(stack, info, line))
+		stack->buff[stack->ret] = '\0';
+		if (ft_trait(stack, info, line))
 			return (1);
-		if (fd < 0 || !(stack = ft_add_elem(info)))
-			return (-1);
-		while ((stack->ret = read(fd, stack->buff, BUFF_SIZE)) > 0)
-		{
-			stack->buff[stack->ret] = '\0';
-			if (ft_trait(stack, info, line))
-				return (1);
-			if (!(stack = ft_add_elem(info)))
-				return (-1);
-		}
-		if (stack->ret < 0)
+		if (!(stack = ft_add_elem(info)))
 			return (-1);
 	}
+	if (stack->ret < 0)
+		return (-1);
 	*line = ft_join_elem(info);
-	return ((end++) ? ft_reset_gnl(&info, &end) : 0);
+	return (ft_reset_gnl(&info));
 }
