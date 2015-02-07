@@ -17,7 +17,7 @@ static int		ft_cd_env(t_list **lenv, char *var, char *cmd)
 	char	*dir;
 	char	*pwd[2];
 
-	dir = ft_find_var(*lenv, var);
+	dir = ft_find_var(*lenv, var, 0);
 	dir = (dir) ? dir + ft_strlen(var) : NULL;
 	if (dir && chdir(dir) != -1)
 	{
@@ -54,7 +54,7 @@ static char		*ft_getpwd(t_list **lenv)
 	char	*pwd[2];
 	char	buf[2048];
 
-	if ((*pwd = ft_find_var(*lenv, "PWD=")))
+	if ((*pwd = ft_find_var(*lenv, "PWD=", 0)))
 		*pwd = ft_strdup(*pwd + 4);
 	else
 	{
@@ -82,7 +82,7 @@ void			ft_cmd_cd(char **cmd, t_list **lenv)
 		{
 			if (!ft_strncmp(cmd[1], "~/", 2))
 			{
-				pwd[1] = ft_find_var(*lenv, "HOME=") + 5;
+				pwd[1] = ft_find_var(*lenv, "HOME=", 0) + 5;
 				pwd[1] = ft_strjoin(pwd[1], cmd[1] + 1);
 				free(cmd[1]);
 				cmd[1] = pwd[1];

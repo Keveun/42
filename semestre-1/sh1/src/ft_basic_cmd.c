@@ -47,9 +47,27 @@ void	ft_cmd_exit(char **cmd, t_list **lenv)
 
 void	ft_cmd_env(char **cmd, t_list **lenv)
 {
-	(void)cmd;
+	char	*var;
+
 	if (*lenv)
-		ft_show_list(*lenv, 1);
+	{
+		if (!cmd[1])
+			ft_show_list(*lenv, 1);
+		else if (*cmd[1] == '-')
+		{
+			if (!ft_strcmp(cmd[1], "-0"))
+				ft_show_list(*lenv, 0);
+			else
+				ft_printerror(cmd[0], cmd[1], 5);
+		}
+		else
+		{
+			if ((var = ft_find_var(*lenv, cmd[1], 1)))
+				ft_putendl(var + ft_strlen(cmd[1]) + 1);
+			else
+				ft_printerror(cmd[0], cmd[1], 3);
+		}
+	}
 }
 
 void	ft_cmd_setenv(char **cmd, t_list **lenv)

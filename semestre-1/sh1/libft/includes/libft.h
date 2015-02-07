@@ -105,6 +105,7 @@ int				ft_binlen(int n);
 t_list			*ft_tab_to_list(char **tab);
 char			**ft_list_to_tab(t_list *list);
 int				ft_iswhitespace(char c);
+void			ft_freetab(char **tab);
 
 
 /*

@@ -97,7 +97,7 @@ char			*ft_getpath(char **paths, char **cmd)
 	return (NULL);
 }
 
-char			*ft_find_var(t_list *lenv, char *tofind)
+char			*ft_find_var(t_list *lenv, char *tofind, int type)
 {
 	char	*s;
 	char	*begin;
@@ -112,7 +112,7 @@ char			*ft_find_var(t_list *lenv, char *tofind)
 			if (*tofind++ != *s++)
 				break ;
 		}
-		if (!*tofind && *(s - 1) == '=')
+		if (!*tofind && ((!type && *(s - 1) == '=') || (type && *s == '=')))
 			return (lenv->content);
 		lenv = lenv->next;
 	}

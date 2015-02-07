@@ -50,13 +50,23 @@ static int		ft_find_func(char *cmd)
 int				ft_parse_stdin(char *line, t_list **lenv)
 {
 	char	**cmd;
+	char	**cmds;
+	int		i;
 	pfunc	f;
 
 	ft_init_f(f);
-	cmd = ft_splitword(line);
-	if (!cmd || !*cmd)
-		return (0);
-	(f[ft_find_func(*cmd)])(cmd, lenv);
+	cmds = ft_strsplit(line, ';');
+	i = 0;
+	while (cmds[i])
+	{
+		cmd = ft_splitword(cmds[i]);
+		if (!cmd || !*cmd)
+			return (0);
+		(f[ft_find_func(*cmd)])(cmd, lenv);
+		++i;
+		ft_freetab(cmd);
+	}
+	ft_freetab(cmds);
 	return (0);
 }
 

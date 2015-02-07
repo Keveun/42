@@ -26,12 +26,24 @@ void		ft_printerror(char *s1, char *s2, int type)
 	else if (type == 2)
 		write(2, " : Permission denied\n", 21);
 	else if (type == 3)
+	{
+		if (s2)
+		{
+			write(2, ": ", 2);
+			write(2, s2, ft_strlen(s2));
+		}
 		write(2, ": No such file or directory\n", 28);
+	}
 	else if (type == 4)
 	{
 		write(2, ": ", 2);
-		if (s2)
-			write(2, s2, ft_strlen(s2));
+		write(2, s2, ft_strlen(s2));
 		write(2, ": Not a directory\n", 18);
+	}
+	else if (type == 5)
+	{
+		write(2, " : unknown option -- ", 21);
+		write(2, s2 + 1, ft_strlen(s2) - 1);
+		write(2, "\n", 1);
 	}
 }
