@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_push_swap.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Kevin <kperreau@42.fr>                     +#+  +:+       +#+        */
+/*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/02/09 22:07:34 by Kevin             #+#    #+#             */
-/*   Updated: 2015/02/09 22:07:36 by Kevin            ###   ########.fr       */
+/*   Created: 2015/02/10 22:18:32 by kperreau          #+#    #+#             */
+/*   Updated: 2015/02/10 22:18:35 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,15 +45,26 @@ void		ft_push_swap(char **tab, int n)
 {
 	int		*a;
 	int		*b;
+	int		debug;
 
+	debug = 0;
+	if (!ft_strcmp(*tab, "-v"))
+	{
+		debug = 1;
+		++tab;
+		--n;
+	}
+	if (debug && n < 3)
+	{
+		write(2, "Error\n", 6);
+		return ;
+	}
 	if ((a = (int*)malloc(sizeof(int) * n)) == NULL)
 		return ;
 	if ((b = (int*)malloc(sizeof(int) * n)) == NULL)
 		return ;
 	if (ft_convert(tab, a, n) != -1)
-	{
-		ft_calc(a, b, n);
-	}
+		ft_calc(a, b, n, debug);
 	else
 		write(2, "Error\n", 6);
 }

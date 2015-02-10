@@ -3,21 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_funcs.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Kevin <kperreau@42.fr>                     +#+  +:+       +#+        */
+/*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/02/10 02:52:28 by Kevin             #+#    #+#             */
-/*   Updated: 2015/02/10 02:52:39 by Kevin            ###   ########.fr       */
+/*   Created: 2015/02/10 22:19:19 by kperreau          #+#    #+#             */
+/*   Updated: 2015/02/10 22:19:33 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-// static void		ft_test(int *a, int size)
-// {
-	// while (size--)
-		// printf("a: %d\n", *a++);
-	// printf("\n");
-// }
 
 void		ft_rotate(int *pile, int n, int display)
 {
