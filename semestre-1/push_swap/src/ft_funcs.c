@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/10 22:19:19 by kperreau          #+#    #+#             */
-/*   Updated: 2015/02/10 22:19:33 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/02/11 22:09:17 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,21 @@ void		ft_rotate(int *pile, int n, int display)
 	}
 }
 
+void		ft_rev_rotate(int *pile, int n, int display)
+{
+	if (display == 1)
+		write(1, "rra ", 4);
+	else if (display == 2)
+		write(1, "rrb ", 4);
+	while (--n)
+		ft_swap(pile + n, pile + n - 1);
+}
+
 void		ft_push_b(int *a, int *b, int pb)
 {
+	(void)pb;
 	write(1, "pb ", 3);
-	b[pb] = *a;
+	*b = *a;
 	*a = 0;
 }
 
