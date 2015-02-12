@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/12 18:11:31 by kperreau          #+#    #+#             */
-/*   Updated: 2015/02/12 18:35:11 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/02/12 19:08:20 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,12 @@ static int		ft_cd_env(t_list **lenv, char *var, char *cmd)
 static int		ft_cd_dir(t_list **lenv, char **cmd)
 {
 	char	*pwd[2];
+	char	buf[2048];
 
 	if (chdir(cmd[1]) != -1)
 	{
-		pwd[1] = ft_strjoin("PWD=", cmd[1]);
+		getcwd(buf, 2048);
+		pwd[1] = ft_strjoin("PWD=", buf);
 		ft_cmd_setenv(pwd, lenv);
 		free(pwd[1]);
 		return (1);
