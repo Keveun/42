@@ -81,7 +81,10 @@ int				ft_shell(t_list **lenv)
 		while ((ret = get_next_line(0, &line)) == -1)
 			;
 		if (!ret)
+		{
+			write(1, "logout\n", 7);
 			return (0);
+		}
 		ft_parse_stdin(line, lenv);
 		free(line);
 	}

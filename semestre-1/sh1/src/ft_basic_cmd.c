@@ -18,24 +18,26 @@ void	ft_cmd_bin(char **cmd, t_list **lenv)
 	char	*path;
 	char	**paths;
 	char	**my_env;
+	char	envi;
 
-	path = ft_findpath(*lenv);
+	path = (lenv) ? ft_findpath(*lenv) : NULL;
 	paths = ft_strsplit(path, ':');
-	if ((path = ft_getpath(paths, cmd)))
+	envi = (!ft_strcmp(*cmd, "env") && !ft_strcmp(cmd[1], "-i")) ? 2 : 0;
+	if (*(cmd + envi) && (path = ft_getpath(paths, cmd + envi)))
 	{
 		father = fork();
 		if (father > 0)
 			wait(NULL);
-		my_env = ft_list_to_tab(*lenv);
+		my_env = (!envi) ? ft_list_to_tab(*lenv) : NULL;
 		if (father == 0)
 		{
 			signal(SIGINT, SIG_DFL);
-			execve(path, cmd, my_env);
+			execve(path, cmd + envi, my_env);
 		}
 		free(my_env);
-		free(path);
-		my_env = NULL;
 	}
+	if (paths)
+		ft_freetab(paths);
 }
 
 void	ft_cmd_exit(char **cmd, t_list **lenv)
@@ -49,24 +51,25 @@ void	ft_cmd_env(char **cmd, t_list **lenv)
 {
 	char	*var;
 
-	if (*lenv)
+	if (!*lenv)
+		return ;
+	if (!cmd[1])
+		ft_show_list(*lenv, 1);
+	else if (*cmd[1] == '-')
 	{
-		if (!cmd[1])
-			ft_show_list(*lenv, 1);
-		else if (*cmd[1] == '-')
-		{
-			if (!ft_strcmp(cmd[1], "-0"))
-				ft_show_list(*lenv, 0);
-			else
-				ft_printerror(cmd[0], cmd[1], 5);
-		}
+		if (!ft_strcmp(cmd[1], "-0"))
+			ft_show_list(*lenv, 0);
+		else if (!ft_strcmp(cmd[1], "-i"))
+			ft_cmd_bin(cmd, lenv);
 		else
-		{
-			if ((var = ft_find_var(*lenv, cmd[1], 1)))
-				ft_putendl(var + ft_strlen(cmd[1]) + 1);
-			else
-				ft_printerror(cmd[0], cmd[1], 3);
-		}
+			ft_printerror(cmd[0], cmd[1], 5);
+	}
+	else
+	{
+		if ((var = ft_find_var(*lenv, cmd[1], 1)))
+			ft_putendl(var + ft_strlen(cmd[1]) + 1);
+		else
+			ft_printerror(cmd[0], cmd[1], 3);
 	}
 }
 
