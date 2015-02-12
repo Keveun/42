@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_findpath.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Kevin <kperreau@42.fr>                     +#+  +:+       +#+        */
+/*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/01/28 04:20:19 by Kevin             #+#    #+#             */
-/*   Updated: 2015/01/28 04:20:31 by Kevin            ###   ########.fr       */
+/*   Created: 2015/02/12 18:12:16 by kperreau          #+#    #+#             */
+/*   Updated: 2015/02/12 18:21:11 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
-#define ishere(c, s) ((c == '/') | !ft_strncmp("./", s, 2) | \
-						!ft_strncmp("../", s, 2))
 #define STRTOFIND "PATH="
 
 char			*ft_findpath(t_list *lenv)
@@ -74,7 +72,7 @@ char			*ft_getpath(char **paths, char **cmd)
 	int		ret;
 
 	ret = 1;
-	if (ishere(**cmd, *cmd))
+	if (ft_ishere(**cmd, *cmd))
 	{
 		pathname = ft_strdup(*cmd);
 		if ((ret = ft_checkpath(pathname)))

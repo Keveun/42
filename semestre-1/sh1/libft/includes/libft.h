@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/03 14:44:18 by kperreau          #+#    #+#             */
-/*   Updated: 2015/01/27 19:05:03 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/02/10 22:23:51 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,6 @@ t_list			*ft_tab_to_list(char **tab);
 char			**ft_list_to_tab(t_list *list);
 int				ft_iswhitespace(char c);
 void			ft_freetab(char **tab);
-
 
 /*
 **GET NEXT LINE

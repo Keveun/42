@@ -3,29 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_errors.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Kevin <kperreau@42.fr>                     +#+  +:+       +#+        */
+/*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/01/28 05:10:36 by Kevin             #+#    #+#             */
-/*   Updated: 2015/01/28 05:10:45 by Kevin            ###   ########.fr       */
+/*   Created: 2015/02/12 18:11:59 by kperreau          #+#    #+#             */
+/*   Updated: 2015/02/12 18:29:54 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-void		ft_printerror(char *s1, char *s2, int type)
+static void		ft_errors2(char *s2, int type)
 {
-	write(2, "-", 1);
-	write(2, NAME, ft_strlen(NAME));
-	if (s1)
-	{
-		write(2, ": ", 2);
-		write(2, s1, ft_strlen(s1));
-	}
-	if (type == 1)
-		write(2, " : command not found\n", 21);
-	else if (type == 2)
-		write(2, " : Permission denied\n", 21);
-	else if (type == 3)
+	if (type == 3)
 	{
 		if (s2)
 		{
@@ -46,4 +35,21 @@ void		ft_printerror(char *s1, char *s2, int type)
 		write(2, s2 + 1, ft_strlen(s2) - 1);
 		write(2, "\n", 1);
 	}
+}
+
+void			ft_printerror(char *s1, char *s2, int type)
+{
+	write(2, "-", 1);
+	write(2, NAME, ft_strlen(NAME));
+	if (s1)
+	{
+		write(2, ": ", 2);
+		write(2, s1, ft_strlen(s1));
+	}
+	if (type == 1)
+		write(2, " : command not found\n", 21);
+	else if (type == 2)
+		write(2, " : Permission denied\n", 21);
+	else if (type >= 3)
+		ft_errors2(s2, type);
 }

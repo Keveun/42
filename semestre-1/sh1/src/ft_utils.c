@@ -1,25 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_striteri.c                                      :+:      :+:    :+:   */
+/*   ft_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/07 19:28:57 by kperreau          #+#    #+#             */
-/*   Updated: 2014/11/07 19:44:13 by kperreau         ###   ########.fr       */
+/*   Created: 2015/02/12 18:18:46 by kperreau          #+#    #+#             */
+/*   Updated: 2015/02/12 18:53:12 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "shell.h"
 
-void	ft_striteri(char *s, void (*f)(unsigned int, char *))
+int		ft_ishere(char c, char *s)
 {
-	size_t	i;
+	return ((c == '/') || !ft_strncmp("./", s, 2) || !ft_strncmp("../", s, 2));
+}
 
-	i = 0;
-	if (s != NULL && f != NULL)
+char	*ft_str_tolower(char *s)
+{
+	char	*begin;
+
+	begin = s;
+	while (*s)
 	{
-		while (*s != '\0')
-			f(i++, s++);
+		if (*s >= 'a' && *s <= 'z')
+			*s -= 32;
+		++s;
 	}
+	return (begin);
 }

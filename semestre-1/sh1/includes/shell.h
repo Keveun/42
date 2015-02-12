@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/19 16:40:01 by kperreau          #+#    #+#             */
-/*   Updated: 2015/01/19 16:46:04 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/02/12 18:50:04 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@
 /*
 **Tableau de pointeur sur fonction
 */
-typedef void	(*pfunc[NBRCMD])(char **cmd, t_list **lenv);
+typedef void	(*t_pfunc[NBRCMD])(char **cmd, t_list **lenv);
 
 int				ft_shell(t_list **lenv);
 char			**ft_splitword(const char *s);
@@ -45,6 +45,8 @@ t_list			*ft_find_env(t_list *lenv, char *s);
 t_list			*ft_find_envpop(t_list *lenv, char *s);
 char			*ft_find_var(t_list *lenv, char *tofind, int type);
 int				ft_parse_stdin(char *line, t_list **lenv);
+int				ft_ishere(char c, char *s);
+char			*ft_str_tolower(char *s);
 
 /*
 **Fonctions commandes

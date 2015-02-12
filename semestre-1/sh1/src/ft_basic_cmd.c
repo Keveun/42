@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_basic_cmd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Kevin <kperreau@42.fr>                     +#+  +:+       +#+        */
+/*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/02/01 03:07:18 by Kevin             #+#    #+#             */
-/*   Updated: 2015/02/01 03:07:20 by Kevin            ###   ########.fr       */
+/*   Created: 2015/02/12 18:11:11 by kperreau          #+#    #+#             */
+/*   Updated: 2015/02/12 18:52:10 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	ft_cmd_exit(char **cmd, t_list **lenv)
 void	ft_cmd_env(char **cmd, t_list **lenv)
 {
 	char	*var;
+	char	*temp;
 
 	if (!*lenv)
 		return ;
@@ -66,10 +67,12 @@ void	ft_cmd_env(char **cmd, t_list **lenv)
 	}
 	else
 	{
-		if ((var = ft_find_var(*lenv, cmd[1], 1)))
+		temp = ft_str_tolower(ft_strdup(cmd[1]));
+		if ((var = ft_find_var(*lenv, temp, 1)))
 			ft_putendl(var + ft_strlen(cmd[1]) + 1);
 		else
 			ft_printerror(cmd[0], cmd[1], 3);
+		free(temp);
 	}
 }
 

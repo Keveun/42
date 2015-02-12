@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/19 16:44:31 by kperreau          #+#    #+#             */
-/*   Updated: 2015/01/19 17:26:32 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/02/12 18:26:08 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void		ft_init_tofind(char **tofind)
 	tofind[5] = '\0';
 }
 
-static void		ft_init_f(pfunc f)
+static void		ft_init_f(t_pfunc f)
 {
 	f[0] = ft_cmd_bin;
 	f[1] = ft_cmd_exit;
@@ -52,7 +52,7 @@ int				ft_parse_stdin(char *line, t_list **lenv)
 	char	**cmd;
 	char	**cmds;
 	int		i;
-	pfunc	f;
+	t_pfunc	f;
 
 	ft_init_f(f);
 	cmds = ft_strsplit(line, ';');

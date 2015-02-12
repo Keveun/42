@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_basic_cmd2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Kevin <kperreau@42.fr>                     +#+  +:+       +#+        */
+/*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/02/01 03:09:00 by Kevin             #+#    #+#             */
-/*   Updated: 2015/02/01 03:09:02 by Kevin            ###   ########.fr       */
+/*   Created: 2015/02/12 18:11:31 by kperreau          #+#    #+#             */
+/*   Updated: 2015/02/12 18:35:11 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,21 +74,18 @@ void			ft_cmd_cd(char **cmd, t_list **lenv)
 	*pwd = ft_getpwd(lenv);
 	if (!cmd[1] || !ft_strcmp(cmd[1], "~"))
 		success = ft_cd_env(lenv, "HOME=", *cmd);
+	else if (!ft_strcmp(cmd[1], "-"))
+		success = ft_cd_env(lenv, "OLDPWD=", *cmd);
 	else
 	{
-		if (!ft_strcmp(cmd[1], "-"))
-			success = ft_cd_env(lenv, "OLDPWD=", *cmd);
-		else
+		if (!ft_strncmp(cmd[1], "~/", 2))
 		{
-			if (!ft_strncmp(cmd[1], "~/", 2))
-			{
-				pwd[1] = ft_find_var(*lenv, "HOME=", 0) + 5;
-				pwd[1] = ft_strjoin(pwd[1], cmd[1] + 1);
-				free(cmd[1]);
-				cmd[1] = pwd[1];
-			}
-			success = ft_cd_dir(lenv, cmd);
+			pwd[1] = ft_find_var(*lenv, "HOME=", 0) + 5;
+			pwd[1] = ft_strjoin(pwd[1], cmd[1] + 1);
+			free(cmd[1]);
+			cmd[1] = pwd[1];
 		}
+		success = ft_cd_dir(lenv, cmd);
 	}
 	pwd[1] = ft_strjoin("OLDPWD=", *pwd);
 	free(*pwd);

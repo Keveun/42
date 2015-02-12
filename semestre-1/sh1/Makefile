@@ -6,7 +6,7 @@
 #    By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/12/05 14:10:51 by kperreau          #+#    #+#              #
-#    Updated: 2015/01/19 16:48:03 by kperreau         ###   ########.fr        #
+#    Updated: 2015/02/12 18:22:33 by kperreau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ LIBDIR = libft
 MAIN = main.c
 
 CFILES = ft_shell.c ft_splitword.c ft_findpath.c ft_errors.c ft_env.c \
-		ft_basic_cmd.c ft_basic_cmd2.c
+		ft_basic_cmd.c ft_basic_cmd2.c ft_utils.c
 
 SRC = $(patsubst %, $(SRCDIR)/%, $(CFILES))
 
