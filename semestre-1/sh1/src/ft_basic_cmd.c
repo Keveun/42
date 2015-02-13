@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/12 18:11:11 by kperreau          #+#    #+#             */
-/*   Updated: 2015/02/13 19:58:57 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/02/13 20:01:25 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,4 +112,6 @@ void	ft_cmd_unsetenv(char **cmd, t_list **lenv)
 		else
 			ft_pop_elem(elem, *lenv);
 	}
+	else
+		ft_printerror(*cmd, cmd[1], 3);
 }
