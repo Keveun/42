@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/12 18:18:46 by kperreau          #+#    #+#             */
-/*   Updated: 2015/02/12 18:53:12 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/02/13 19:54:13 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,26 @@ char	*ft_str_tolower(char *s)
 		++s;
 	}
 	return (begin);
+}
+
+char	**ft_initpwd(char **pwd, int n)
+{
+	char	**s;
+
+	s = pwd;
+	while (n--)
+		pwd[n] = 0;
+	return (s);
+}
+
+int		ft_count_tabelem(char **tab)
+{
+	int		n;
+
+	if (!tab)
+		return (0);
+	n = 0;
+	while (*tab++)
+		++n;
+	return (n);
 }

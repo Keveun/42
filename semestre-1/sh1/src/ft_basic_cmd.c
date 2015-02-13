@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/12 18:11:11 by kperreau          #+#    #+#             */
-/*   Updated: 2015/02/13 18:32:57 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/02/13 19:58:57 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ void	ft_cmd_exit(char **cmd, t_list **lenv)
 {
 	(void)cmd;
 	(void)lenv;
+	if (ft_error_args(cmd + 1, 0, 0))
+		return ;
 	exit(0);
 }
 
@@ -52,7 +54,7 @@ void	ft_cmd_env(char **cmd, t_list **lenv)
 	char	*var;
 	char	*temp;
 
-	if (!*lenv)
+	if (!*lenv || ft_error_args(cmd + 1, 0, 1))
 		return ;
 	if (!cmd[1])
 		ft_show_list(*lenv, 1);
@@ -80,6 +82,8 @@ void	ft_cmd_setenv(char **cmd, t_list **lenv)
 {
 	t_list	*elem;
 
+	if (ft_error_args(cmd + 1, 1, 1))
+		return ;
 	if (ft_strchr(cmd[1], '='))
 	{
 		if (*lenv && (elem = ft_find_env(*lenv, cmd[1])))
@@ -96,6 +100,8 @@ void	ft_cmd_unsetenv(char **cmd, t_list **lenv)
 {
 	t_list	*elem;
 
+	if (ft_error_args(cmd + 1, 1, 1))
+		return ;
 	if (*lenv && (elem = ft_find_envpop(*lenv, cmd[1])))
 	{
 		if (elem == *lenv)

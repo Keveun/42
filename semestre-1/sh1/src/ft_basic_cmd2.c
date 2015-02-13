@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/12 18:11:31 by kperreau          #+#    #+#             */
-/*   Updated: 2015/02/12 19:08:20 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/02/13 19:56:38 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,9 @@
 static int		ft_cd_env(t_list **lenv, char *var, char *cmd)
 {
 	char	*dir;
-	char	*pwd[2];
+	char	*pwd[3];
 
+	ft_initpwd(pwd, 3);
 	dir = ft_find_var(*lenv, var, 0);
 	dir = (dir) ? dir + ft_strlen(var) : NULL;
 	if (dir && chdir(dir) != -1)
@@ -29,15 +30,23 @@ static int		ft_cd_env(t_list **lenv, char *var, char *cmd)
 		return (1);
 	}
 	else
-		ft_printerror(cmd, dir, 4);
+	{
+		if (!ft_strcmp("OLDPWD=", var))
+			ft_env_error(NULL, 2);
+		else if (!ft_strcmp("HOME=", var))
+			ft_env_error(NULL, 3);
+		else
+			ft_printerror(cmd, dir, 4);
+	}
 	return (0);
 }
 
 static int		ft_cd_dir(t_list **lenv, char **cmd)
 {
-	char	*pwd[2];
+	char	*pwd[3];
 	char	buf[2048];
 
+	ft_initpwd(pwd, 3);
 	if (chdir(cmd[1]) != -1)
 	{
 		getcwd(buf, 2048);
@@ -53,9 +62,10 @@ static int		ft_cd_dir(t_list **lenv, char **cmd)
 
 static char		*ft_getpwd(t_list **lenv)
 {
-	char	*pwd[2];
+	char	*pwd[3];
 	char	buf[2048];
 
+	ft_initpwd(pwd, 3);
 	if ((*pwd = ft_find_var(*lenv, "PWD=", 0)))
 		*pwd = ft_strdup(*pwd + 4);
 	else
@@ -70,9 +80,10 @@ static char		*ft_getpwd(t_list **lenv)
 
 void			ft_cmd_cd(char **cmd, t_list **lenv)
 {
-	char	*pwd[2];
+	char	*pwd[3];
 	int		success;
 
+	ft_initpwd(pwd, 3);
 	*pwd = ft_getpwd(lenv);
 	if (!cmd[1] || !ft_strcmp(cmd[1], "~"))
 		success = ft_cd_env(lenv, "HOME=", *cmd);

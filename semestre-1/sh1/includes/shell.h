@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/19 16:40:01 by kperreau          #+#    #+#             */
-/*   Updated: 2015/02/12 18:50:04 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/02/13 19:55:02 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,10 @@ char			*ft_find_var(t_list *lenv, char *tofind, int type);
 int				ft_parse_stdin(char *line, t_list **lenv);
 int				ft_ishere(char c, char *s);
 char			*ft_str_tolower(char *s);
+int				ft_count_tabelem(char **tab);
+int				ft_env_error(char **cmd, int type);
+int				ft_error_args(char **cmd, int min, int max);
+char			**ft_initpwd(char **pwd, int n);
 
 /*
 **Fonctions commandes
