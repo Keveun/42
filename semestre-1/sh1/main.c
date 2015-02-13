@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/19 16:39:09 by kperreau          #+#    #+#             */
-/*   Updated: 2015/01/27 23:14:55 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/02/13 18:06:34 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,10 @@ int				main(int argc, char **argv, char **env)
 	signal(SIGINT, SIG_IGN);
 	lenv = ft_tab_to_list(env);
 	if (argc > 1)
+	{
 		ft_read_file(&lenv, argv[1]);
-	ft_shell(&lenv);
+	}
+	else
+		ft_shell(&lenv);
 	return (0);
 }

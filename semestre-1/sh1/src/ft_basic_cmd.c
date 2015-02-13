@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/12 18:11:11 by kperreau          #+#    #+#             */
-/*   Updated: 2015/02/12 18:52:10 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/02/13 18:32:57 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,11 @@ void	ft_cmd_unsetenv(char **cmd, t_list **lenv)
 	if (*lenv && (elem = ft_find_envpop(*lenv, cmd[1])))
 	{
 		if (elem == *lenv)
+		{
 			*lenv = (*lenv)->next;
-		ft_pop_elem(elem, *lenv);
+			ft_pop_elem(elem, NULL);
+		}
+		else
+			ft_pop_elem(elem, *lenv);
 	}
 }
