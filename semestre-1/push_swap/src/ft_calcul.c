@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/10 22:17:27 by kperreau          #+#    #+#             */
-/*   Updated: 2015/02/11 22:28:23 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/02/25 21:52:31 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int		ft_get_minpos(int *a, int n)
 	return (minpos);
 }
 
-static void		ft_test(int *a, int *b, int size, int max)
+void			ft_test(int *a, int *b, int size, int max)
 {
 	int		nb;
 
@@ -99,6 +99,8 @@ void			ft_calc(int *a, int *b, int n, int debug)
 	{
 		if (ft_is_sort(a, na))
 			break ;
+		if (ft_check_sa(a, b, na, debug))
+			continue ;
 		ft_opti(a, b, na, debug);
 		if (ft_is_sort(a, na))
 			break ;
@@ -107,11 +109,10 @@ void			ft_calc(int *a, int *b, int n, int debug)
 		ft_rev_rotate(b, nb + 1, 0);
 		ft_test(a, b + 1, na, (debug) ? n : 0);
 	}
-	while (na--)
+	while (na != n && na--)
 		ft_rotate(a, n, 0);
-	na = nb;
-	while (na--)
-		ft_finish(a, ++b, na, (debug) ? n : 0);
-	if (!debug)
+	while (nb--)
+		ft_finish(a, ++b, nb, (debug) ? n : 0);
+	if (!debug || (na == n))
 		write(1, "\n", 1);
 }

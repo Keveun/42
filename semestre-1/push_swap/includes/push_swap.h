@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/19 16:40:01 by kperreau          #+#    #+#             */
-/*   Updated: 2015/02/11 20:55:14 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/02/25 21:52:53 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@ void		ft_rotate(int *pile, int n, int display);
 void		ft_rev_rotate(int *pile, int n, int display);
 void		ft_push_b(int *a, int *b, int pb);
 void		ft_push_a(int *a, int *b, int pa);
+void		ft_swap_a(int *a, int pa);
 int			ft_is_sort(int *a, int n);
+int			ft_check_sa(int *a, int *b, int na, int debug);
+void		ft_test(int *a, int *b, int na, int debug);
 
 #endif

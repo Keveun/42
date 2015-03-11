@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/06 14:57:35 by kperreau          #+#    #+#             */
-/*   Updated: 2014/11/09 14:59:10 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/03/11 16:21:29 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,6 @@ char				**ft_strsplit(char const *s, char c)
 		s += lenc;
 		++str;
 	}
-	*str = '\0';
+	*str = NULL;
 	return (temp);
 }

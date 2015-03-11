@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/19 16:39:09 by kperreau          #+#    #+#             */
-/*   Updated: 2015/01/27 23:14:55 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/02/22 21:19:45 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int				main(int argc, char **argv)
 {
-	if (argc > 2)
+	if (argc > 1)
 		ft_push_swap(argv + 1, argc - 1);
 	else
 		write(2, "Error\n", 6);

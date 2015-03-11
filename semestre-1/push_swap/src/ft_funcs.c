@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/10 22:19:19 by kperreau          #+#    #+#             */
-/*   Updated: 2015/02/11 22:09:17 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/02/25 21:42:07 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,17 @@ void		ft_push_a(int *a, int *b, int pa)
 		write(1, "pa", 3);
 	a[pa] = *b;
 	*b = 0;
+}
+
+void		ft_swap_a(int *a, int pa)
+{
+	int		temp;
+
+	if (pa)
+		write(1, "sa ", 3);
+	else
+		write(1, "sa", 3);
+	temp = a[0];
+	a[0] = a[1];
+	a[1] = temp;
 }

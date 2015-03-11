@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/10 22:18:32 by kperreau          #+#    #+#             */
-/*   Updated: 2015/02/10 22:18:35 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/02/22 21:19:17 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	ft_toint(char **tab, int *a, int n)
 		if (ft_strlen(*tab) > 11)
 			return (-1);
 		temp = ft_atoi(*tab++);
-		if ((temp > 2147483647 || temp < -2147483647) ||
+		if ((temp > 2147483647 || temp < -2147483648) ||
 			(count && ft_isdouble(begin, count, temp)))
 			return (-1);
 		*a++ = (int)temp;
@@ -54,7 +54,7 @@ void		ft_push_swap(char **tab, int n)
 		++tab;
 		--n;
 	}
-	if (debug && n < 3)
+	if (debug && n < 1)
 	{
 		write(2, "Error\n", 6);
 		return ;

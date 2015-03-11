@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/10 22:22:02 by kperreau          #+#    #+#             */
-/*   Updated: 2015/02/10 22:22:06 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/03/11 16:21:42 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,6 @@ char		**ft_list_to_tab(t_list *list)
 		*tab++ = list->content;
 		list = list->next;
 	}
-	*tab = '\0';
+	*tab = NULL;
 	return (begin);
 }
