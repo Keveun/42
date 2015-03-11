@@ -6,20 +6,22 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/10 22:18:32 by kperreau          #+#    #+#             */
-/*   Updated: 2015/02/22 21:19:17 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/03/11 20:40:25 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static int	ft_toint(char **tab, int *a, int n)
+static int	ft_toint(char **tab, t_data *pile)
 {
 	long	temp;
 	int		count;
 	int		*begin;
+	int		n;
 
-	begin = a;
+	begin = pile->a;
 	count = 0;
+	n = pile->n;
 	while (n--)
 	{
 		if (ft_strlen(*tab) > 11)
@@ -28,43 +30,53 @@ static int	ft_toint(char **tab, int *a, int n)
 		if ((temp > 2147483647 || temp < -2147483648) ||
 			(count && ft_isdouble(begin, count, temp)))
 			return (-1);
-		*a++ = (int)temp;
+		*pile->a++ = (int)temp;
 		++count;
 	}
+	pile->a = begin;
 	return (0);
 }
 
-static int	ft_convert(char **tab, int *a, int n)
+static int	ft_convert(char **tab, t_data *pile)
 {
-	if (!ft_isnumbers(tab, n) || ft_toint(tab, a, n) == -1)
+	if (!ft_isnumbers(tab, pile->n) || ft_toint(tab, pile) == -1)
 		return (-1);
 	return (0);
 }
 
+static void	ft_init_pile(t_data *pile)
+{
+	pile->debug = 0;
+	pile->count = 0;
+	pile->opti = 0;
+	pile->nb = 0;
+}
+
 void		ft_push_swap(char **tab, int n)
 {
-	int		*a;
-	int		*b;
-	int		debug;
+	t_data	pile;
 
-	debug = 0;
-	if (!ft_strcmp(*tab, "-v"))
+	ft_init_pile(&pile);
+	if (!ft_strcmp(*tab, "-v") || !ft_strcmp(*tab, "-i"))
 	{
-		debug = 1;
-		++tab;
+		if (!ft_strcmp(*tab++, "-v"))
+			pile.debug = 1;
+		else
+			pile.opti = 1;
 		--n;
 	}
-	if (debug && n < 1)
+	if (pile.debug && n < 1)
 	{
 		write(2, "Error\n", 6);
 		return ;
 	}
-	if ((a = (int*)malloc(sizeof(int) * n)) == NULL)
+	if (((pile.a = (int*)malloc(sizeof(int) * n)) == NULL) ||
+		((pile.b = (int*)malloc(sizeof(int) * n)) == NULL))
 		return ;
-	if ((b = (int*)malloc(sizeof(int) * n)) == NULL)
-		return ;
-	if (ft_convert(tab, a, n) != -1)
-		ft_calc(a, b, n, debug);
+	pile.n = n;
+	pile.na = n;
+	if (ft_convert(tab, &pile) != -1)
+		ft_calc(&pile);
 	else
 		write(2, "Error\n", 6);
 }

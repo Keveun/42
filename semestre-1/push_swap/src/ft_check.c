@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/10 22:18:50 by kperreau          #+#    #+#             */
-/*   Updated: 2015/02/25 21:58:16 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/03/11 17:47:45 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,15 +55,11 @@ int			ft_is_sort(int *a, int n)
 	return (1);
 }
 
-int			ft_check_sa(int *a, int *b, int na, int debug)
+int			ft_check_sa(t_data *pile)
 {
-	static int	n = 0;
-
-	if (!n)
-		n = na;
-	if (a[0] < a[1])
+	if (pile->a[0] < pile->a[1])
 		return (0);
-	ft_swap_a(a, na);
-	ft_test(a, b + 1, na, (debug) ? n : 0);
+	ft_swap_a(pile->a, pile->na, pile);
+	ft_test(pile->a, pile->b + 1, pile->na, (pile->debug) ? pile->n : 0);
 	return (1);
 }
