@@ -6,7 +6,7 @@
 #    By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/12/04 15:19:03 by kperreau          #+#    #+#              #
-#    Updated: 2015/03/24 16:48:36 by kperreau         ###   ########.fr        #
+#    Updated: 2015/03/24 17:00:22 by kperreau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,6 +47,13 @@ fclean: clean
 
 %.o: %.s
 			nasm -f macho64 $< -o $@
+
+git:
+	git add $(SFILES)
+	git add main.c
+	git add Makefile
+	git commit -m "autoupdate"
+	git push
 
 test: $(NAME) main.o
 	@gcc $(FLAGS) -I. main.o libfts.a -o test
