@@ -6,7 +6,7 @@
 #    By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/12/04 15:19:03 by kperreau          #+#    #+#              #
-#    Updated: 2015/03/24 17:00:22 by kperreau         ###   ########.fr        #
+#    Updated: 2015/03/24 17:01:38 by kperreau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,6 +51,7 @@ fclean: clean
 git:
 	git add $(SFILES)
 	git add main.c
+	git add header.h
 	git add Makefile
 	git commit -m "autoupdate"
 	git push
