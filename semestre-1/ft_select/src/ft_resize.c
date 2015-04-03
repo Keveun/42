@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/30 18:13:04 by kperreau          #+#    #+#             */
-/*   Updated: 2015/03/30 20:39:32 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/04/03 16:46:37 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void			ft_resize(int sig)
 	t_infos		*infos;
 	char		*res;
 
-	signal(SIGWINCH, SIG_IGN);
 	if ((res = tgetstr("cl", NULL)) == NULL)
 		return ;
 	tputs(res, 0, ft_my_outc);
@@ -28,5 +27,4 @@ void			ft_resize(int sig)
 	infos->cursor.x = 0;
 	infos->cursor.y = 0;
 	ft_display(infos);
-	signal(SIGWINCH, ft_resize);
 }
