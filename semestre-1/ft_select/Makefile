@@ -24,7 +24,7 @@ LIBDIR = libft
 
 MAIN = main.c
 
-CFILES = ft_select.c
+CFILES = ft_select.c ft_args.c ft_funcs.c ft_resize.c ft_display.c
 
 SRC = $(patsubst %, $(SRCDIR)/%, $(CFILES))
 
