@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/30 18:12:11 by kperreau          #+#    #+#             */
-/*   Updated: 2015/03/30 20:40:42 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/04/04 21:37:31 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@
 # define K_RETURN 10
 # define K_RESET 114
 
+# define COLOR_REV "\033[7;7m"
+
 typedef struct termios	t_termios;
 typedef struct winsize	t_winsize;
 
@@ -48,6 +50,8 @@ typedef struct	s_args
 	int			len;
 	int			visible;
 	int			selected;
+	int			cursor;
+	t_coord		c;
 }				t_args;
 
 typedef struct	s_infos
@@ -56,7 +60,12 @@ typedef struct	s_infos
 	t_args		*args;
 	t_winsize	size;
 	t_coord		cursor;
+	char		*cl;
+	char		*us;
+	char		*ue;
+	char		*rv;
 	int			nbr_args;
+	int			lastid;
 }				t_infos;
 
 void			ft_select(int argc, char **argv, t_infos *infos);
@@ -65,5 +74,7 @@ int				ft_my_outc(int c);
 void			ft_resize(int ptr);
 t_infos			*ft_singleton(void);
 int				ft_display(t_infos *infos);
+void			ft_moove(t_infos *infos, int key);
+int				ft_find_longest(t_args *args, int end);
 
 #endif

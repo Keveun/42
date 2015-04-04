@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/30 18:13:04 by kperreau          #+#    #+#             */
-/*   Updated: 2015/03/30 20:39:32 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/04/04 21:36:02 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,12 @@ static int		ft_reset_term(t_termios *term)
 {
 	char	*res;
 
+	ft_putstr_fd("\033[?1049l\033[0m", 1);
 	if (tcgetattr(0, term) == -1)
 		return (-1);
 	term->c_lflag = (ICANON | ECHO);
 	if (tcsetattr(0, 0, term) == -1)
 		return (-1);
-	if ((res = tgetstr("cl", NULL)) == NULL)
-		return (-1);
-	tputs(res, 0, ft_my_outc);
 	if ((res = tgetstr("ve", NULL)) == NULL)
 		return (-1);
 	tputs(res, 0, ft_my_outc);
@@ -34,17 +32,24 @@ static int		ft_init_term(t_termios *term, t_infos *infos)
 {
 	char	*res;
 
+	ft_putstr_fd("\033[?1049h\033[H", 1);
 	term->c_lflag &= ~(ICANON);
 	term->c_lflag &= ~(ECHO);
 	term->c_cc[VMIN] = 1;
 	term->c_cc[VTIME] = 0;
+	//if ((infos->rv = tgetstr("rv", NULL)) == NULL)
+//		return (-1);
+	if ((infos->us = tgetstr("us", NULL)) == NULL)
+		return (-1);
+	if ((infos->ue = tgetstr("ue", NULL)) == NULL)
+		return (-1);
 	if (ioctl(STDIN_FILENO,TIOCGWINSZ, (char*)&infos->size) < 0)
 		ft_putstr_fd("Erreur TIOCGEWINSZ\n", 2);
 	if (tcsetattr(0, TCSADRAIN, term) == -1)
 		return (-1);
-	if ((res = tgetstr("cl", NULL)) == NULL)
+	if ((infos->cl = tgetstr("cl", NULL)) == NULL)
 		return (-1);
-	tputs(res, 0, ft_my_outc);
+	tputs(infos->cl, 0, ft_my_outc);
 	if ((res = tgetstr("vi", NULL)) == NULL)
 		return (-1);
 	tputs(res, 0, ft_my_outc);
@@ -59,10 +64,12 @@ void			ft_select(int argc, char **argv, t_infos *infos)
 	{
 		signal(SIGWINCH, ft_resize);
 		infos->args = ft_args(argc, argv);
+		infos->lastid = 0;
 		ft_display(infos);
 		while (1)
 		{
 			read(0, &key, sizeof(int));
+			ft_moove(infos, key);
 			// printf("w: %d, h: %d\n", infos->size.ws_col, infos->size.ws_row);
 			if (key == K_EXIT)
 				break ;

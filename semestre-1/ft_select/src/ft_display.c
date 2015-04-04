@@ -6,13 +6,13 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/30 18:13:04 by kperreau          #+#    #+#             */
-/*   Updated: 2015/03/30 20:39:32 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/04/04 21:37:15 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
 
-static int	ft_find_longest(t_args *args, int end)
+int			ft_find_longest(t_args *args, int end)
 {
 	int		n;
 	int		i;
@@ -36,6 +36,9 @@ int			ft_display(t_infos *infos)
 	int		j;
 	t_args	*tmp;
 
+	tputs(infos->cl, 1, ft_my_outc);
+	infos->cursor.x = 0;
+	infos->cursor.y = 0;
 	i = -1;
 	j = 0;
 	tmp = infos->args;
@@ -45,11 +48,19 @@ int			ft_display(t_infos *infos)
 			break ;
 		res = tgetstr("cm", NULL);
 		tputs(tgoto(res, infos->cursor.x, infos->cursor.y), 1, ft_my_outc);
+		if (infos->args[i].cursor)
+			tputs(infos->us, 0, ft_my_outc);
+		//if (infos->args[i].selected)
+			
+		infos->args[i].c.x = infos->cursor.x;
+		infos->args[i].c.y = infos->cursor.y;
 		write(1, infos->args[i].str, infos->args[i].len - \
 			((infos->args[i].len + infos->cursor.x > infos->size.ws_col) ? \
 			(infos->args[i].len + infos->cursor.x) - infos->size.ws_col : 0));
+		if (infos->args[i].cursor)
+			tputs(infos->ue, 0, ft_my_outc);
 		++j;
-		if (++infos->cursor.y > infos->size.ws_row)
+		if (++infos->cursor.y >= infos->size.ws_row)
 		{
 			infos->cursor.y = 0;
 			infos->cursor.x += ft_find_longest(tmp, j) + 2;
