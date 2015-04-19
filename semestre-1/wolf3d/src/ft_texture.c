@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/15 18:10:26 by kperreau          #+#    #+#             */
-/*   Updated: 2015/03/25 18:26:34 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/03/30 17:07:30 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void		ft_set_floor(t_mlx *mx, t_img *dfloor, int x, int y)
 	t_dcoord	currentfloor;
 	t_coord		floortex;
 
-	weight = (mx->height / (2.0 * y - mx->height)) / mx->v.perpwalldist;
+	weight = (mx->height / (2.0 * y - mx->height)) / mx->v.correctwalldist;
 	currentfloor.x = weight * mx->v.floor.x + (1.0 - weight) * mx->v.pos.x;
 	currentfloor.y = weight * mx->v.floor.y + (1.0 - weight) * mx->v.pos.y;
 	floortex.x = ((int)(currentfloor.x * dfloor->width) % dfloor->width);

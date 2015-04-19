@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/15 23:19:36 by kperreau          #+#    #+#             */
-/*   Updated: 2015/03/25 15:47:01 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/03/30 17:06:19 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,21 @@
 
 void		ft_top(t_vars *v, t_map *map)
 {
-	if (map->data[(int)(v->pos.x + v->dir.x * (v->moveSpeed + 0.2))]\
+	if (map->data[(int)(v->pos.x + v->dir.x * (v->movespeed + 0.2))]\
 		[(int)v->pos.y] <= START)
 		v->pos.x += v->dir.x * v->movespeed;
 	if (map->data[(int)v->pos.x]\
-		[(int)(v->pos.y + v->dir.y * (v->moveSpeed + 0.2))] <= START)
+		[(int)(v->pos.y + v->dir.y * (v->movespeed + 0.2))] <= START)
 		v->pos.y += v->dir.y * v->movespeed;
 }
 
 void		ft_bottom(t_vars *v, t_map *map)
 {
-	if (map->data[(int)(v->pos.x - v->dir.x * (v->moveSpeed + 0.2))]\
+	if (map->data[(int)(v->pos.x - v->dir.x * (v->movespeed + 0.2))]\
 		[(int)v->pos.y] <= START)
 		v->pos.x -= v->dir.x * v->movespeed;
 	if (map->data[(int)v->pos.x]\
-		[(int)(v->pos.y - v->dir.y * (v->moveSpeed + 0.2))] <= START)
+		[(int)(v->pos.y - v->dir.y * (v->movespeed + 0.2))] <= START)
 		v->pos.y -= v->dir.y * v->movespeed;
 }
 

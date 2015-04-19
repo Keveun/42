@@ -6,7 +6,7 @@
 #    By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/12/05 14:10:51 by kperreau          #+#    #+#              #
-#    Updated: 2015/03/02 20:40:15 by kperreau         ###   ########.fr        #
+#    Updated: 2015/03/30 17:30:52 by kperreau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,8 +38,7 @@ HEADERS = $(patsubst %, $(INCLUDESDIR)/%, $(HFILES))
 
 # COMPILATION
 
-ERRORFLAGS = -Wall -Werror -Wextra -W -O3
-# ERRORFLAGS = -O3
+ERRORFLAGS = -Wall -Werror -Wextra -W -O2 -march=native
 
 #INCLUDEFLAGS = -I $(INCLUDESDIR)/ -I $(LIBDIR)/includes/
 INCLUDEFLAGS = -I $(INCLUDESDIR)/ -I $(LIBDIR)/includes/ -I./mlx
@@ -60,7 +59,10 @@ TOGIT =	$(SRC) \
 		$(MAIN) \
 		Makefile \
 		auteur \
-		$(LIBDIR)
+		$(LIBDIR) \
+		mlx \
+		textures \
+		map.kpmap
 
 # Rules
 
