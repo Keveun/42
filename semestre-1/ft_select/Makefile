@@ -6,7 +6,7 @@
 #    By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/12/05 14:10:51 by kperreau          #+#    #+#              #
-#    Updated: 2015/04/19 18:31:57 by kperreau         ###   ########.fr        #
+#    Updated: 2015/04/19 19:05:57 by kperreau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ LIBDIR = libft
 MAIN = main.c
 
 CFILES = ft_select.c ft_args.c ft_funcs.c ft_resize.c ft_display.c ft_moove.c \
-		ft_out.c
+		ft_out.c ft_delete.c
 
 SRC = $(patsubst %, $(SRCDIR)/%, $(CFILES))
 

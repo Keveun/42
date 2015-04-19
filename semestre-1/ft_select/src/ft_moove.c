@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/04 17:27:46 by kperreau          #+#    #+#             */
-/*   Updated: 2015/04/19 18:38:53 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/04/19 20:29:23 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ static void		ft_rewrite(t_infos *infos, int l, int n)
 		tputs(infos->mr, 1, ft_my_outc);
 	write(1, infos->args[n].str, len);
 	tputs(infos->me, 1, ft_my_outc);
-	//tputs(infos->ue, 0, ft_my_outc);
 }
 
 static int		ft_jmp_right(t_infos *infos, int lid)

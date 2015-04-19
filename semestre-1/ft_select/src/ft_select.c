@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/30 18:13:04 by kperreau          #+#    #+#             */
-/*   Updated: 2015/04/19 18:35:31 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/04/19 19:34:35 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ void			ft_select(int argc, char **argv, t_infos *infos)
 	{
 		signal(SIGWINCH, ft_resize);
 		infos->args = ft_args(argc, argv);
+		infos->reset = ft_args(argc, argv);
 		infos->lastid = 0;
 		ft_display(infos);
 		while (1)
@@ -75,7 +76,12 @@ void			ft_select(int argc, char **argv, t_infos *infos)
 			read(0, &key, sizeof(int));
 			ft_moove(infos, key);
 			// printf("w: %d, h: %d\n", infos->size.ws_col, infos->size.ws_row);
-			if (key == K_EXIT || key == K_RETURN)
+			if (key == K_DEL || key == K_BACKSPACE)
+			{
+				if (ft_delete(infos) == -1)
+					break ;
+			}
+			else if (key == K_EXIT || key == K_RETURN)
 				break ;
 			// printf("key: %d\n", key);
 			key = 0;

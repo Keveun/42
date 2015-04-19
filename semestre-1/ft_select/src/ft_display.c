@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/30 18:13:04 by kperreau          #+#    #+#             */
-/*   Updated: 2015/04/04 21:37:15 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/04/19 20:30:23 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ int			ft_find_longest(t_args *args, int end)
 
 int			ft_display(t_infos *infos)
 {
-	char	*res;
 	int		i;
 	int		j;
 	t_args	*tmp;
@@ -46,12 +45,12 @@ int			ft_display(t_infos *infos)
 	{
 		if (infos->cursor.x > infos->size.ws_col)
 			break ;
-		res = tgetstr("cm", NULL);
-		tputs(tgoto(res, infos->cursor.x, infos->cursor.y), 1, ft_my_outc);
-		if (infos->args[i].cursor)
+		tputs(tgoto(infos->cm, infos->cursor.x, infos->cursor.y), 1, ft_my_outc);
+		//if (infos->args[i].cursor)
+		if (infos->args[i].selected)
+			tputs(infos->mr, 1, ft_my_outc);
+		if (i == infos->lastid)
 			tputs(infos->us, 0, ft_my_outc);
-		//if (infos->args[i].selected)
-			
 		infos->args[i].c.x = infos->cursor.x;
 		infos->args[i].c.y = infos->cursor.y;
 		write(1, infos->args[i].str, infos->args[i].len - \
@@ -67,6 +66,7 @@ int			ft_display(t_infos *infos)
 			tmp += j;
 			j = 0;
 		}
+		tputs(infos->me, 1, ft_my_outc);
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/30 18:12:11 by kperreau          #+#    #+#             */
-/*   Updated: 2015/04/19 18:37:25 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/04/19 20:05:09 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ typedef struct	s_args
 typedef struct	s_infos
 {
 	t_termios	term;
+	t_args		*reset;
 	t_args		*args;
 	t_winsize	size;
 	t_coord		cursor;
@@ -68,12 +69,15 @@ typedef struct	s_infos
 	char		*me;
 	char		*cm;
 	int			nbr_args;
+	int			nbr_rargs;
 	int			nbr_selected;
+	int			nbr_visible;
 	int			lastid;
 }				t_infos;
 
 void			ft_select(int argc, char **argv, t_infos *infos);
 t_args			*ft_args(int argc, char **argv);
+t_args			*ft_n_args(int argc, t_infos *infos, int id);
 int				ft_my_outc(int c);
 void			ft_resize(int ptr);
 t_infos			*ft_singleton(void);
@@ -81,5 +85,6 @@ int				ft_display(t_infos *infos);
 void			ft_moove(t_infos *infos, int key);
 int				ft_find_longest(t_args *args, int end);
 void			ft_out(t_infos *infos);
+int				ft_delete(t_infos *infos);
 
 #endif
