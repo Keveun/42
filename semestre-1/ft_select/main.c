@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/30 18:11:25 by kperreau          #+#    #+#             */
-/*   Updated: 2015/03/30 20:41:14 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/04/19 18:37:43 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ static void		ft_init_infos(t_infos *infos, int argc)
 {
 	infos->cursor.x = 0;
 	infos->cursor.y = 0;
+	infos->nbr_selected = 0;
 	infos->nbr_args = argc;
 }
 

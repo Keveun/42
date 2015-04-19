@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/30 18:13:04 by kperreau          #+#    #+#             */
-/*   Updated: 2015/04/04 21:36:02 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/04/19 18:35:31 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,15 @@ static int		ft_init_term(t_termios *term, t_infos *infos)
 	term->c_lflag &= ~(ECHO);
 	term->c_cc[VMIN] = 1;
 	term->c_cc[VTIME] = 0;
-	//if ((infos->rv = tgetstr("rv", NULL)) == NULL)
-//		return (-1);
+	if ((infos->mr = tgetstr("mr", NULL)) == NULL)
+		return (-1);
+	if ((infos->me = tgetstr("me", NULL)) == NULL)
+		return (-1);
 	if ((infos->us = tgetstr("us", NULL)) == NULL)
 		return (-1);
 	if ((infos->ue = tgetstr("ue", NULL)) == NULL)
+		return (-1);
+	if ((infos->cm = tgetstr("cm", NULL)) == NULL)
 		return (-1);
 	if (ioctl(STDIN_FILENO,TIOCGWINSZ, (char*)&infos->size) < 0)
 		ft_putstr_fd("Erreur TIOCGEWINSZ\n", 2);
@@ -71,11 +75,12 @@ void			ft_select(int argc, char **argv, t_infos *infos)
 			read(0, &key, sizeof(int));
 			ft_moove(infos, key);
 			// printf("w: %d, h: %d\n", infos->size.ws_col, infos->size.ws_row);
-			if (key == K_EXIT)
+			if (key == K_EXIT || key == K_RETURN)
 				break ;
 			// printf("key: %d\n", key);
 			key = 0;
 		}
 		ft_reset_term(&infos->term);
+		ft_out(infos);
 	}
 }

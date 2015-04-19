@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/30 18:12:11 by kperreau          #+#    #+#             */
-/*   Updated: 2015/04/04 21:37:31 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/04/19 18:37:25 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,11 @@ typedef struct	s_infos
 	char		*us;
 	char		*ue;
 	char		*rv;
+	char		*mr;
+	char		*me;
+	char		*cm;
 	int			nbr_args;
+	int			nbr_selected;
 	int			lastid;
 }				t_infos;
 
@@ -76,5 +80,6 @@ t_infos			*ft_singleton(void);
 int				ft_display(t_infos *infos);
 void			ft_moove(t_infos *infos, int key);
 int				ft_find_longest(t_args *args, int end);
+void			ft_out(t_infos *infos);
 
 #endif

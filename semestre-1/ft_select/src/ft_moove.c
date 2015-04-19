@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/04 17:27:46 by kperreau          #+#    #+#             */
-/*   Updated: 2015/04/04 21:30:48 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/04/19 18:38:53 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,26 @@
 
 static void		ft_rewrite(t_infos *infos, int l, int n)
 {
-	char	*res;
 	int		len;
 
-	l = infos->lastid;
-	res = tgetstr("cm", NULL);
-	tputs(tgoto(res, infos->args[l].c.x, infos->args[l].c.y), 1, ft_my_outc);
+	tputs(tgoto(infos->cm, infos->args[l].c.x, infos->args[l].c.y), 1, ft_my_outc);
 	len = infos->args[l].len - \
 		((infos->args[l].c.x + infos->args[l].len > infos->size.ws_col) ? \
 		(infos->args[l].c.x + infos->args[l].len) - infos->size.ws_col : 0);
+	if (infos->args[l].selected)
+		tputs(infos->mr, 1, ft_my_outc);
 	write(1, infos->args[l].str, len);
-	res = tgetstr("cm", NULL);
-	tputs(tgoto(res, infos->args[n].c.x, infos->args[n].c.y), 1, ft_my_outc);
+	tputs(infos->me, 1, ft_my_outc);
+	tputs(tgoto(infos->cm, infos->args[n].c.x, infos->args[n].c.y), 1, ft_my_outc);
 	tputs(infos->us, 0, ft_my_outc);
 	len = infos->args[n].len - \
 		((infos->args[n].c.x + infos->args[n].len > infos->size.ws_col) ? \
 		(infos->args[n].c.x + infos->args[n].len) - infos->size.ws_col : 0);
+	if (infos->args[n].selected)
+		tputs(infos->mr, 1, ft_my_outc);
 	write(1, infos->args[n].str, len);
-	tputs(infos->ue, 0, ft_my_outc);
+	tputs(infos->me, 1, ft_my_outc);
+	//tputs(infos->ue, 0, ft_my_outc);
 }
 
 static int		ft_jmp_right(t_infos *infos, int lid)
@@ -59,6 +61,29 @@ static int		ft_jmp_left(t_infos *infos, int lid)
 	return (value);
 }
 
+static void		ft_selected(t_infos *infos)
+{
+	int		l;
+	int		len;
+
+	l = infos->lastid;
+	infos->args[l].selected = !infos->args[l].selected;
+	len = infos->args[l].len - \
+		((infos->args[l].c.x + infos->args[l].len > infos->size.ws_col) ? \
+		(infos->args[l].c.x + infos->args[l].len) - infos->size.ws_col : 0);
+	tputs(tgoto(infos->cm, infos->args[l].c.x, infos->args[l].c.y), 1, ft_my_outc);
+	tputs(infos->us, 1, ft_my_outc);
+	if (infos->args[l].selected)
+	{
+		tputs(infos->mr, 1, ft_my_outc);
+		++infos->nbr_selected;
+	}
+	else
+		--infos->nbr_selected;
+	write(1, infos->args[l].str, len);
+	tputs(infos->me, 0, ft_my_outc);
+}
+
 void			ft_moove(t_infos *infos, int key)
 {
 	int		lid;
@@ -73,6 +98,12 @@ void			ft_moove(t_infos *infos, int key)
 		value = ft_jmp_left(infos, lid);
 	else if (key == K_RIGHT)
 		value = ft_jmp_right(infos, lid);
+	else if (key == K_SPACE)
+	{
+		ft_selected(infos);
+		//if (infos->args[lid].selected)
+			ft_moove(infos, K_BOTTOM);
+	}
 	if (key == K_RIGHT || key == K_LEFT || key == K_TOP || key == K_BOTTOM)
 	{
 		value = (value < 0) ? infos->nbr_args - 1 : value % infos->nbr_args;
