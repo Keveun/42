@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/04 17:27:46 by kperreau          #+#    #+#             */
-/*   Updated: 2015/04/19 20:29:23 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/04/22 18:35:30 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,15 @@ static int		ft_jmp_right(t_infos *infos, int lid)
 
 	value = lid + infos->size.ws_row;
 	if (value >= infos->nbr_args)
-		value = (lid % infos->size.ws_row);
+		value -= infos->size.ws_row;
+	else if (infos->args[lid].col + 1 == infos->column - 1 &&
+		value + infos->size.ws_row < infos->nbr_args)
+	{
+		infos->start += infos->size.ws_row;
+		ft_display(infos);
+	}
+	else if (value < infos->nbr_args)
+		++infos->pos_col;
 	return (value);
 }
 
@@ -50,12 +58,20 @@ static int		ft_jmp_left(t_infos *infos, int lid)
 	int		value;
 
 	value = lid - infos->size.ws_row;
+	if (infos->pos_col)
+		--infos->pos_col;
+	else if (infos->start)
+	{
+		infos->start -= infos->size.ws_row;
+		ft_display(infos);
+	}
 	if (value < 0)
 	{
-		value = (int)(infos->nbr_args / infos->size.ws_row) * \
-			infos->size.ws_row + lid; 
-		if (value >= infos->nbr_args)
-			value -= infos->size.ws_row;
+		//value = (int)(infos->nbr_args / infos->size.ws_row) * \
+	//		infos->size.ws_row + lid;
+		value += infos->size.ws_row; 
+		//if (value >= infos->nbr_args)
+		//	value -= infos->size.ws_row;
 	}
 	return (value);
 }
@@ -83,16 +99,41 @@ static void		ft_selected(t_infos *infos)
 	tputs(infos->me, 0, ft_my_outc);
 }
 
+static int		ft_top_bot(t_infos *infos, int key, int l)
+{
+	int	 value;
+
+	value = 0;
+	if (key == K_TOP)
+	{
+		value = (l - 1 < 0) ? 0 : l - 1;
+		if (!infos->args[l].c.y && infos->args[l].col == 1 && infos->start)
+		{
+			infos->start -= infos->size.ws_row;
+			ft_display(infos);
+		}
+	}
+	else if (key == K_BOTTOM)
+	{
+		value = (l + 1 < infos->nbr_args) ? l + 1 : infos->nbr_args - 1;
+		if (infos->args[l].c.y == infos->size.ws_row &&
+			infos->args[l].col == infos->column)
+		{
+			infos->start += infos->size.ws_row;
+			ft_display(infos);
+		}
+	}
+	return (value);
+}
+
 void			ft_moove(t_infos *infos, int key)
 {
 	int		lid;
 	int		value;
 
 	lid = infos->lastid;
-	if (key == K_TOP)
-		value = lid - 1;
-	else if (key == K_BOTTOM)
-		value = lid + 1;
+	if (key == K_TOP || key == K_BOTTOM)
+		value = ft_top_bot(infos, key, lid);
 	else if (key == K_LEFT)
 		value = ft_jmp_left(infos, lid);
 	else if (key == K_RIGHT)
@@ -100,8 +141,7 @@ void			ft_moove(t_infos *infos, int key)
 	else if (key == K_SPACE)
 	{
 		ft_selected(infos);
-		//if (infos->args[lid].selected)
-			ft_moove(infos, K_BOTTOM);
+		ft_moove(infos, K_BOTTOM);
 	}
 	if (key == K_RIGHT || key == K_LEFT || key == K_TOP || key == K_BOTTOM)
 	{

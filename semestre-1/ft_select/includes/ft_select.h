@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/30 18:12:11 by kperreau          #+#    #+#             */
-/*   Updated: 2015/04/19 20:05:09 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/04/22 14:47:01 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ typedef struct	s_args
 	int			selected;
 	int			cursor;
 	t_coord		c;
+	int			col;
 }				t_args;
 
 typedef struct	s_infos
@@ -73,6 +74,10 @@ typedef struct	s_infos
 	int			nbr_selected;
 	int			nbr_visible;
 	int			lastid;
+	int			column;
+	int			pos_col;
+	int			nbr_print;
+	int			start;
 }				t_infos;
 
 void			ft_select(int argc, char **argv, t_infos *infos);

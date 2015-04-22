@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/30 18:13:04 by kperreau          #+#    #+#             */
-/*   Updated: 2015/04/19 20:30:23 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/04/22 17:37:21 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,10 @@ int			ft_display(t_infos *infos)
 	tputs(infos->cl, 1, ft_my_outc);
 	infos->cursor.x = 0;
 	infos->cursor.y = 0;
-	i = -1;
+	infos->column = 0;
+	i = infos->start - 1;
 	j = 0;
-	tmp = infos->args;
+	tmp = infos->args + infos->start;
 	while (++i < infos->nbr_args)
 	{
 		if (infos->cursor.x > infos->size.ws_col)
@@ -53,6 +54,8 @@ int			ft_display(t_infos *infos)
 			tputs(infos->us, 0, ft_my_outc);
 		infos->args[i].c.x = infos->cursor.x;
 		infos->args[i].c.y = infos->cursor.y;
+		++infos->nbr_print;
+		infos->args[i].col = infos->column;
 		write(1, infos->args[i].str, infos->args[i].len - \
 			((infos->args[i].len + infos->cursor.x > infos->size.ws_col) ? \
 			(infos->args[i].len + infos->cursor.x) - infos->size.ws_col : 0));
@@ -61,6 +64,7 @@ int			ft_display(t_infos *infos)
 		++j;
 		if (++infos->cursor.y >= infos->size.ws_row)
 		{
+			++infos->column;
 			infos->cursor.y = 0;
 			infos->cursor.x += ft_find_longest(tmp, j) + 2;
 			tmp += j;
