@@ -33,6 +33,7 @@ int			ft_display(t_infos *infos)
 {
 	int		i;
 	int		j;
+	int		notok;
 	t_args	*tmp;
 
 	tputs(infos->cl, 1, ft_my_outc);
@@ -40,14 +41,13 @@ int			ft_display(t_infos *infos)
 	infos->cursor.y = 0;
 	infos->column = 0;
 	i = infos->start - 1;
+	infos->end = 0;
+	notok = 0;
 	j = 0;
 	tmp = infos->args + infos->start;
 	while (++i < infos->nbr_args)
 	{
-		if (infos->cursor.x > infos->size.ws_col)
-			break ;
 		tputs(tgoto(infos->cm, infos->cursor.x, infos->cursor.y), 1, ft_my_outc);
-		//if (infos->args[i].cursor)
 		if (infos->args[i].selected)
 			tputs(infos->mr, 1, ft_my_outc);
 		if (i == infos->lastid)
@@ -61,16 +61,22 @@ int			ft_display(t_infos *infos)
 			(infos->args[i].len + infos->cursor.x) - infos->size.ws_col : 0));
 		if (infos->args[i].cursor)
 			tputs(infos->ue, 0, ft_my_outc);
+		if (infos->args[i].len + infos->cursor.x > infos->size.ws_col)
+			notok = 1;
 		++j;
 		if (++infos->cursor.y >= infos->size.ws_row)
 		{
-			++infos->column;
 			infos->cursor.y = 0;
 			infos->cursor.x += ft_find_longest(tmp, j) + 2;
+			if (infos->cursor.x > infos->size.ws_col)
+				break ;
+			++infos->column;
 			tmp += j;
 			j = 0;
 		}
 		tputs(infos->me, 1, ft_my_outc);
 	}
+	if (!notok && i == infos->nbr_args)
+		infos->end = 1;
 	return (0);
 }

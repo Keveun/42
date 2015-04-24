@@ -42,8 +42,7 @@ static int		ft_jmp_right(t_infos *infos, int lid)
 	value = lid + infos->size.ws_row;
 	if (value >= infos->nbr_args)
 		value -= infos->size.ws_row;
-	else if (infos->args[lid].col + 1 == infos->column - 1 &&
-		value + infos->size.ws_row < infos->nbr_args)
+	else if (!infos->end && infos->args[value].col == infos->column)
 	{
 		infos->start += infos->size.ws_row;
 		ft_display(infos);
@@ -66,13 +65,7 @@ static int		ft_jmp_left(t_infos *infos, int lid)
 		ft_display(infos);
 	}
 	if (value < 0)
-	{
-		//value = (int)(infos->nbr_args / infos->size.ws_row) * \
-	//		infos->size.ws_row + lid;
 		value += infos->size.ws_row; 
-		//if (value >= infos->nbr_args)
-		//	value -= infos->size.ws_row;
-	}
 	return (value);
 }
 
@@ -107,7 +100,7 @@ static int		ft_top_bot(t_infos *infos, int key, int l)
 	if (key == K_TOP)
 	{
 		value = (l - 1 < 0) ? 0 : l - 1;
-		if (!infos->args[l].c.y && infos->args[l].col == 1 && infos->start)
+		if (!infos->args[l].c.y && !infos->args[l].col && infos->start)
 		{
 			infos->start -= infos->size.ws_row;
 			ft_display(infos);
@@ -116,8 +109,9 @@ static int		ft_top_bot(t_infos *infos, int key, int l)
 	else if (key == K_BOTTOM)
 	{
 		value = (l + 1 < infos->nbr_args) ? l + 1 : infos->nbr_args - 1;
-		if (infos->args[l].c.y == infos->size.ws_row &&
-			infos->args[l].col == infos->column)
+		if (infos->args[l].c.y == infos->size.ws_row-1 &&
+			infos->args[l].col + 1 == infos->column &&
+			!infos->end)
 		{
 			infos->start += infos->size.ws_row;
 			ft_display(infos);

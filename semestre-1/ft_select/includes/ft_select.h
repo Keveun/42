@@ -78,6 +78,7 @@ typedef struct	s_infos
 	int			pos_col;
 	int			nbr_print;
 	int			start;
+	int			end;
 }				t_infos;
 
 void			ft_select(int argc, char **argv, t_infos *infos);
