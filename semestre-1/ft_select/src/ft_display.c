@@ -29,6 +29,15 @@ int			ft_find_longest(t_args *args, int end)
 	return (n);
 }
 
+static void	ft_init_disp(t_infos *infos)
+{
+	tputs(infos->cl, 1, ft_my_outc);
+	infos->cursor.x = 0;
+	infos->cursor.y = 0;
+	infos->column = 0;
+	infos->end = 0;
+}
+
 int			ft_display(t_infos *infos)
 {
 	int		i;
@@ -36,12 +45,8 @@ int			ft_display(t_infos *infos)
 	int		notok;
 	t_args	*tmp;
 
-	tputs(infos->cl, 1, ft_my_outc);
-	infos->cursor.x = 0;
-	infos->cursor.y = 0;
-	infos->column = 0;
+	ft_init_disp(infos);
 	i = infos->start - 1;
-	infos->end = 0;
 	notok = 0;
 	j = 0;
 	tmp = infos->args + infos->start;

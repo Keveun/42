@@ -12,8 +12,9 @@
 
 #include "ft_select.h"
 
-static void		ft_init_infos(t_infos *infos, int argc)
+static int		ft_init_infos(t_infos *infos, int argc)
 {
+	infos->lastid = 0;
 	infos->cursor.x = 0;
 	infos->cursor.y = 0;
 	infos->nbr_selected = 0;
@@ -23,6 +24,7 @@ static void		ft_init_infos(t_infos *infos, int argc)
 	infos->nbr_visible = argc;
 	infos->nbr_args = argc;
 	infos->nbr_rargs = argc;
+	return (0);
 }
 
 t_infos			*ft_singleton(void)
@@ -38,7 +40,8 @@ int				main(int argc, char **argv)
 	t_infos		*infos;
 
 	infos = ft_singleton();
-	ft_init_infos(infos, argc - 1);
+	if (ft_init_infos(infos, argc - 1) == -1)
+		return (-1);
 	if ((tname = getenv("TERM")) == NULL)
 		return (-1);
 	if (tgetent(NULL, tname) == ERR)

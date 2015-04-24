@@ -37,21 +37,16 @@ static int		ft_init_term(t_termios *term, t_infos *infos)
 	term->c_lflag &= ~(ECHO);
 	term->c_cc[VMIN] = 1;
 	term->c_cc[VTIME] = 0;
-	if ((infos->mr = tgetstr("mr", NULL)) == NULL)
-		return (-1);
-	if ((infos->me = tgetstr("me", NULL)) == NULL)
-		return (-1);
-	if ((infos->us = tgetstr("us", NULL)) == NULL)
-		return (-1);
-	if ((infos->ue = tgetstr("ue", NULL)) == NULL)
-		return (-1);
-	if ((infos->cm = tgetstr("cm", NULL)) == NULL)
-		return (-1);
 	if (ioctl(STDIN_FILENO,TIOCGWINSZ, (char*)&infos->size) < 0)
 		ft_putstr_fd("Erreur TIOCGEWINSZ\n", 2);
 	if (tcsetattr(0, TCSADRAIN, term) == -1)
 		return (-1);
-	if ((infos->cl = tgetstr("cl", NULL)) == NULL)
+	if (((infos->mr = tgetstr("mr", NULL)) == NULL) ||
+		((infos->me = tgetstr("me", NULL)) == NULL) ||
+		((infos->us = tgetstr("us", NULL)) == NULL) ||
+		((infos->ue = tgetstr("ue", NULL)) == NULL) ||
+		((infos->cm = tgetstr("cm", NULL)) == NULL) ||
+		((infos->cl = tgetstr("cl", NULL)) == NULL))
 		return (-1);
 	tputs(infos->cl, 0, ft_my_outc);
 	if ((res = tgetstr("vi", NULL)) == NULL)
@@ -69,13 +64,12 @@ void			ft_select(int argc, char **argv, t_infos *infos)
 		signal(SIGWINCH, ft_resize);
 		infos->args = ft_args(argc, argv);
 		infos->reset = ft_args(argc, argv);
-		infos->lastid = 0;
 		ft_display(infos);
 		while (1)
 		{
+			key = 0;
 			read(0, &key, sizeof(int));
 			ft_moove(infos, key);
-			// printf("w: %d, h: %d\n", infos->size.ws_col, infos->size.ws_row);
 			if (key == K_DEL || key == K_BACKSPACE)
 			{
 				if (ft_delete(infos) == -1)
@@ -83,10 +77,9 @@ void			ft_select(int argc, char **argv, t_infos *infos)
 			}
 			else if (key == K_EXIT || key == K_RETURN)
 				break ;
-			// printf("key: %d\n", key);
-			key = 0;
 		}
 		ft_reset_term(&infos->term);
-		ft_out(infos);
+		if (key == K_RETURN)
+			ft_out(infos);
 	}
 }
