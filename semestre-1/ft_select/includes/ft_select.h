@@ -17,6 +17,9 @@
 # include <term.h>
 # include <sys/ioctl.h>
 # include <signal.h>
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <fcntl.h>
 
 # define K_ARROW1 27
 # define K_ARROW2 91
@@ -79,6 +82,7 @@ typedef struct	s_infos
 	int			nbr_print;
 	int			start;
 	int			end;
+	int			fd;
 }				t_infos;
 
 void			ft_select(int argc, char **argv, t_infos *infos);

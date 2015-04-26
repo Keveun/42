@@ -12,11 +12,11 @@
 
 #include "ft_select.h"
 
-static int		ft_reset_term(t_termios *term)
+static int		ft_reset_term(t_termios *term, t_infos *infos)
 {
 	char	*res;
 
-	ft_putstr_fd("\033[?1049l\033[0m", 1);
+	ft_putstr_fd("\033[?1049l\033[0m", infos->fd);
 	if (tcgetattr(0, term) == -1)
 		return (-1);
 	term->c_lflag = (ICANON | ECHO);
@@ -32,12 +32,12 @@ static int		ft_init_term(t_termios *term, t_infos *infos)
 {
 	char	*res;
 
-	ft_putstr_fd("\033[?1049h\033[H", 1);
+	ft_putstr_fd("\033[?1049h\033[H", infos->fd);
 	term->c_lflag &= ~(ICANON);
 	term->c_lflag &= ~(ECHO);
 	term->c_cc[VMIN] = 1;
 	term->c_cc[VTIME] = 0;
-	if (ioctl(STDIN_FILENO,TIOCGWINSZ, (char*)&infos->size) < 0)
+	if (ioctl(STDIN_FILENO, TIOCGWINSZ, (char*)&infos->size) < 0)
 		ft_putstr_fd("Erreur TIOCGEWINSZ\n", 2);
 	if (tcsetattr(0, TCSADRAIN, term) == -1)
 		return (-1);
@@ -78,7 +78,7 @@ void			ft_select(int argc, char **argv, t_infos *infos)
 			else if (key == K_EXIT || key == K_RETURN)
 				break ;
 		}
-		ft_reset_term(&infos->term);
+		ft_reset_term(&infos->term, infos);
 		if (key == K_RETURN)
 			ft_out(infos);
 	}

@@ -61,7 +61,7 @@ int			ft_display(t_infos *infos)
 		infos->args[i].c.y = infos->cursor.y;
 		++infos->nbr_print;
 		infos->args[i].col = infos->column;
-		write(1, infos->args[i].str, infos->args[i].len - \
+		write(infos->fd, infos->args[i].str, infos->args[i].len - \
 			((infos->args[i].len + infos->cursor.x > infos->size.ws_col) ? \
 			(infos->args[i].len + infos->cursor.x) - infos->size.ws_col : 0));
 		if (infos->args[i].cursor)

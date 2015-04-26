@@ -14,6 +14,10 @@
 
 int			ft_my_outc(int c)
 {
-	ft_putchar(c);
+	t_infos		*infos;
+
+	infos = ft_singleton();
+	// ft_putchar(c);
+	write(infos->fd, &c, 1);
 	return (0);
 }

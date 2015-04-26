@@ -22,7 +22,7 @@ static void		ft_rewrite(t_infos *infos, int l, int n)
 		(infos->args[l].c.x + infos->args[l].len) - infos->size.ws_col : 0);
 	if (infos->args[l].selected)
 		tputs(infos->mr, 1, ft_my_outc);
-	write(1, infos->args[l].str, len);
+	write(infos->fd, infos->args[l].str, len);
 	tputs(infos->me, 1, ft_my_outc);
 	tputs(tgoto(infos->cm, infos->args[n].c.x, infos->args[n].c.y), 1, ft_my_outc);
 	tputs(infos->us, 0, ft_my_outc);
@@ -31,7 +31,7 @@ static void		ft_rewrite(t_infos *infos, int l, int n)
 		(infos->args[n].c.x + infos->args[n].len) - infos->size.ws_col : 0);
 	if (infos->args[n].selected)
 		tputs(infos->mr, 1, ft_my_outc);
-	write(1, infos->args[n].str, len);
+	write(infos->fd, infos->args[n].str, len);
 	tputs(infos->me, 1, ft_my_outc);
 }
 
@@ -88,7 +88,7 @@ static void		ft_selected(t_infos *infos)
 	}
 	else
 		--infos->nbr_selected;
-	write(1, infos->args[l].str, len);
+	write(infos->fd, infos->args[l].str, len);
 	tputs(infos->me, 0, ft_my_outc);
 }
 

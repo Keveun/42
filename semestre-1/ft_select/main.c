@@ -42,6 +42,8 @@ int				main(int argc, char **argv)
 	infos = ft_singleton();
 	if (ft_init_infos(infos, argc - 1) == -1)
 		return (-1);
+	if ((infos->fd = open(ttyname(STDIN_FILENO), O_WRONLY)) == -1)
+		return (-1);
 	if ((tname = getenv("TERM")) == NULL)
 		return (-1);
 	if (tgetent(NULL, tname) == ERR)
