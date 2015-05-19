@@ -6,20 +6,20 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/30 18:13:04 by kperreau          #+#    #+#             */
-/*   Updated: 2015/04/22 13:53:14 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/05/19 18:38:32 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
 
-static int		ft_reset_term(t_termios *term, t_infos *infos)
+int			ft_reset_term(t_termios *term, t_infos *infos)
 {
 	char	*res;
 
 	ft_putstr_fd("\033[?1049l\033[0m", infos->fd);
 	if (tcgetattr(0, term) == -1)
 		return (-1);
-	term->c_lflag = (ICANON | ECHO);
+	term->c_lflag |= (ICANON | ECHO);
 	if (tcsetattr(0, 0, term) == -1)
 		return (-1);
 	if ((res = tgetstr("ve", NULL)) == NULL)
@@ -28,7 +28,7 @@ static int		ft_reset_term(t_termios *term, t_infos *infos)
 	return (0);
 }
 
-static int		ft_init_term(t_termios *term, t_infos *infos)
+int			ft_init_term(t_termios *term, t_infos *infos)
 {
 	char	*res;
 
@@ -69,6 +69,7 @@ void			ft_select(int argc, char **argv, t_infos *infos)
 		{
 			key = 0;
 			read(0, &key, sizeof(int));
+			//printf("key: %d\n", key);
 			ft_moove(infos, key);
 			if (key == K_DEL || key == K_BACKSPACE)
 			{
@@ -77,6 +78,8 @@ void			ft_select(int argc, char **argv, t_infos *infos)
 			}
 			else if (key == K_EXIT || key == K_RETURN)
 				break ;
+			else if (key == K_RESET)
+				ft_reset(infos);
 		}
 		ft_reset_term(&infos->term, infos);
 		if (key == K_RETURN)

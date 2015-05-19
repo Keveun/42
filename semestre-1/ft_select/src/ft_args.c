@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/30 18:13:04 by kperreau          #+#    #+#             */
-/*   Updated: 2015/04/19 20:27:10 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/04/26 17:35:05 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,24 @@ t_args			*ft_n_args(int argc, t_infos *infos, int id)
 			args[j].str = infos->args[i].str;
 			++j;
 		}
+	}
+	return (args);
+}
+
+t_args			*ft_reset_args(t_infos *infos)
+{
+	t_args	*args;
+	int		i;
+
+	if ((args = malloc(sizeof(t_args) * (infos->nbr_rargs + 1))) == NULL)
+		return (NULL);
+	i = -1;
+	while (++i <= infos->nbr_rargs)
+	{
+		args[i].len = infos->reset[i].len;
+		args[i].selected = infos->reset[i].selected;
+		args[i].cursor = (i == infos->lastid) ? 1 : 0;
+		args[i].str = infos->reset[i].str;
 	}
 	return (args);
 }

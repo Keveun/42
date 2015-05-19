@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/30 18:12:11 by kperreau          #+#    #+#             */
-/*   Updated: 2015/04/22 14:47:01 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/05/19 18:40:59 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,13 @@
 # define K_RETURN 10
 # define K_RESET 114
 
+# define ANSI_COLOR_RED "\x1b[31m"
+# define ANSI_COLOR_GREEN "\x1b[32m"
+# define ANSI_COLOR_YELLOW "\x1b[33m"
+# define ANSI_COLOR_BLUE "\x1b[34m"
+# define ANSI_COLOR_MAGENTA "\x1b[35m"
+# define ANSI_COLOR_CYAN "\x1b[36m"
+# define COLOR_RESET "\x1b[0m"
 # define COLOR_REV "\033[7;7m"
 
 typedef struct termios	t_termios;
@@ -96,5 +103,14 @@ void			ft_moove(t_infos *infos, int key);
 int				ft_find_longest(t_args *args, int end);
 void			ft_out(t_infos *infos);
 int				ft_delete(t_infos *infos);
+void			ft_init_disp(t_infos *infos);
+void			ft_resize_error(t_infos *infos);
+t_args			*ft_reset_args(t_infos *infos);
+void			ft_reset(t_infos *infos);
+int				ft_reset_term(t_termios *term, t_infos *infos);
+void			ft_sig_int(int sig);
+void			ft_sig_stop(int sig);
+void			ft_sig_cont(int sig);
+int				ft_init_term(t_termios *term, t_infos *infos);
 
 #endif

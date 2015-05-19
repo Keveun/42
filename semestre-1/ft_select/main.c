@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/30 18:11:25 by kperreau          #+#    #+#             */
-/*   Updated: 2015/04/22 14:15:09 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/05/19 18:36:30 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,20 @@ t_infos			*ft_singleton(void)
 	return (&infos);
 }
 
+static void		ft_sig(void)
+{
+	signal(SIGINT, ft_sig_int);
+	signal(SIGTSTP, ft_sig_stop);
+	signal(SIGCONT, ft_sig_cont);
+}
+
 int				main(int argc, char **argv)
 {
 	char		*tname;
 	t_infos		*infos;
 
 	infos = ft_singleton();
+	ft_sig();
 	if (ft_init_infos(infos, argc - 1) == -1)
 		return (-1);
 	if ((infos->fd = open(ttyname(STDIN_FILENO), O_WRONLY)) == -1)

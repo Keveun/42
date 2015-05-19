@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/30 18:13:04 by kperreau          #+#    #+#             */
-/*   Updated: 2015/04/22 17:37:21 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/05/19 20:55:24 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int			ft_find_longest(t_args *args, int end)
 	return (n);
 }
 
-static void	ft_init_disp(t_infos *infos)
+void		ft_init_disp(t_infos *infos)
 {
 	tputs(infos->cl, 1, ft_my_outc);
 	infos->cursor.x = 0;
@@ -61,13 +61,20 @@ int			ft_display(t_infos *infos)
 		infos->args[i].c.y = infos->cursor.y;
 		++infos->nbr_print;
 		infos->args[i].col = infos->column;
+		if (infos->args[i].len + infos->cursor.x > infos->size.ws_col)
+		{
+			notok = 1;
+			if (!infos->cursor.x)
+			{
+				ft_resize_error(infos);
+				break ;
+			}
+		}
 		write(infos->fd, infos->args[i].str, infos->args[i].len - \
 			((infos->args[i].len + infos->cursor.x > infos->size.ws_col) ? \
 			(infos->args[i].len + infos->cursor.x) - infos->size.ws_col : 0));
 		if (infos->args[i].cursor)
 			tputs(infos->ue, 0, ft_my_outc);
-		if (infos->args[i].len + infos->cursor.x > infos->size.ws_col)
-			notok = 1;
 		++j;
 		if (++infos->cursor.y >= infos->size.ws_row)
 		{

@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/04 17:27:46 by kperreau          #+#    #+#             */
-/*   Updated: 2015/04/22 18:35:30 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/05/19 20:31:16 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static int		ft_jmp_right(t_infos *infos, int lid)
 		value -= infos->size.ws_row;
 	else if (!infos->end && infos->args[value].col == infos->column)
 	{
-		infos->start += infos->size.ws_row;
+		infos->start += infos->column * infos->size.ws_row;//infos->nbr_print - infos->size.ws_row;
 		ft_display(infos);
 	}
 	else if (value < infos->nbr_args)
