@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/04 17:27:46 by kperreau          #+#    #+#             */
-/*   Updated: 2015/05/19 20:31:16 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/05/20 20:23:33 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ static void		ft_rewrite(t_infos *infos, int l, int n)
 
 	tputs(tgoto(infos->cm, infos->args[l].c.x, infos->args[l].c.y), 1, ft_my_outc);
 	len = infos->args[l].len - \
-		((infos->args[l].c.x + infos->args[l].len > infos->size.ws_col) ? \
-		(infos->args[l].c.x + infos->args[l].len) - infos->size.ws_col : 0);
+		  ((infos->args[l].c.x + infos->args[l].len > infos->size.ws_col) ? \
+		   (infos->args[l].c.x + infos->args[l].len) - infos->size.ws_col : 0);
 	if (infos->args[l].selected)
 		tputs(infos->mr, 1, ft_my_outc);
 	write(infos->fd, infos->args[l].str, len);
@@ -27,8 +27,8 @@ static void		ft_rewrite(t_infos *infos, int l, int n)
 	tputs(tgoto(infos->cm, infos->args[n].c.x, infos->args[n].c.y), 1, ft_my_outc);
 	tputs(infos->us, 0, ft_my_outc);
 	len = infos->args[n].len - \
-		((infos->args[n].c.x + infos->args[n].len > infos->size.ws_col) ? \
-		(infos->args[n].c.x + infos->args[n].len) - infos->size.ws_col : 0);
+		  ((infos->args[n].c.x + infos->args[n].len > infos->size.ws_col) ? \
+		   (infos->args[n].c.x + infos->args[n].len) - infos->size.ws_col : 0);
 	if (infos->args[n].selected)
 		tputs(infos->mr, 1, ft_my_outc);
 	write(infos->fd, infos->args[n].str, len);
@@ -44,8 +44,10 @@ static int		ft_jmp_right(t_infos *infos, int lid)
 		value -= infos->size.ws_row;
 	else if (!infos->end && infos->args[value].col == infos->column)
 	{
-		infos->start += infos->column * infos->size.ws_row;//infos->nbr_print - infos->size.ws_row;
+		infos->start += infos->column * infos->size.ws_row;
+		infos->lastid = value;
 		ft_display(infos);
+		infos->redisp = 1;
 	}
 	else if (value < infos->nbr_args)
 		++infos->pos_col;
@@ -61,11 +63,13 @@ static int		ft_jmp_left(t_infos *infos, int lid)
 		--infos->pos_col;
 	else if (infos->start)
 	{
-		infos->start -= infos->size.ws_row;
+		infos->start -= infos->column * infos->size.ws_row; //nfos->size.ws_row;
+		infos->lastid = value;
 		ft_display(infos);
+		infos->redisp = 1;
 	}
 	if (value < 0)
-		value += infos->size.ws_row; 
+		value += infos->size.ws_row;
 	return (value);
 }
 
@@ -77,8 +81,8 @@ static void		ft_selected(t_infos *infos)
 	l = infos->lastid;
 	infos->args[l].selected = !infos->args[l].selected;
 	len = infos->args[l].len - \
-		((infos->args[l].c.x + infos->args[l].len > infos->size.ws_col) ? \
-		(infos->args[l].c.x + infos->args[l].len) - infos->size.ws_col : 0);
+		  ((infos->args[l].c.x + infos->args[l].len > infos->size.ws_col) ? \
+		   (infos->args[l].c.x + infos->args[l].len) - infos->size.ws_col : 0);
 	tputs(tgoto(infos->cm, infos->args[l].c.x, infos->args[l].c.y), 1, ft_my_outc);
 	tputs(infos->us, 1, ft_my_outc);
 	if (infos->args[l].selected)
@@ -110,8 +114,8 @@ static int		ft_top_bot(t_infos *infos, int key, int l)
 	{
 		value = (l + 1 < infos->nbr_args) ? l + 1 : infos->nbr_args - 1;
 		if (infos->args[l].c.y == infos->size.ws_row-1 &&
-			infos->args[l].col + 1 == infos->column &&
-			!infos->end)
+				infos->args[l].col + 1 == infos->column &&
+				!infos->end)
 		{
 			infos->start += infos->size.ws_row;
 			ft_display(infos);
@@ -140,11 +144,13 @@ void			ft_moove(t_infos *infos, int key)
 	if (key == K_RIGHT || key == K_LEFT || key == K_TOP || key == K_BOTTOM)
 	{
 		value = (value < 0) ? infos->nbr_args - 1 : value % infos->nbr_args;
-		ft_rewrite(infos, lid, value);
+		if (!infos->redisp)
+			ft_rewrite(infos, lid, value);
 		infos->cursor.x = infos->args[value].c.x;
 		infos->cursor.y = infos->args[value].c.y;
 		infos->args[value].cursor = 1;
 		infos->args[lid].cursor = 0;
 		infos->lastid = value;
+		infos->redisp = 0;
 	}
 }
