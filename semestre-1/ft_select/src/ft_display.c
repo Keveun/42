@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/30 18:13:04 by kperreau          #+#    #+#             */
-/*   Updated: 2015/05/20 20:14:38 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/05/21 18:01:04 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void		ft_init_disp(t_infos *infos)
 	infos->redisp = 0;
 	infos->nbr_print = 0;
 	infos->prev_nbr_args = 0;
+	tputs(infos->me, 1, ft_my_outc);
 }
 
 int			ft_display(t_infos *infos)

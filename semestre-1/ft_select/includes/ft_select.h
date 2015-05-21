@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/30 18:12:11 by kperreau          #+#    #+#             */
-/*   Updated: 2015/05/20 20:14:24 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/05/21 17:47:17 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@
 # define K_SPACE 32
 # define K_RETURN 10
 # define K_RESET 114
-
+# define K_SELALL 49
+# define K_DESELALL 50
 # define ANSI_COLOR_RED "\x1b[31m"
 # define ANSI_COLOR_GREEN "\x1b[32m"
 # define ANSI_COLOR_YELLOW "\x1b[33m"
@@ -116,5 +117,6 @@ void			ft_sig_int(int sig);
 void			ft_sig_stop(int sig);
 void			ft_sig_cont(int sig);
 int				ft_init_term(t_termios *term, t_infos *infos);
+void			ft_select_all(t_infos *infos, int code);
 
 #endif

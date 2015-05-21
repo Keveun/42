@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/17 17:38:22 by kperreau          #+#    #+#             */
-/*   Updated: 2015/05/19 18:42:04 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/05/21 17:02:09 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,20 +24,20 @@ void		ft_sig_int(int sig)
 
 void		ft_sig_stop(int sig)
 {
-	// t_infos		*infos;
-	// char		cp[2];
+	t_infos		*infos;
+	char		cp[2];
 
 	(void)sig;
-	// if (isatty(1))
-	// {
-		// infos = ft_singleton();
-		// cp[0] = infos->term.c_cc[VSUSP];
-		// cp[1] = '\0';
-		// ft_reset_term(&infos->term, infos);
-		// ioctl(0, TIOCSTI, cp);
-		// ft_putstr("\b\b\033[0J");
-		// signal(SIGTSTP, SIG_DFL);
-	// }
+	if (isatty(1))
+	{
+		infos = ft_singleton();
+		cp[0] = infos->term.c_cc[VSUSP];
+		cp[1] = '\0';
+		ft_reset_term(&infos->term, infos);
+		ioctl(0, TIOCSTI, cp);
+		ft_putstr("\b\b\033[0J");
+		signal(SIGTSTP, SIG_DFL);
+	}
 }
 
 void		ft_sig_cont(int sig)

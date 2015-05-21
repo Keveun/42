@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/30 18:13:04 by kperreau          #+#    #+#             */
-/*   Updated: 2015/05/19 18:38:32 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/05/21 19:28:20 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,20 @@ int			ft_init_term(t_termios *term, t_infos *infos)
 	return (0);
 }
 
+static int		ft_check_key(int key, t_infos *infos)
+{
+	if (key == K_DEL || key == K_BACKSPACE)
+	{
+		if (ft_delete(infos) == -1)
+			return (-1);
+	}
+	else if (key == K_EXIT || key == K_RETURN)
+		return (-1);
+	else if (key == K_RESET)
+		ft_reset(infos);
+	return (0);
+}
+
 void			ft_select(int argc, char **argv, t_infos *infos)
 {
 	int		key;
@@ -69,17 +83,9 @@ void			ft_select(int argc, char **argv, t_infos *infos)
 		{
 			key = 0;
 			read(0, &key, sizeof(int));
-			//printf("key: %d\n", key);
 			ft_moove(infos, key);
-			if (key == K_DEL || key == K_BACKSPACE)
-			{
-				if (ft_delete(infos) == -1)
-					break ;
-			}
-			else if (key == K_EXIT || key == K_RETURN)
+			if (ft_check_key(key, infos) == -1)
 				break ;
-			else if (key == K_RESET)
-				ft_reset(infos);
 		}
 		ft_reset_term(&infos->term, infos);
 		if (key == K_RETURN)

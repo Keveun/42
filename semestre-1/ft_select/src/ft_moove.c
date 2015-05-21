@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/04 17:27:46 by kperreau          #+#    #+#             */
-/*   Updated: 2015/05/20 20:23:33 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/05/21 17:53:02 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,6 +161,10 @@ void			ft_moove(t_infos *infos, int key)
 		ft_selected(infos);
 		ft_moove(infos, K_BOTTOM);
 	}
+	else if (key == K_SELALL)
+		ft_select_all(infos, 1);
+	else if (key == K_DESELALL)
+		ft_select_all(infos, 0);
 	if (key == K_RIGHT || key == K_LEFT || key == K_TOP || key == K_BOTTOM)
 	{
 		value = (value < 0) ? infos->nbr_args - 1 : value % infos->nbr_args;
