@@ -23,7 +23,7 @@ _ft_puts:
 	mov rdx, 1
 	mov rax, 0x2000004
 	syscall
-	pop rax
+	add rsp, 8
 	ret
 
 is_null:
