@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/19 19:02:57 by kperreau          #+#    #+#             */
-/*   Updated: 2015/05/21 17:32:35 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/05/21 19:51:54 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,7 @@ int				ft_delete(t_infos *infos)
 		free(tmp);
 		if (infos->end && infos->start && l == infos->start)
 		{
-			--infos->id_page;
-			tmp2 = infos->start - infos->page[infos->id_page];
+			tmp2 = infos->start - infos->page[--infos->id_page];
 			infos->start = infos->page[infos->id_page];
 			ft_display(infos);
 			infos->pos_col = (tmp2 / infos->size.ws_row) - 1;

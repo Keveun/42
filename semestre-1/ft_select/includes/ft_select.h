@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/30 18:12:11 by kperreau          #+#    #+#             */
-/*   Updated: 2015/05/21 17:47:17 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/05/21 20:01:51 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ void			ft_moove(t_infos *infos, int key);
 int				ft_find_longest(t_args *args, int end);
 void			ft_out(t_infos *infos);
 int				ft_delete(t_infos *infos);
-void			ft_init_disp(t_infos *infos);
+void			ft_init_disp(t_infos *infos, int *notok);
 void			ft_resize_error(t_infos *infos);
 t_args			*ft_reset_args(t_infos *infos);
 void			ft_reset(t_infos *infos);
@@ -118,5 +118,8 @@ void			ft_sig_stop(int sig);
 void			ft_sig_cont(int sig);
 int				ft_init_term(t_termios *term, t_infos *infos);
 void			ft_select_all(t_infos *infos, int code);
+void			ft_rewrite(t_infos *infos, int l, int n);
+void			ft_selected(t_infos *infos);
+void			ft_calc_val(t_infos *infos, int value, int lid);
 
 #endif

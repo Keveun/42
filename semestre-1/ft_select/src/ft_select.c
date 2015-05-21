@@ -6,13 +6,13 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/30 18:13:04 by kperreau          #+#    #+#             */
-/*   Updated: 2015/05/21 19:28:20 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/05/21 19:53:56 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
 
-int			ft_reset_term(t_termios *term, t_infos *infos)
+int				ft_reset_term(t_termios *term, t_infos *infos)
 {
 	char	*res;
 
@@ -28,7 +28,7 @@ int			ft_reset_term(t_termios *term, t_infos *infos)
 	return (0);
 }
 
-int			ft_init_term(t_termios *term, t_infos *infos)
+int				ft_init_term(t_termios *term, t_infos *infos)
 {
 	char	*res;
 

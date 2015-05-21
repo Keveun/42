@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/30 18:13:04 by kperreau          #+#    #+#             */
-/*   Updated: 2015/05/19 19:59:14 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/05/21 19:53:26 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void			ft_resize(int sig)
 	(void)sig;
 	infos = ft_singleton();
 	size = infos->size.ws_col * infos->size.ws_row;
-	if (ioctl(STDIN_FILENO,TIOCGWINSZ, (char*)&infos->size) < 0)
+	if (ioctl(STDIN_FILENO, TIOCGWINSZ, (char*)&infos->size) < 0)
 		ft_putstr_fd("Erreur TIOCGEWINSZ\n", 2);
 	infos->cursor.x = 0;
 	infos->cursor.y = 0;

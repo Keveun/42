@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/30 18:13:04 by kperreau          #+#    #+#             */
-/*   Updated: 2015/04/26 17:35:05 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/05/21 20:10:39 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,21 @@ t_args			*ft_reset_args(t_infos *infos)
 		args[i].str = infos->reset[i].str;
 	}
 	return (args);
+}
+
+int			ft_find_longest(t_args *args, int end)
+{
+	int		n;
+	int		i;
+
+	i = 0;
+	n = args[i++].len;
+	--end;
+	while (end--)
+	{
+		if (args[i].len > n)
+			n = args[i].len;
+		++i;
+	}
+	return (n);
 }

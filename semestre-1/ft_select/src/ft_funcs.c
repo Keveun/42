@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/30 18:13:04 by kperreau          #+#    #+#             */
-/*   Updated: 2015/05/21 17:58:30 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/05/21 19:50:55 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int			ft_my_outc(int c)
 	return (0);
 }
 
-void			ft_select_all(t_infos *infos, int code)
+void		ft_select_all(t_infos *infos, int code)
 {
 	int		i;
 
@@ -31,3 +31,64 @@ void			ft_select_all(t_infos *infos, int code)
 	ft_display(infos);
 }
 
+void		ft_selected(t_infos *infos)
+{
+	int		l;
+	int		len;
+
+	l = infos->lastid;
+	infos->args[l].selected = !infos->args[l].selected;
+	len = infos->args[l].len - \
+		((infos->args[l].c.x + infos->args[l].len > infos->size.ws_col) ? \
+		(infos->args[l].c.x + infos->args[l].len) - infos->size.ws_col : 0);
+	tputs(tgoto(infos->cm, infos->args[l].c.x, infos->args[l].c.y)\
+		, 1, ft_my_outc);
+	tputs(infos->us, 1, ft_my_outc);
+	if (infos->args[l].selected)
+	{
+		tputs(infos->mr, 1, ft_my_outc);
+		++infos->nbr_selected;
+	}
+	else
+		--infos->nbr_selected;
+	write(infos->fd, infos->args[l].str, len);
+	tputs(infos->me, 0, ft_my_outc);
+}
+
+void		ft_rewrite(t_infos *infos, int l, int n)
+{
+	int		len;
+
+	tputs(tgoto(infos->cm, infos->args[l].c.x, infos->args[l].c.y)\
+		, 1, ft_my_outc);
+	len = infos->args[l].len - \
+		((infos->args[l].c.x + infos->args[l].len > infos->size.ws_col) ? \
+		(infos->args[l].c.x + infos->args[l].len) - infos->size.ws_col : 0);
+	if (infos->args[l].selected)
+		tputs(infos->mr, 1, ft_my_outc);
+	write(infos->fd, infos->args[l].str, len);
+	tputs(infos->me, 1, ft_my_outc);
+	tputs(tgoto(infos->cm, infos->args[n].c.x, infos->args[n].c.y)\
+		, 1, ft_my_outc);
+	tputs(infos->us, 0, ft_my_outc);
+	len = infos->args[n].len - \
+		((infos->args[n].c.x + infos->args[n].len > infos->size.ws_col) ? \
+		(infos->args[n].c.x + infos->args[n].len) - infos->size.ws_col : 0);
+	if (infos->args[n].selected)
+		tputs(infos->mr, 1, ft_my_outc);
+	write(infos->fd, infos->args[n].str, len);
+	tputs(infos->me, 1, ft_my_outc);
+}
+
+void		ft_calc_val(t_infos *infos, int value, int lid)
+{
+	value = (value < 0) ? infos->nbr_args - 1 : value % infos->nbr_args;
+	if (!infos->redisp)
+		ft_rewrite(infos, lid, value);
+	infos->cursor.x = infos->args[value].c.x;
+	infos->cursor.y = infos->args[value].c.y;
+	infos->args[value].cursor = 1;
+	infos->args[lid].cursor = 0;
+	infos->lastid = value;
+	infos->redisp = 0;
+}
