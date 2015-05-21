@@ -37,6 +37,8 @@ void		ft_init_disp(t_infos *infos)
 	infos->column = 0;
 	infos->end = 0;
 	infos->redisp = 0;
+	infos->nbr_print = 0;
+	infos->prev_nbr_args = 0;
 }
 
 int			ft_display(t_infos *infos)
@@ -60,7 +62,6 @@ int			ft_display(t_infos *infos)
 			tputs(infos->us, 0, ft_my_outc);
 		infos->args[i].c.x = infos->cursor.x;
 		infos->args[i].c.y = infos->cursor.y;
-		++infos->nbr_print;
 		infos->args[i].col = infos->column;
 		if (infos->args[i].len + infos->cursor.x > infos->size.ws_col)
 		{
@@ -71,6 +72,9 @@ int			ft_display(t_infos *infos)
 				break ;
 			}
 		}
+		else
+			++infos->prev_nbr_args;
+		++infos->nbr_print;
 		write(infos->fd, infos->args[i].str, infos->args[i].len - \
 			((infos->args[i].len + infos->cursor.x > infos->size.ws_col) ? \
 			(infos->args[i].len + infos->cursor.x) - infos->size.ws_col : 0));

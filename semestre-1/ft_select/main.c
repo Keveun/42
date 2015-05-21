@@ -22,9 +22,12 @@ static int		ft_init_infos(t_infos *infos, int argc)
 	infos->start = 0;
 	infos->pos_col = 0;
 	infos->redisp = 0;
+	infos->prev_nbr_args = 0;
 	infos->nbr_visible = argc;
 	infos->nbr_args = argc;
 	infos->nbr_rargs = argc;
+	ft_bzero(infos->page, 32000);
+	infos->id_page = 0;
 	return (0);
 }
 

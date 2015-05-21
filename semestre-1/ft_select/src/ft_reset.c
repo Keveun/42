@@ -16,8 +16,6 @@ void		ft_reset(t_infos *infos)
 {
 	t_args *tmp;
 
-
-
 	tmp = infos->args;
 	infos->args = ft_reset_args(infos);
 	infos->nbr_args = infos->nbr_rargs;

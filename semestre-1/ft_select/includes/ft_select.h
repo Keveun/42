@@ -72,6 +72,8 @@ typedef struct	s_infos
 	t_args		*args;
 	t_winsize	size;
 	t_coord		cursor;
+	int			page[32000];
+	int			id_page;
 	char		*cl;
 	char		*us;
 	char		*ue;
@@ -83,6 +85,7 @@ typedef struct	s_infos
 	int			nbr_rargs;
 	int			nbr_selected;
 	int			nbr_visible;
+	int			prev_nbr_args;
 	int			lastid;
 	int			column;
 	int			pos_col;

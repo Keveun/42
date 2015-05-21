@@ -44,10 +44,14 @@ static int		ft_jmp_right(t_infos *infos, int lid)
 		value -= infos->size.ws_row;
 	else if (!infos->end && infos->args[value].col == infos->column)
 	{
+		if (infos->id_page)
+			infos->page[infos->id_page] = infos->start;
+		++infos->id_page;
 		infos->start += infos->column * infos->size.ws_row;
 		infos->lastid = value;
 		ft_display(infos);
 		infos->redisp = 1;
+		infos->pos_col = 0;
 	}
 	else if (value < infos->nbr_args)
 		++infos->pos_col;
@@ -57,16 +61,20 @@ static int		ft_jmp_right(t_infos *infos, int lid)
 static int		ft_jmp_left(t_infos *infos, int lid)
 {
 	int		value;
+	int		tmp;
 
 	value = lid - infos->size.ws_row;
 	if (infos->pos_col)
 		--infos->pos_col;
 	else if (infos->start)
 	{
-		infos->start -= infos->column * infos->size.ws_row; //nfos->size.ws_row;
+		--infos->id_page;
+		tmp = infos->start - infos->page[infos->id_page];
+		infos->start = infos->page[infos->id_page];
 		infos->lastid = value;
 		ft_display(infos);
 		infos->redisp = 1;
+		infos->pos_col = (tmp / infos->size.ws_row) - 1;
 	}
 	if (value < 0)
 		value += infos->size.ws_row;
@@ -81,8 +89,8 @@ static void		ft_selected(t_infos *infos)
 	l = infos->lastid;
 	infos->args[l].selected = !infos->args[l].selected;
 	len = infos->args[l].len - \
-		  ((infos->args[l].c.x + infos->args[l].len > infos->size.ws_col) ? \
-		   (infos->args[l].c.x + infos->args[l].len) - infos->size.ws_col : 0);
+		((infos->args[l].c.x + infos->args[l].len > infos->size.ws_col) ? \
+		(infos->args[l].c.x + infos->args[l].len) - infos->size.ws_col : 0);
 	tputs(tgoto(infos->cm, infos->args[l].c.x, infos->args[l].c.y), 1, ft_my_outc);
 	tputs(infos->us, 1, ft_my_outc);
 	if (infos->args[l].selected)
@@ -98,7 +106,8 @@ static void		ft_selected(t_infos *infos)
 
 static int		ft_top_bot(t_infos *infos, int key, int l)
 {
-	int	 value;
+	int		value;
+	int		tmp;
 
 	value = 0;
 	if (key == K_TOP)
@@ -106,19 +115,30 @@ static int		ft_top_bot(t_infos *infos, int key, int l)
 		value = (l - 1 < 0) ? 0 : l - 1;
 		if (!infos->args[l].c.y && !infos->args[l].col && infos->start)
 		{
-			infos->start -= infos->size.ws_row;
+			--infos->id_page;
+			tmp = infos->start - infos->page[infos->id_page];
+			infos->start = infos->page[infos->id_page];
+			infos->lastid = value;
 			ft_display(infos);
+			infos->redisp = 1;
+			infos->pos_col = (tmp / infos->size.ws_row) - 1;
 		}
 	}
 	else if (key == K_BOTTOM)
 	{
 		value = (l + 1 < infos->nbr_args) ? l + 1 : infos->nbr_args - 1;
-		if (infos->args[l].c.y == infos->size.ws_row-1 &&
+		if (infos->args[l].c.y == infos->size.ws_row - 1 &&
 				infos->args[l].col + 1 == infos->column &&
 				!infos->end)
 		{
-			infos->start += infos->size.ws_row;
+			if (infos->id_page)
+				infos->page[infos->id_page] = infos->start;
+			++infos->id_page;
+			infos->start += infos->column * infos->size.ws_row;
+			infos->lastid = value;
 			ft_display(infos);
+			infos->redisp = 1;
+			infos->pos_col = 0;
 		}
 	}
 	return (value);

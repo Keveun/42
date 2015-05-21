@@ -21,3 +21,14 @@ int			ft_my_outc(int c)
 	write(infos->fd, &c, 1);
 	return (0);
 }
+
+// int			ft_find_start(t_infos *infos)
+// {
+	// int		val;
+	// int		i;
+
+	// val = 0;
+	// i = infos->start;
+	// while ()
+	// return (val);
+// }
