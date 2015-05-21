@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/30 18:13:04 by kperreau          #+#    #+#             */
-/*   Updated: 2015/05/21 20:11:03 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/05/21 21:13:48 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,29 @@ static void	ft_norme_disp(t_infos *infos, int i)
 	infos->args[i].col = infos->column;
 }
 
+static int	ft_norme2(t_infos *infos, int i, int *j, t_args **tmp)
+{
+	++infos->nbr_print;
+	write(infos->fd, infos->args[i].str, infos->args[i].len - \
+		((infos->args[i].len + infos->cursor.x > infos->size.ws_col) ? \
+		(infos->args[i].len + infos->cursor.x) - infos->size.ws_col : 0));
+	if (infos->args[i].cursor)
+		tputs(infos->ue, 0, ft_my_outc);
+	++*j;
+	if (++infos->cursor.y >= infos->size.ws_row)
+	{
+		infos->cursor.y = 0;
+		infos->cursor.x += ft_find_longest(*tmp, *j) + 2;
+		if (infos->cursor.x > infos->size.ws_col)
+			return (-1);
+		++infos->column;
+		*tmp += *j;
+		*j = 0;
+	}
+	tputs(infos->me, 1, ft_my_outc);
+	return (0);
+}
+
 int			ft_display(t_infos *infos)
 {
 	int		i;
@@ -70,24 +93,8 @@ int			ft_display(t_infos *infos)
 			break ;
 		else
 			++infos->prev_nbr_args;
-		++infos->nbr_print;
-		write(infos->fd, infos->args[i].str, infos->args[i].len - \
-			((infos->args[i].len + infos->cursor.x > infos->size.ws_col) ? \
-			(infos->args[i].len + infos->cursor.x) - infos->size.ws_col : 0));
-		if (infos->args[i].cursor)
-			tputs(infos->ue, 0, ft_my_outc);
-		++j;
-		if (++infos->cursor.y >= infos->size.ws_row)
-		{
-			infos->cursor.y = 0;
-			infos->cursor.x += ft_find_longest(tmp, j) + 2;
-			if (infos->cursor.x > infos->size.ws_col)
-				break ;
-			++infos->column;
-			tmp += j;
-			j = 0;
-		}
-		tputs(infos->me, 1, ft_my_outc);
+		if (ft_norme2(infos, i, &j, &tmp) == -1)
+			break ;
 	}
 	if (!notok && i == infos->nbr_args)
 		infos->end = 1;
