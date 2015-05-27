@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/19 19:02:57 by kperreau          #+#    #+#             */
-/*   Updated: 2015/05/27 17:52:31 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/05/27 18:19:42 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ int				ft_delete(t_infos *infos)
 	int		tmp2;
 
 	l = infos->lastid;
+	if (infos->args[l].selected)
+		--infos->nbr_selected;
 	infos->args[l].selected = 0;
-	--infos->nbr_selected;
-	--infos->nbr_args;
-	if (l >= infos->nbr_args && infos->args[l - 1].c.x < infos->args[l].c.x)
+	if (l >= --infos->nbr_args && infos->args[l - 1].c.x < infos->args[l].c.x)
 		--infos->pos_col;
 	if (infos->nbr_args < 1)
 		return (-1);
