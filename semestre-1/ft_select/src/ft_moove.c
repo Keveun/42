@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/04 17:27:46 by kperreau          #+#    #+#             */
-/*   Updated: 2015/05/27 15:17:17 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/05/27 16:59:56 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ static int		ft_top(t_infos *infos, int l)
 	int		tmp;
 
 	value = (l - 1 < 0) ? 0 : l - 1;
+	value = (value < 0) ? infos->nbr_args - 1 : value % infos->nbr_args;
 	if (!infos->args[l].c.y && !infos->args[l].col && infos->start)
 	{
 		--infos->id_page;
@@ -74,11 +75,13 @@ static int		ft_top(t_infos *infos, int l)
 		infos->redisp = 1;
 		infos->pos_col = (tmp / infos->size.ws_row) - 1;
 	}
-	value = (value < 0) ? infos->nbr_args - 1 : value % infos->nbr_args;
-	if (infos->args[value].c.x > infos->args[l].c.x)
-		++infos->pos_col;
-	else if (infos->args[value].c.x < infos->args[l].c.x)
-		--infos->pos_col;
+	else
+	{
+		if (infos->args[value].c.x > infos->args[l].c.x)
+			++infos->pos_col;
+		else if (infos->args[value].c.x < infos->args[l].c.x)
+			--infos->pos_col;
+	}
 	return (value);
 }
 
@@ -87,6 +90,7 @@ static int		ft_bottom(t_infos *infos, int l)
 	int		value;
 
 	value = (l + 1 < infos->nbr_args) ? l + 1 : infos->nbr_args - 1;
+	value = (value < 0) ? infos->nbr_args - 1 : value % infos->nbr_args;
 	if (infos->args[l].c.y == infos->size.ws_row - 1 &&
 			infos->args[l].col + 1 == infos->column &&
 			!infos->end)
@@ -100,11 +104,13 @@ static int		ft_bottom(t_infos *infos, int l)
 		infos->redisp = 1;
 		infos->pos_col = 0;
 	}
-	value = (value < 0) ? infos->nbr_args - 1 : value % infos->nbr_args;
-	if (infos->args[value].c.x > infos->args[l].c.x)
-		++infos->pos_col;
-	else if (infos->args[value].c.x < infos->args[l].c.x)
-		--infos->pos_col;
+	else
+	{
+		if (infos->args[value].c.x > infos->args[l].c.x)
+			++infos->pos_col;
+		else if (infos->args[value].c.x < infos->args[l].c.x)
+			--infos->pos_col;
+	}
 	return (value);
 }
 
