@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/30 18:11:25 by kperreau          #+#    #+#             */
-/*   Updated: 2015/05/20 20:18:32 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/05/25 19:34:10 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ static void		ft_sig(void)
 	signal(SIGINT, ft_sig_int);
 	signal(SIGTSTP, ft_sig_stop);
 	signal(SIGCONT, ft_sig_cont);
+	signal(SIGQUIT, ft_sig_int);
 }
 
 int				main(int argc, char **argv)

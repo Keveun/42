@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/04 17:27:46 by kperreau          #+#    #+#             */
-/*   Updated: 2015/05/21 19:52:57 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/05/27 10:53:42 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static int		ft_jmp_right(t_infos *infos, int lid)
 	}
 	else if (value < infos->nbr_args)
 		++infos->pos_col;
-	return (value);
+	return ((value < 0) ? infos->nbr_args - 1 : value % infos->nbr_args);
 }
 
 static int		ft_jmp_left(t_infos *infos, int lid)
@@ -55,7 +55,7 @@ static int		ft_jmp_left(t_infos *infos, int lid)
 	}
 	if (value < 0)
 		value += infos->size.ws_row;
-	return (value);
+	return ((value < 0) ? infos->nbr_args - 1 : value % infos->nbr_args);
 }
 
 static int		ft_top(t_infos *infos, int l)
@@ -63,7 +63,6 @@ static int		ft_top(t_infos *infos, int l)
 	int		value;
 	int		tmp;
 
-	value = 0;
 	value = (l - 1 < 0) ? 0 : l - 1;
 	if (!infos->args[l].c.y && !infos->args[l].col && infos->start)
 	{
@@ -75,6 +74,11 @@ static int		ft_top(t_infos *infos, int l)
 		infos->redisp = 1;
 		infos->pos_col = (tmp / infos->size.ws_row) - 1;
 	}
+	value = (value < 0) ? infos->nbr_args - 1 : value % infos->nbr_args;
+	if (infos->args[value].c.x > infos->args[l].c.x)
+		++infos->pos_col;
+	else if (infos->args[value].c.x < infos->args[l].c.x)
+		--infos->pos_col;
 	return (value);
 }
 
@@ -96,6 +100,11 @@ static int		ft_bottom(t_infos *infos, int l)
 		infos->redisp = 1;
 		infos->pos_col = 0;
 	}
+	value = (value < 0) ? infos->nbr_args - 1 : value % infos->nbr_args;
+	if (infos->args[value].c.x > infos->args[l].c.x)
+		++infos->pos_col;
+	else if (infos->args[value].c.x < infos->args[l].c.x)
+		--infos->pos_col;
 	return (value);
 }
 
