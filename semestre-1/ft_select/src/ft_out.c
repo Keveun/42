@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/19 18:25:52 by kperreau          #+#    #+#             */
-/*   Updated: 2015/05/27 17:52:59 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/05/27 18:05:38 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void		ft_out(t_infos *infos)
 	{
 		if (infos->args[i].selected)
 		{
-			ft_putstr(infos>args[i].str);
+			ft_putstr(infos->args[i].str);
 			if (--infos->nbr_selected)
 				ft_putchar(' ');
 		}

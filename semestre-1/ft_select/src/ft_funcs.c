@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/30 18:13:04 by kperreau          #+#    #+#             */
-/*   Updated: 2015/05/27 15:24:25 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/05/27 18:09:31 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void		ft_select_all(t_infos *infos, int code)
 	i = -1;
 	while (++i < infos->nbr_args)
 		infos->args[i].selected = code;
+	infos->nbr_selected = (code) ? infos->nbr_args : 0;
 	ft_display(infos);
 }
 
