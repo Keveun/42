@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/30 18:12:11 by kperreau          #+#    #+#             */
-/*   Updated: 2015/05/21 20:01:51 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/05/27 15:25:57 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ typedef struct	s_infos
 	int			end;
 	int			fd;
 	int			redisp;
+	int			error;
 }				t_infos;
 
 void			ft_select(int argc, char **argv, t_infos *infos);
@@ -121,5 +122,6 @@ void			ft_select_all(t_infos *infos, int code);
 void			ft_rewrite(t_infos *infos, int l, int n);
 void			ft_selected(t_infos *infos);
 void			ft_calc_val(t_infos *infos, int value, int lid);
+int				ft_size_ok(t_infos *infos);
 
 #endif

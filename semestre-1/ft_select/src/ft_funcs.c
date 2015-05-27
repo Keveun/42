@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/30 18:13:04 by kperreau          #+#    #+#             */
-/*   Updated: 2015/05/27 11:49:24 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/05/27 15:24:25 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void		ft_rewrite(t_infos *infos, int l, int n)
 
 void		ft_calc_val(t_infos *infos, int value, int lid)
 {
-	if (!infos->redisp)
+	if (!infos->redisp && !infos->error)
 		ft_rewrite(infos, lid, value);
 	infos->cursor.x = infos->args[value].c.x;
 	infos->cursor.y = infos->args[value].c.y;

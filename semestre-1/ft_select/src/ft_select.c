@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/30 18:13:04 by kperreau          #+#    #+#             */
-/*   Updated: 2015/05/21 19:53:56 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/05/27 15:50:04 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int				ft_init_term(t_termios *term, t_infos *infos)
 
 static int		ft_check_key(int key, t_infos *infos)
 {
-	if (key == K_DEL || key == K_BACKSPACE)
+	if (!infos->error && (key == K_DEL || key == K_BACKSPACE))
 	{
 		if (ft_delete(infos) == -1)
 			return (-1);
@@ -78,12 +78,16 @@ void			ft_select(int argc, char **argv, t_infos *infos)
 		signal(SIGWINCH, ft_resize);
 		infos->args = ft_args(argc, argv);
 		infos->reset = ft_args(argc, argv);
-		ft_display(infos);
+		if (ft_size_ok(infos) != -1)
+			ft_display(infos);
+		else
+			ft_resize_error(infos);
 		while (1)
 		{
 			key = 0;
 			read(0, &key, sizeof(int));
-			ft_moove(infos, key);
+			if (!infos->error)
+				ft_moove(infos, key);
 			if (ft_check_key(key, infos) == -1)
 				break ;
 		}

@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/26 15:40:44 by kperreau          #+#    #+#             */
-/*   Updated: 2015/05/21 20:02:52 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/05/27 14:07:13 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,5 @@ void		ft_resize_error(t_infos *infos)
 		tputs(tgoto(infos->cm, 0, y), 1, ft_my_outc);
 	}
 	ft_putstr_fd(COLOR_RESET, infos->fd);
+	infos->error = 1;
 }
