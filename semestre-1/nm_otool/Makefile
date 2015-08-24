@@ -6,82 +6,24 @@
 #    By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/12/05 14:10:51 by kperreau          #+#    #+#              #
-#    Updated: 2015/08/22 18:48:46 by kperreau         ###   ########.fr        #
+#    Updated: 2015/08/24 20:00:33 by kperreau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = ft_nm
+all: ft_nm
 
-# Dir vars
+ft_nm:
+	@make -C nm/
 
-SRCDIR = src
-
-INCLUDESDIR = includes
-
-LIBDIR = libft
-
-# Files vars
-
-MAIN = main.c
-
-CFILES = ft_nm.c ft_sort.c ft_tools.c ft_display.c ft_lib.c ft_fat.c \
-		ft_display_32.c ft_sort_32.c
-
-SRC = $(patsubst %, $(SRCDIR)/%, $(CFILES))
-
-OBJ = $(SRC:.c=.o)
-
-HFILES = ft_nm_otool.h
-
-HEADERS = $(patsubst %, $(INCLUDESDIR)/%, $(HFILES))
-
-# COMPILATION
-
-#ERRORFLAGS = -Wall -Werror -Wextra -W -O2 -march=native
-ERRORFLAGS = -O3 -march=native 
-
-INCLUDEFLAGS = -I $(INCLUDESDIR)/ -I $(LIBDIR)/includes/ -I $(LIBDIR)/printf/includes/
-
-LIBFLAGS = -L $(LIBDIR)/ -lft
-
-FLAGS = $(ERRORFLAGS) $(INCLUDEFLAGS)
-
-CC = gcc
-
-# Git vars
-
-TOGIT =	$(SRC) \
-		$(HEADERS) \
-		$(MAIN) \
-		Makefile \
-		auteur \
-		$(LIBDIR) \
-
-# Rules
-
-all: $(NAME)
-
-$(NAME): $(OBJ)
-			@make -j -C $(LIBDIR)/
-			@$(CC) $(FLAGS) $(OBJ) $(MAIN) $(LIBFLAGS) -o $(NAME)
+#ft_otool:
+#	@make -C otool/
 
 re: fclean all
 
 clean:
-			@rm -f $(OBJ)
-			@make -C $(LIBDIR)/ clean
+	@make -C nm/ clean
+#	@make -C otool/ clean
 
-fclean: clean
-			@rm -f $(NAME)
-			@make -j -C $(LIBDIR)/ fclean
-
-relib:
-		@make -j -C $(LIBDIR)/ re
-
-%.o: %.c
-			@$(CC) -o $@ -c $< $(FLAGS)
-
-git:
-		git add $(TOGIT)
-		git commit -m 'auto update'
-		git push
+fclean:
+	@make -C nm/ fclean
+#	@make -C otool/ fclean
