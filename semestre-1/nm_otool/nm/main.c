@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/09 10:11:25 by kperreau          #+#    #+#             */
-/*   Updated: 2015/08/26 16:13:54 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/08/26 16:29:26 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static int			ft_get_options(int argc, char **argv, int *args)
 	return (flags);
 }
 
-static int		ft_options(char argc, char **argv, int *args)
+int				ft_options(int argc, char **argv, int *args)
 {
 	static int		flags = 0;
 

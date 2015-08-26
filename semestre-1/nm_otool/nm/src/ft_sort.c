@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/10 16:59:30 by kperreau          #+#    #+#             */
-/*   Updated: 2015/08/22 18:48:11 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/08/26 17:06:56 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,19 @@ int			ft_sort_alpha(char *s1, char *s2)
 	while (*s1 && *s2)
 	{
 		if (*s1 != *s2)
-			return ((*s1 > *s2) ? 1 : 0);
+		{
+			if (!(ft_options(0, NULL, NULL) & FLAG_R))
+				return ((*s1 > *s2) ? 1 : 0);
+			else
+				return ((*s1 < *s2) ? 1 : 0);
+		}
 		++s1;
 		++s2;
 	}
-	return ((*s1 && !*s2) ? 1 : 0);
+	if (!(ft_options(0, NULL, NULL) & FLAG_R))
+		return ((*s1 && !*s2) ? 1 : 0);
+	else
+		return ((!*s1 && *s2) ? 1 : 0);
 }
 
 static void	ft_merge(t_merge *merge, int start1, int end1, int end2)

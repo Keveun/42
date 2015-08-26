@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/20 22:24:21 by kperreau          #+#    #+#             */
-/*   Updated: 2015/08/26 13:03:07 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/08/26 16:55:42 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,16 @@ void		ft_display_type(struct nlist_64 *array, char **sec_str)
 		ft_printf("I ");
 }
 
+static int	ft_check_bonus(t_nlist_64 *nlist)
+{
+	int		flags;
+
+	flags = ft_options(0, NULL, NULL);
+	if ((flags & FLAG_G) && !(nlist->n_type & 1))
+		return (1);
+	return (0);
+}
+
 static void	ft_sub_out(t_merge *merge, char **sec_str, int n)
 {
 	int		i;
@@ -50,21 +60,22 @@ static void	ft_sub_out(t_merge *merge, char **sec_str, int n)
 	i = -1;
 	while (++i < n)
 	{
-		if (merge->array[merge->index[i]].n_type & N_STAB)
+		if ((merge->array[merge->index[i]].n_type & N_STAB) ||
+			ft_check_bonus(&merge->array[merge->index[i]]))
 			continue ;
 		if (((merge->array[merge->index[i]].n_type & N_TYPE) != N_UNDF ||
 			merge->array[merge->index[i]].n_value) &&
-			(merge->array[merge->index[i]].n_type & N_TYPE) != N_INDR)
+			(merge->array[merge->index[i]].n_type & N_TYPE) != N_INDR &&
+			!(ft_options(0, NULL, NULL) & FLAG_J))
 			ft_printf("%16ll0x ", merge->array[merge->index[i]].n_value);
-		else
+		else if (!(ft_options(0, NULL, NULL) & FLAG_J))
 			ft_printf("%16s ", "");
-		ft_display_type(merge->array + merge->index[i], sec_str);
+		if (!(ft_options(0, NULL, NULL) & FLAG_J))
+			ft_display_type(merge->array + merge->index[i], sec_str);
 		if ((merge->array[merge->index[i]].n_type & N_TYPE) == N_INDR)
-		{
 			ft_printf("%s (indirect for %s)\n", \
 				merge->s + merge->array[merge->index[i]].n_un.n_strx, \
 				merge->s + merge->array[merge->index[i]].n_value);
-		}
 		else
 			ft_printf("%s\n", merge->s + \
 				merge->array[merge->index[i]].n_un.n_strx);
@@ -89,7 +100,8 @@ void		ft_output(struct symtab_command *sym, char **sec_str, char *ptr)
 	merge.index = index;
 	merge.array = array;
 	merge.s = stringtable;
-	ft_merge_sort(&merge, 0, sym->nsyms - 1);
+	if (!(ft_options(0, NULL, NULL) & FLAG_P))
+		ft_merge_sort(&merge, 0, sym->nsyms - 1);
 	ft_sub_out(&merge, sec_str, sym->nsyms);
 	free(index);
 }

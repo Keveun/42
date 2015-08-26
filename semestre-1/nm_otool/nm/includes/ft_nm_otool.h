@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/09 10:21:30 by kperreau          #+#    #+#             */
-/*   Updated: 2015/08/26 16:15:32 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/08/26 16:59:00 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,11 @@
 # include <mach-o/ranlib.h>
 # include </usr/include/ar.h>
 
-# define FLAGS "lRart"
-# define FLAG_L	1
-# define FLAG_R	2
-# define FLAG_A 4
-# define FLAG_RR 8
-# define FLAG_T 16
+# define FLAGS "gpjr"
+# define FLAG_G	1
+# define FLAG_P	2
+# define FLAG_J 4
+# define FLAG_R 8
 
 typedef struct	s_merge
 {
@@ -58,6 +57,7 @@ typedef struct	s_lib
 typedef struct mach_header_64	t_mach_header_64;
 typedef struct mach_header		t_mach_header;
 typedef struct fat_header		t_fat_header;
+typedef struct nlist_64			t_nlist_64;
 
 /*
 ** Main functions
@@ -65,6 +65,7 @@ typedef struct fat_header		t_fat_header;
 int				ft_nm(int fd, char *file, int n);
 void			ft_handle64(char *ptr, struct mach_header_64 *header);
 void			ft_handle(char *ptr, struct mach_header *header);
+int				ft_options(int argc, char **argv, int *args);
 
 /*
 ** Tools
