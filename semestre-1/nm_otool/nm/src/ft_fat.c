@@ -6,13 +6,13 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/20 23:08:11 by kperreau          #+#    #+#             */
-/*   Updated: 2015/08/24 17:29:55 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/08/26 13:05:46 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_nm_otool.h"
 
-void	ft_fat_handle(char *ptr, t_fat_header *header, char *file, int size)
+void	ft_fat_handle(char *ptr, t_fat_header *header, char *file)
 {
 	struct fat_arch		*arch;
 	char				*newptr;
@@ -20,7 +20,7 @@ void	ft_fat_handle(char *ptr, t_fat_header *header, char *file, int size)
 
 	arch = (void*)ptr + sizeof(*header);
 	i = -1;
-	while (++i < ft_rev_int(header->nfat_arch))
+	while (++i < (int)ft_rev_int(header->nfat_arch))
 	{
 		if (ft_rev_int(arch->cputype) == CPU_TYPE_X86_64)
 			break ;

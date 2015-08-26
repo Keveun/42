@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/09 10:45:47 by kperreau          #+#    #+#             */
-/*   Updated: 2015/08/24 18:52:17 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/08/26 13:06:59 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@ void	ft_handle(char *ptr, t_mach_header *header)
 	lc = (void*)ptr + sizeof(*header);
 	i = -1;
 	j = -1;
-	while (++i < header->ncmds)
+	while (++i < (int)header->ncmds)
 	{
 		if (lc->cmd == LC_SEGMENT)
 		{
 			k = -1;
-			while (++k < ((struct segment_command*)lc)->nsects)
+			while (++k < (int)((struct segment_command*)lc)->nsects)
 				sec_str[++j] = ((struct section*)((void*)lc + \
 					sizeof(struct segment_command)))[k].sectname;
 		}
@@ -52,12 +52,12 @@ void	ft_handle64(char *ptr, t_mach_header_64 *header)
 	lc = (void*)ptr + sizeof(*header);
 	i = -1;
 	j = -1;
-	while (++i < header->ncmds)
+	while (++i < (int)header->ncmds)
 	{
 		if (lc->cmd == LC_SEGMENT_64)
 		{
 			k = -1;
-			while (++k < ((struct segment_command_64*)lc)->nsects)
+			while (++k < (int)((struct segment_command_64*)lc)->nsects)
 				sec_str[++j] = ((struct section_64*)((void*)lc + \
 					sizeof(struct segment_command_64)))[k].sectname;
 		}
@@ -91,7 +91,7 @@ int		ft_nm(int fd, char *file, int n)
 	if (magic_number == MH_MAGIC)
 		ft_handle(ptr, (struct mach_header*)ptr);
 	if (magic_number == FAT_CIGAM || magic_number == FAT_MAGIC)
-		ft_fat_handle(ptr, (struct fat_header*)ptr, file, buf.st_size);
+		ft_fat_handle(ptr, (struct fat_header*)ptr, file);
 	if (!ft_strncmp(ptr, ARMAG, SARMAG))
 		ft_lib(ptr, file, buf.st_size);
 	if (munmap(ptr, buf.st_size) < 0)

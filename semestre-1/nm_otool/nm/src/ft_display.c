@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/20 22:24:21 by kperreau          #+#    #+#             */
-/*   Updated: 2015/08/24 18:52:09 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/08/26 13:03:07 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void		ft_output(struct symtab_command *sym, char **sec_str, char *ptr)
 	if ((index = malloc(sizeof(int) * sym->nsyms)) == NULL)
 		return ;
 	i = -1;
-	while (++i < sym->nsyms)
+	while (++i < (int)sym->nsyms)
 		index[i] = i;
 	merge.index = index;
 	merge.array = array;

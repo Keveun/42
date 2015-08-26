@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/09 10:21:30 by kperreau          #+#    #+#             */
-/*   Updated: 2015/08/24 17:07:15 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/08/26 13:08:44 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void			ft_lib(char *ptr, char *file, int size);
 ** Fat
 */
 void			ft_fat_handle(char *ptr, t_fat_header *header,\
-					 char *file, int size);
+					char *file);
 
 /*
 ** Display 64 bits

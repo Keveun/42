@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/20 22:27:06 by kperreau          #+#    #+#             */
-/*   Updated: 2015/08/24 18:08:10 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/08/26 13:04:47 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void			ft_lib(char *ptr, char *file, int size)
 	slib.arr_len = *(unsigned int*)(slib.str - 4);
 	slib.str += slib.arr_len;
 	i = -1;
-	while (++i < slib.arr_len && slib.str - ptr < size)
+	while (++i < (int)slib.arr_len && slib.str - ptr < size)
 	{
 		ar = (struct ar_hdr*)slib.str;
 		slib.str += sizeof(struct ar_hdr);
