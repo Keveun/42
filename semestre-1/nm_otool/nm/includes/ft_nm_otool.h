@@ -6,12 +6,14 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/09 10:21:30 by kperreau          #+#    #+#             */
-/*   Updated: 2015/08/26 13:08:44 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/08/26 16:15:32 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_NM_OTOOL_H
+
 # define FT_NM_OTOOL_H
+
 # include "libft.h"
 # include <stdio.h>
 # include <sys/mman.h>
@@ -23,6 +25,13 @@
 # include <mach-o/fat.h>
 # include <mach-o/ranlib.h>
 # include </usr/include/ar.h>
+
+# define FLAGS "lRart"
+# define FLAG_L	1
+# define FLAG_R	2
+# define FLAG_A 4
+# define FLAG_RR 8
+# define FLAG_T 16
 
 typedef struct	s_merge
 {
@@ -66,6 +75,12 @@ int				*ft_index(int *index, int start, int end);
 int				ft_sort_alpha(char *s1, char*s2);
 int				ft_test(void);
 unsigned int	ft_rev_int(unsigned int num);
+
+/*
+** Error
+*/
+int				ft_error_options(char msg);
+int				ft_error_file(char *msg);
 
 /*
 ** Libs

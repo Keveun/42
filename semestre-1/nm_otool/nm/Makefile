@@ -6,7 +6,7 @@
 #    By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/12/05 14:10:51 by kperreau          #+#    #+#              #
-#    Updated: 2015/08/26 13:00:34 by kperreau         ###   ########.fr        #
+#    Updated: 2015/08/26 16:07:38 by kperreau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ LIBDIR = libft
 MAIN = main.c
 
 CFILES = ft_nm.c ft_sort.c ft_tools.c ft_display.c ft_lib.c ft_fat.c \
-		ft_display_32.c ft_sort_32.c
+		ft_display_32.c ft_sort_32.c ft_error.c
 
 SRC = $(patsubst %, $(SRCDIR)/%, $(CFILES))
 
