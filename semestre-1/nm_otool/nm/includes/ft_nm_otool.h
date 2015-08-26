@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/09 10:21:30 by kperreau          #+#    #+#             */
-/*   Updated: 2015/08/26 16:59:00 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/08/26 17:09:39 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ typedef struct mach_header_64	t_mach_header_64;
 typedef struct mach_header		t_mach_header;
 typedef struct fat_header		t_fat_header;
 typedef struct nlist_64			t_nlist_64;
+typedef struct nlist			t_nlist;
 
 /*
 ** Main functions
