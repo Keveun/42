@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/20 22:24:21 by kperreau          #+#    #+#             */
-/*   Updated: 2015/08/26 17:22:32 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/08/26 17:35:22 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ static void	ft_sub_out_32(t_merge32 *merge, char **sec_str, int n)
 				merge->array[merge->index[i]].n_un.n_strx);
 	}
 }
+
 void		ft_output_32(struct symtab_command *sym, char **sec_str, char *ptr)
 {
 	int				i;

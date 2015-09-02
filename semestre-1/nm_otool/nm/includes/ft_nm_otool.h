@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/09 10:21:30 by kperreau          #+#    #+#             */
-/*   Updated: 2015/08/26 17:09:39 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/09/02 17:32:31 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 # define FLAG_P	2
 # define FLAG_J 4
 # define FLAG_R 8
+# define ER "Error: ft_nm: can't open file: a.out (No such file or directory)\n"
 
 typedef struct	s_merge
 {

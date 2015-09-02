@@ -6,13 +6,13 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/09 10:11:25 by kperreau          #+#    #+#             */
-/*   Updated: 2015/08/26 16:29:26 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/09/02 17:33:24 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_nm_otool.h"
 
-static int			ft_get_options(int argc, char **argv, int *args)
+static int		ft_get_options(int argc, char **argv, int *args)
 {
 	char	options[6];
 	int		flags;
@@ -75,7 +75,7 @@ static void		ft_file(int argc, char **argv)
 		close(fd);
 	}
 	else
-		ft_putstr_fd("Error: ft_nm: can't open file: a.out (No such file or directory)\n", 2);
+		ft_putstr_fd(ER, 2);
 }
 
 int				main(int argc, char **argv)
