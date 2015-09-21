@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/20 22:24:21 by kperreau          #+#    #+#             */
-/*   Updated: 2015/08/26 17:35:22 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/09/21 16:23:16 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,9 @@ static void	ft_sub_out_32(t_merge32 *merge, char **sec_str, int n)
 			merge->array[merge->index[i]].n_value) &&
 			(merge->array[merge->index[i]].n_type & N_TYPE) != N_INDR &&
 			!(ft_options(0, NULL, NULL) & FLAG_J))
-			ft_printf("%16ll0x ", merge->array[merge->index[i]].n_value);
+			ft_printf("%8ll0x ", merge->array[merge->index[i]].n_value);
 		else if (!(ft_options(0, NULL, NULL) & FLAG_J))
-			ft_printf("%16s ", "");
+			ft_printf("%8s ", "");
 		if (!(ft_options(0, NULL, NULL) & FLAG_J))
 			ft_display_type_32(merge->array + merge->index[i], sec_str);
 		if ((merge->array[merge->index[i]].n_type & N_TYPE) == N_INDR)
