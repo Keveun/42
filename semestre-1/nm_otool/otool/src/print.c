@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-pach <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/06/12 14:55:17 by mde-pach          #+#    #+#             */
-/*   Updated: 2015/09/21 16:40:51 by mde-pach         ###   ########.fr       */
+/*   Created: 2015/09/22 17:07:21 by kperreau          #+#    #+#             */
+/*   Updated: 2015/09/22 22:35:14 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,9 +93,10 @@ void				fat_header(T_FAT_HEADER *header, T_FAT_ARCH *arch)
 	{
 		ft_printf("architecture %d\n    ", i);
 		ft_printf("cputype %d\n    ", ft_rev_int(arch->cputype));
-		ft_printf("cpusubtype %d\n    ", ft_rev_int(arch->cpusubtype));
-		ft_printf("capabilities 0x%d\n    ", ft_rev_int(arch->cpusubtype) &
-				CPU_SUBTYPE_MASK);
+		ft_printf("cpusubtype %d\n    ", ft_rev_int(arch->cpusubtype) & \
+				~CPU_SUBTYPE_MASK);
+		ft_printf("capabilities 0x%x\n    ", ft_rev_int(\
+				ft_rev_int(arch->cpusubtype) & CPU_SUBTYPE_LIB64));
 		ft_printf("offset %d\n    ", ft_rev_int(arch->offset));
 		ft_printf("size %d\n    ", ft_rev_int(arch->size));
 		ft_printf("align 2^%d (%d)\n", ft_rev_int(arch->align),
