@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/06 20:17:34 by kperreau          #+#    #+#             */
-/*   Updated: 2014/11/06 20:18:47 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/09/22 23:40:28 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,5 @@
 void	ft_putendl_fd(char const *s, int fd)
 {
 	ft_putstr_fd(s, fd);
-	ft_putchar('\n');
+	write(fd, "\n", 1);
 }

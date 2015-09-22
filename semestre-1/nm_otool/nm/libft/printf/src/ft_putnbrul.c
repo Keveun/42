@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_error.c                                         :+:      :+:    :+:   */
+/*   ft_putnbrul.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/09/22 17:06:19 by kperreau          #+#    #+#             */
-/*   Updated: 2015/09/22 23:33:50 by kperreau         ###   ########.fr       */
+/*   Created: 2015/01/02 21:22:03 by kperreau          #+#    #+#             */
+/*   Updated: 2015/01/12 17:38:05 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "otool.h"
+#include "printf.h"
 
-void		ft_error_object(char *s)
+void	ft_putnbrul(unsigned long n)
 {
-	ft_putstr_fd(s, 1);
-	ft_putstr_fd(": is not an object file\n", 1);
-}
-
-void		ft_error_open(char *s, char *s1)
-{
-	ft_putstr_fd(s, 2);
-	ft_putstr_fd(": can't open file: ", 2);
-	ft_putendl_fd(s1, 2);
+	if (n > 9)
+	{
+		ft_putnbrul(n / 10);
+		ft_putnbrul(n % 10);
+	}
+	else
+	{
+		ft_putchar(48 + n);
+	}
 }
