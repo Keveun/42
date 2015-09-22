@@ -6,7 +6,7 @@
 #    By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/12/05 14:10:51 by kperreau          #+#    #+#              #
-#    Updated: 2015/09/21 17:09:45 by kperreau         ###   ########.fr        #
+#    Updated: 2015/09/22 22:46:57 by kperreau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,6 @@ HEADERS = $(patsubst %, $(INCLUDESDIR)/%, $(HFILES))
 # COMPILATION
 
 ERRORFLAGS = -Wall -Werror -Wextra -W -O2 -march=native
-#ERRORFLAGS = -O3 -march=native 
 
 INCLUDEFLAGS = -I $(INCLUDESDIR)/ -I $(LIBDIR)/includes/ -I $(LIBDIR)/printf/includes/
 
