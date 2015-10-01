@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/09 10:11:25 by kperreau          #+#    #+#             */
-/*   Updated: 2015/09/02 17:33:24 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/09/23 18:34:50 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static int		ft_get_options(int argc, char **argv, int *args)
 		{
 			i = 0;
 			while (options[i] != **argv && options[i] != '\0')
-				i++;
+				++i;
 			if (i > 4)
 				return (ft_error_options(**argv));
 			flags |= 1 << i;

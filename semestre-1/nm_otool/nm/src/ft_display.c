@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/20 22:24:21 by kperreau          #+#    #+#             */
-/*   Updated: 2015/08/26 17:46:28 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/09/23 18:41:00 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ static int	ft_check_bonus(t_nlist_64 *nlist)
 	flags = ft_options(0, NULL, NULL);
 	if ((flags & FLAG_G) && !(nlist->n_type & 1))
 		return (1);
+	if ((flags & FLAG_U) && ((nlist->n_type & N_TYPE) != N_UNDF))
+		return (1);
 	return (0);
 }
 
@@ -66,11 +68,11 @@ static void	ft_sub_out(t_merge *merge, char **sec_str, int n)
 		if (((merge->array[merge->index[i]].n_type & N_TYPE) != N_UNDF ||
 			merge->array[merge->index[i]].n_value) &&
 			(merge->array[merge->index[i]].n_type & N_TYPE) != N_INDR &&
-			!(ft_options(0, NULL, NULL) & FLAG_J))
+			!(ft_options(0, NULL, NULL) & (FLAG_J | FLAG_U)))
 			ft_printf("%16ll0x ", merge->array[merge->index[i]].n_value);
-		else if (!(ft_options(0, NULL, NULL) & FLAG_J))
+		else if (!(ft_options(0, NULL, NULL) & (FLAG_J | FLAG_U)))
 			ft_printf("%16s ", "");
-		if (!(ft_options(0, NULL, NULL) & FLAG_J))
+		if (!(ft_options(0, NULL, NULL) & (FLAG_J | FLAG_U)))
 			ft_display_type(merge->array + merge->index[i], sec_str);
 		if ((merge->array[merge->index[i]].n_type & N_TYPE) == N_INDR)
 			ft_printf("%s (indirect for %s)\n", \

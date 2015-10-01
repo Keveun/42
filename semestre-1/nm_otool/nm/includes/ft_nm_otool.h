@@ -6,7 +6,7 @@
 /*   By: kperreau <kperreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/09 10:21:30 by kperreau          #+#    #+#             */
-/*   Updated: 2015/09/02 17:32:31 by kperreau         ###   ########.fr       */
+/*   Updated: 2015/09/23 18:34:42 by kperreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,12 @@
 # include <mach-o/ranlib.h>
 # include </usr/include/ar.h>
 
-# define FLAGS "gpjr"
+# define FLAGS "gpjru"
 # define FLAG_G	1
 # define FLAG_P	2
 # define FLAG_J 4
 # define FLAG_R 8
+# define FLAG_U 16
 # define ER "Error: ft_nm: can't open file: a.out (No such file or directory)\n"
 
 typedef struct	s_merge
